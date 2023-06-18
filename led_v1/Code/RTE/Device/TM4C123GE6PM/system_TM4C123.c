@@ -85,7 +85,7 @@
 // the system clock.  The value of the divider is determined by the table
 // above.
 //
-#define CFG_RCC_PWMDIV 7
+#define CFG_RCC_PWMDIV 1
 
 //      <q> PWRDN: PLL Power Down
 //          <i> Check this box to disable the PLL.  You must also choose
