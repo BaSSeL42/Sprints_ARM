@@ -27,7 +27,7 @@ enu_buttonError_t HButton_Init(enu_pin_t en_pinx)
 	if ( en_pinx < MGPIO_PIN_INVALID )
 	{
 		str_dio_button_init.enu_pin 													= en_pinx;
-		str_dio_button_init.enu_gpio_mode										= MGPIO_MODE_DIGITAL;
+		str_dio_button_init.enu_gpio_mode										  = MGPIO_MODE_DIGITAL;
 		str_dio_button_init.enu_pin_dir_mode									= MGPIO_DIR_INPUT;
 		str_dio_button_init.un_gpio_conf.u8_input_pull_type 	= MGPIO_PULL_UP;
 

@@ -13,3 +13,4 @@
 .\objects\app.o: .\code\HAL\LED\include\led.h
 .\objects\app.o: .\code\HAL\Button\include\button.h
 .\objects\app.o: .\code\APP\includes\app.h
+.\objects\app.o: .\code\MCAL\systick\include\systick_Interface.h

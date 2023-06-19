@@ -4,16 +4,19 @@
 #include "led.h"
 #include "button.h"
 #include "app.h"
+#include "systick_Interface.h"
 
 #define RED							MGPIO_PINF_1
 #define BLUE						MGPIO_PINF_2
 #define GREEN						MGPIO_PINF_3
 #define PUSH_BTN				MGPIO_PINF_4
 
-
+void v_systick_cbf(void);
 static uint8_ u8_gs_btn_state = MGPIO_PIN_HIGH;
 static uint8_ u8_gs_btn_prv_state = MGPIO_PIN_HIGH;
 static uint8_ u8_gs_btn_press_counter = 4;
+static uint8_ u8_gs_prv_btn_press_counter = 4;
+
 void APP_vidInit(void)
 {
 	HLed_Init(RED);				// RED
@@ -24,6 +27,14 @@ void APP_vidInit(void)
 	
 	HButton_Init(PUSH_BTN);			// Push button
 	
+	st_systk_cfg_t st_systk_cfg = {
+		.en_systck_clk_src = SYSTK_PIOSC,
+		.en_systck_int = SYSTK_IRQ_ENABLE,
+		.u32_time_ms = 100000,
+		.ptr_func = v_systick_cbf
+	
+	};
+	SYSTICK_u8Init(&st_systk_cfg);
 	
 	
 	HLed_off(RED);			// RED OFF
@@ -38,13 +49,15 @@ void APP_vidStart(void)
 	
 	if(MGPIO_PIN_LOW == u8_gs_btn_state && MGPIO_PIN_HIGH == u8_gs_btn_prv_state)
 	{
-		if(4 == u8_gs_btn_press_counter)
+		if(4 == u8_gs_prv_btn_press_counter)
 		{
+			u8_gs_prv_btn_press_counter = 0;
 			u8_gs_btn_press_counter = 0;
 		}
-		else if(4 >  u8_gs_btn_press_counter)
+		else if(4 >  u8_gs_prv_btn_press_counter)
 		{
-			u8_gs_btn_press_counter++;
+			u8_gs_prv_btn_press_counter++;
+			u8_gs_btn_press_counter = u8_gs_prv_btn_press_counter;
 		}
 	}
 
@@ -52,6 +65,7 @@ void APP_vidStart(void)
 	{
 							case 0 :
 							{
+								SYSTICK_vidStart();	// start timer
 								HLed_on(RED);			// RED On
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_off(GREEN);		// GREEN OFF
@@ -59,6 +73,7 @@ void APP_vidStart(void)
 							}
 							case 1 :
 							{
+								SYSTICK_vidStart();	// start timer
 								HLed_off(RED);			// RED OFF
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_on(GREEN);		// GREEN On
@@ -66,6 +81,7 @@ void APP_vidStart(void)
 							}
 							case 2 :
 							{
+								SYSTICK_vidStart();	// start timer
 								HLed_off(RED);			// RED OFF
 								HLed_on(BLUE);			// BLUE	On
 								HLed_off(GREEN);		// GREEN OFF
@@ -73,6 +89,7 @@ void APP_vidStart(void)
 							}
 							case 3 :
 							{
+								SYSTICK_vidStart();	// start timer
 								HLed_on(RED);			// RED On
 								HLed_on(BLUE);		// BLUE	On
 								HLed_on(GREEN);		// GREEN On
@@ -80,6 +97,7 @@ void APP_vidStart(void)
 							}
 							case 4 :
 							{
+								SYSTICK_vidStop();		// stop timer
 								HLed_off(RED);			// RED OFF
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_off(GREEN);		// GREEN OFF
@@ -100,7 +118,11 @@ void APP_vidStart(void)
 
 
 
-
+void v_systick_cbf(void)
+{
+	//u8_gs_btn_press_counter++;
+	u8_gs_btn_press_counter = 4;
+}
 
 
 
