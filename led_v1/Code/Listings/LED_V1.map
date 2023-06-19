@@ -302,24 +302,24 @@ Image Symbol Table
     .text                                    0x0000049a   Section        0  indicate_semi.o(.text)
     i.APP_vidInit                            0x0000049a   Section        0  app.o(i.APP_vidInit)
     i.APP_vidStart                           0x000004c8   Section        0  app.o(i.APP_vidStart)
-    i.GPIOA_Handler                          0x00000594   Section        0  mgpio_program.o(i.GPIOA_Handler)
-    i.GPIOB_Handler                          0x000005a8   Section        0  mgpio_program.o(i.GPIOB_Handler)
-    i.GPIOC_Handler                          0x000005bc   Section        0  mgpio_program.o(i.GPIOC_Handler)
-    i.GPIOD_Handler                          0x000005d0   Section        0  mgpio_program.o(i.GPIOD_Handler)
-    i.GPIOE_Handler                          0x000005e4   Section        0  mgpio_program.o(i.GPIOE_Handler)
-    i.GPIOF_Handler                          0x000005f8   Section        0  mgpio_program.o(i.GPIOF_Handler)
-    i.HButton_Init                           0x0000060c   Section        0  button.o(i.HButton_Init)
-    i.HButton_getPinVal                      0x0000063c   Section        0  button.o(i.HButton_getPinVal)
-    i.HLed_Init                              0x0000065c   Section        0  led.o(i.HLed_Init)
-    i.HLed_off                               0x0000068c   Section        0  led.o(i.HLed_off)
-    i.HLed_on                                0x000006a8   Section        0  led.o(i.HLed_on)
-    i.MGPIO_u8GetPinData                     0x000006c4   Section        0  mgpio_program.o(i.MGPIO_u8GetPinData)
-    i.MGPIO_u8Init                           0x0000071c   Section        0  mgpio_program.o(i.MGPIO_u8Init)
-    i.MGPIO_u8SetPinData                     0x00000b54   Section        0  mgpio_program.o(i.MGPIO_u8SetPinData)
-    i.SystemInit                             0x00000c50   Section        0  system_tm4c123.o(i.SystemInit)
-    i.main                                   0x00000cc8   Section        0  main.o(i.main)
-    x$fpl$fpinit                             0x00000cd4   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000cd4   Number         0  fpinit.o(x$fpl$fpinit)
+    i.GPIOA_Handler                          0x000005a0   Section        0  mgpio_program.o(i.GPIOA_Handler)
+    i.GPIOB_Handler                          0x000005b4   Section        0  mgpio_program.o(i.GPIOB_Handler)
+    i.GPIOC_Handler                          0x000005c8   Section        0  mgpio_program.o(i.GPIOC_Handler)
+    i.GPIOD_Handler                          0x000005dc   Section        0  mgpio_program.o(i.GPIOD_Handler)
+    i.GPIOE_Handler                          0x000005f0   Section        0  mgpio_program.o(i.GPIOE_Handler)
+    i.GPIOF_Handler                          0x00000604   Section        0  mgpio_program.o(i.GPIOF_Handler)
+    i.HButton_Init                           0x00000618   Section        0  button.o(i.HButton_Init)
+    i.HButton_getPinVal                      0x00000648   Section        0  button.o(i.HButton_getPinVal)
+    i.HLed_Init                              0x00000668   Section        0  led.o(i.HLed_Init)
+    i.HLed_off                               0x00000698   Section        0  led.o(i.HLed_off)
+    i.HLed_on                                0x000006b4   Section        0  led.o(i.HLed_on)
+    i.MGPIO_u8GetPinData                     0x000006d0   Section        0  mgpio_program.o(i.MGPIO_u8GetPinData)
+    i.MGPIO_u8Init                           0x00000728   Section        0  mgpio_program.o(i.MGPIO_u8Init)
+    i.MGPIO_u8SetPinData                     0x00000b60   Section        0  mgpio_program.o(i.MGPIO_u8SetPinData)
+    i.SystemInit                             0x00000c5c   Section        0  system_tm4c123.o(i.SystemInit)
+    i.main                                   0x00000cd4   Section        0  main.o(i.main)
+    x$fpl$fpinit                             0x00000ce0   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x00000ce0   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section        4  led.o(.data)
     .data                                    0x20000004   Section        4  button.o(.data)
     .data                                    0x20000008   Section        3  app.o(.data)
@@ -546,28 +546,28 @@ Image Symbol Table
     __use_no_semihosting_swi                 0x00000499   Thumb Code     2  use_no_semi.o(.text)
     APP_vidInit                              0x0000049b   Thumb Code    46  app.o(i.APP_vidInit)
     __semihosting_library_function           0x0000049b   Thumb Code     0  indicate_semi.o(.text)
-    APP_vidStart                             0x000004c9   Thumb Code   190  app.o(i.APP_vidStart)
-    GPIOA_Handler                            0x00000595   Thumb Code    16  mgpio_program.o(i.GPIOA_Handler)
-    GPIOB_Handler                            0x000005a9   Thumb Code    16  mgpio_program.o(i.GPIOB_Handler)
-    GPIOC_Handler                            0x000005bd   Thumb Code    16  mgpio_program.o(i.GPIOC_Handler)
-    GPIOD_Handler                            0x000005d1   Thumb Code    16  mgpio_program.o(i.GPIOD_Handler)
-    GPIOE_Handler                            0x000005e5   Thumb Code    16  mgpio_program.o(i.GPIOE_Handler)
-    GPIOF_Handler                            0x000005f9   Thumb Code    16  mgpio_program.o(i.GPIOF_Handler)
-    HButton_Init                             0x0000060d   Thumb Code    42  button.o(i.HButton_Init)
-    HButton_getPinVal                        0x0000063d   Thumb Code    32  button.o(i.HButton_getPinVal)
-    HLed_Init                                0x0000065d   Thumb Code    44  led.o(i.HLed_Init)
-    HLed_off                                 0x0000068d   Thumb Code    28  led.o(i.HLed_off)
-    HLed_on                                  0x000006a9   Thumb Code    28  led.o(i.HLed_on)
-    MGPIO_u8GetPinData                       0x000006c5   Thumb Code    82  mgpio_program.o(i.MGPIO_u8GetPinData)
-    MGPIO_u8Init                             0x0000071d   Thumb Code  1078  mgpio_program.o(i.MGPIO_u8Init)
-    MGPIO_u8SetPinData                       0x00000b55   Thumb Code   246  mgpio_program.o(i.MGPIO_u8SetPinData)
-    SystemInit                               0x00000c51   Thumb Code    92  system_tm4c123.o(i.SystemInit)
-    main                                     0x00000cc9   Thumb Code    12  main.o(i.main)
-    _fp_init                                 0x00000cd5   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x00000cdd   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x00000cdd   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000ce0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000d00   Number         0  anon$$obj.o(Region$$Table)
+    APP_vidStart                             0x000004c9   Thumb Code   204  app.o(i.APP_vidStart)
+    GPIOA_Handler                            0x000005a1   Thumb Code    16  mgpio_program.o(i.GPIOA_Handler)
+    GPIOB_Handler                            0x000005b5   Thumb Code    16  mgpio_program.o(i.GPIOB_Handler)
+    GPIOC_Handler                            0x000005c9   Thumb Code    16  mgpio_program.o(i.GPIOC_Handler)
+    GPIOD_Handler                            0x000005dd   Thumb Code    16  mgpio_program.o(i.GPIOD_Handler)
+    GPIOE_Handler                            0x000005f1   Thumb Code    16  mgpio_program.o(i.GPIOE_Handler)
+    GPIOF_Handler                            0x00000605   Thumb Code    16  mgpio_program.o(i.GPIOF_Handler)
+    HButton_Init                             0x00000619   Thumb Code    42  button.o(i.HButton_Init)
+    HButton_getPinVal                        0x00000649   Thumb Code    32  button.o(i.HButton_getPinVal)
+    HLed_Init                                0x00000669   Thumb Code    44  led.o(i.HLed_Init)
+    HLed_off                                 0x00000699   Thumb Code    28  led.o(i.HLed_off)
+    HLed_on                                  0x000006b5   Thumb Code    28  led.o(i.HLed_on)
+    MGPIO_u8GetPinData                       0x000006d1   Thumb Code    82  mgpio_program.o(i.MGPIO_u8GetPinData)
+    MGPIO_u8Init                             0x00000729   Thumb Code  1078  mgpio_program.o(i.MGPIO_u8Init)
+    MGPIO_u8SetPinData                       0x00000b61   Thumb Code   246  mgpio_program.o(i.MGPIO_u8SetPinData)
+    SystemInit                               0x00000c5d   Thumb Code    92  system_tm4c123.o(i.SystemInit)
+    main                                     0x00000cd5   Thumb Code    12  main.o(i.main)
+    _fp_init                                 0x00000ce1   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x00000ce9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x00000ce9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x00000cec   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000d0c   Number         0  anon$$obj.o(Region$$Table)
     str_dio_led_init                         0x20000000   Data           4  led.o(.data)
     str_dio_button_init                      0x20000004   Data           4  button.o(.data)
     __libspace_start                         0x20000024   Data          96  libspace.o(.bss)
@@ -581,9 +581,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000030d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000d0c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000d18, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000d00, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000d0c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -645,45 +645,45 @@ Memory Map of the image
     0x00000498   0x00000498   0x00000002   Code   RO          427    .text               c_w.l(use_no_semi.o)
     0x0000049a   0x0000049a   0x00000000   Code   RO          429    .text               c_w.l(indicate_semi.o)
     0x0000049a   0x0000049a   0x0000002e   Code   RO          246    i.APP_vidInit       app.o
-    0x000004c8   0x000004c8   0x000000cc   Code   RO          247    i.APP_vidStart      app.o
-    0x00000594   0x00000594   0x00000014   Code   RO            4    i.GPIOA_Handler     mgpio_program.o
-    0x000005a8   0x000005a8   0x00000014   Code   RO            5    i.GPIOB_Handler     mgpio_program.o
-    0x000005bc   0x000005bc   0x00000014   Code   RO            6    i.GPIOC_Handler     mgpio_program.o
-    0x000005d0   0x000005d0   0x00000014   Code   RO            7    i.GPIOD_Handler     mgpio_program.o
-    0x000005e4   0x000005e4   0x00000014   Code   RO            8    i.GPIOE_Handler     mgpio_program.o
-    0x000005f8   0x000005f8   0x00000014   Code   RO            9    i.GPIOF_Handler     mgpio_program.o
-    0x0000060c   0x0000060c   0x00000030   Code   RO          210    i.HButton_Init      button.o
-    0x0000063c   0x0000063c   0x00000020   Code   RO          211    i.HButton_getPinVal  button.o
-    0x0000065c   0x0000065c   0x00000030   Code   RO          158    i.HLed_Init         led.o
-    0x0000068c   0x0000068c   0x0000001c   Code   RO          159    i.HLed_off          led.o
-    0x000006a8   0x000006a8   0x0000001c   Code   RO          160    i.HLed_on           led.o
-    0x000006c4   0x000006c4   0x00000058   Code   RO           10    i.MGPIO_u8GetPinData  mgpio_program.o
-    0x0000071c   0x0000071c   0x00000436   Code   RO           13    i.MGPIO_u8Init      mgpio_program.o
-    0x00000b52   0x00000b52   0x00000002   PAD
-    0x00000b54   0x00000b54   0x000000fc   Code   RO           15    i.MGPIO_u8SetPinData  mgpio_program.o
-    0x00000c50   0x00000c50   0x00000078   Code   RO          286    i.SystemInit        system_tm4c123.o
-    0x00000cc8   0x00000cc8   0x0000000c   Code   RO          140    i.main              main.o
-    0x00000cd4   0x00000cd4   0x0000000a   Code   RO          414    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000cde   0x00000cde   0x00000002   PAD
-    0x00000ce0   0x00000ce0   0x00000020   Data   RO          482    Region$$Table       anon$$obj.o
+    0x000004c8   0x000004c8   0x000000d8   Code   RO          247    i.APP_vidStart      app.o
+    0x000005a0   0x000005a0   0x00000014   Code   RO            4    i.GPIOA_Handler     mgpio_program.o
+    0x000005b4   0x000005b4   0x00000014   Code   RO            5    i.GPIOB_Handler     mgpio_program.o
+    0x000005c8   0x000005c8   0x00000014   Code   RO            6    i.GPIOC_Handler     mgpio_program.o
+    0x000005dc   0x000005dc   0x00000014   Code   RO            7    i.GPIOD_Handler     mgpio_program.o
+    0x000005f0   0x000005f0   0x00000014   Code   RO            8    i.GPIOE_Handler     mgpio_program.o
+    0x00000604   0x00000604   0x00000014   Code   RO            9    i.GPIOF_Handler     mgpio_program.o
+    0x00000618   0x00000618   0x00000030   Code   RO          210    i.HButton_Init      button.o
+    0x00000648   0x00000648   0x00000020   Code   RO          211    i.HButton_getPinVal  button.o
+    0x00000668   0x00000668   0x00000030   Code   RO          158    i.HLed_Init         led.o
+    0x00000698   0x00000698   0x0000001c   Code   RO          159    i.HLed_off          led.o
+    0x000006b4   0x000006b4   0x0000001c   Code   RO          160    i.HLed_on           led.o
+    0x000006d0   0x000006d0   0x00000058   Code   RO           10    i.MGPIO_u8GetPinData  mgpio_program.o
+    0x00000728   0x00000728   0x00000436   Code   RO           13    i.MGPIO_u8Init      mgpio_program.o
+    0x00000b5e   0x00000b5e   0x00000002   PAD
+    0x00000b60   0x00000b60   0x000000fc   Code   RO           15    i.MGPIO_u8SetPinData  mgpio_program.o
+    0x00000c5c   0x00000c5c   0x00000078   Code   RO          286    i.SystemInit        system_tm4c123.o
+    0x00000cd4   0x00000cd4   0x0000000c   Code   RO          140    i.main              main.o
+    0x00000ce0   0x00000ce0   0x0000000a   Code   RO          414    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00000cea   0x00000cea   0x00000002   PAD
+    0x00000cec   0x00000cec   0x00000020   Data   RO          482    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000d00, Size: 0x0000000c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000d0c, Size: 0x0000000c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000d00   0x00000004   Data   RW          162    .data               led.o
-    0x20000004   0x00000d04   0x00000004   Data   RW          212    .data               button.o
-    0x20000008   0x00000d08   0x00000003   Data   RW          248    .data               app.o
+    0x20000000   0x00000d0c   0x00000004   Data   RW          162    .data               led.o
+    0x20000004   0x00000d10   0x00000004   Data   RW          212    .data               button.o
+    0x20000008   0x00000d14   0x00000003   Data   RW          248    .data               app.o
 
 
-    Execution Region ER_ZI (Exec base: 0x2000000c, Load base: 0x00000d0c, Size: 0x0000027c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x2000000c, Load base: 0x00000d18, Size: 0x0000027c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x2000000c        -       0x00000018   Zero   RW           16    .bss                mgpio_program.o
     0x20000024        -       0x00000060   Zero   RW          356    .bss                c_w.l(libspace.o)
-    0x20000084   0x00000d0c   0x00000004   PAD
+    0x20000084   0x00000d18   0x00000004   PAD
     0x20000088        -       0x00000000   Zero   RW          276    HEAP                startup_tm4c123.o
     0x20000088        -       0x00000200   Zero   RW          275    STACK               startup_tm4c123.o
 
@@ -695,16 +695,16 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       250         20          0          3          0       1341   app.o
-        80          6          0          4          0       2381   button.o
-       104          4          0          4          0       2372   led.o
-        12          0          0          0          0        463   main.o
-      1538         46          0          0         24      14177   mgpio_program.o
-       276         24        620          0        512       5468   startup_tm4c123.o
-       120         28          0          0          0        601   system_tm4c123.o
+       262         12          0          3          0       1441   app.o
+        80          6          0          4          0       2517   button.o
+       104          4          0          4          0       2508   led.o
+        12          0          0          0          0        487   main.o
+      1538         46          0          0         24      14529   mgpio_program.o
+       276         24        620          0        512       5496   startup_tm4c123.o
+       120         28          0          0          0        629   system_tm4c123.o
 
     ----------------------------------------------------------------------
-      2382        128        652         12        536      26803   Object Totals
+      2394        120        652         12        536      27607   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          1          0          0   (incl. Padding)
 
@@ -755,15 +755,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2676        144        652         12        636      25847   Grand Totals
-      2676        144        652         12        636      25847   ELF Image Totals
-      2676        144        652         12          0          0   ROM Totals
+      2688        136        652         12        636      26651   Grand Totals
+      2688        136        652         12        636      26651   ELF Image Totals
+      2688        136        652         12          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3328 (   3.25kB)
+    Total RO  Size (Code + RO Data)                 3340 (   3.26kB)
     Total RW  Size (RW Data + ZI Data)               648 (   0.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       3340 (   3.26kB)
+    Total ROM Size (Code + RO Data + RW Data)       3352 (   3.27kB)
 
 ==============================================================================
 
