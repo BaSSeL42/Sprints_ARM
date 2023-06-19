@@ -48,48 +48,40 @@ void APP_vidStart(void)
 		}
 	}
 
-	switch(u8_gs_btn_press_counter)
+	if(0 == u8_gs_btn_press_counter)
 	{
-							case 0 :
-							{
-								HLed_on(RED);			// RED On
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_off(GREEN);		// GREEN OFF
-								break;
-							}
-							case 1 :
-							{
-								HLed_off(RED);			// RED OFF
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_on(GREEN);		// GREEN On
-								break;
-							}
-							case 2 :
-							{
-								HLed_off(RED);			// RED OFF
-								HLed_on(BLUE);			// BLUE	On
-								HLed_off(GREEN);		// GREEN OFF
-								break;
-							}
-							case 3 :
-							{
-								HLed_on(RED);			// RED On
-								HLed_on(BLUE);		// BLUE	On
-								HLed_on(GREEN);		// GREEN On
-								break;
-							}
-							case 4 :
-							{
-								HLed_off(RED);			// RED OFF
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_off(GREEN);		// GREEN OFF
-								break;
-							}
-							default :
-							{
-								break;
-							}
-	}	
+		HLed_on(RED);			// RED On
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else if (1 == u8_gs_btn_press_counter)
+	{
+		HLed_off(RED);			// RED OFF
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_on(GREEN);		// GREEN On
+	}
+	else if (2 == u8_gs_btn_press_counter)
+	{
+		HLed_off(RED);			// RED OFF
+		HLed_on(BLUE);			// BLUE	On
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else if(3 == u8_gs_btn_press_counter)
+	{
+		HLed_on(RED);			// RED On
+		HLed_on(BLUE);		// BLUE	On
+		HLed_on(GREEN);		// GREEN On
+	}
+	else if(4 == u8_gs_btn_press_counter)
+	{
+		HLed_off(RED);			// RED OFF
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else
+	{
+		// do nothing
+	}
 	u8_gs_btn_prv_state = u8_gs_btn_state;
 }
 
