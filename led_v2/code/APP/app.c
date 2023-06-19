@@ -61,53 +61,46 @@ void APP_vidStart(void)
 		}
 	}
 
-	switch(u8_gs_btn_press_counter)
+	if(0 == u8_gs_btn_press_counter)
 	{
-							case 0 :
-							{
-								SYSTICK_vidStart();	// start timer
-								HLed_on(RED);			// RED On
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_off(GREEN);		// GREEN OFF
-								goto end_S;
-								//break;
-							}
-							case 1 :
-							{
-								SYSTICK_vidStart();	// start timer
-								HLed_off(RED);			// RED OFF
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_on(GREEN);		// GREEN On
-								goto end_S;
-							}
-							case 2 :
-							{
-								SYSTICK_vidStart();	// start timer
-								HLed_off(RED);			// RED OFF
-								HLed_on(BLUE);			// BLUE	On
-								HLed_off(GREEN);		// GREEN OFF
-								goto end_S;
-							}
-							case 3 :
-							{
-								SYSTICK_vidStart();	// start timer
-								HLed_on(RED);			// RED On
-								HLed_on(BLUE);		// BLUE	On
-								HLed_on(GREEN);		// GREEN On
-								goto end_S;
-							}
-							case 4 :
-							{
-								SYSTICK_vidStop();		// stop timer
-								HLed_off(RED);			// RED OFF
-								HLed_off(BLUE);			// BLUE	OFF
-								HLed_off(GREEN);		// GREEN OFF
-								goto end_S;
-							}
-							default : goto end_S;
-							end_S: break;
-							
-	}	
+		SYSTICK_vidStart();	// start timer
+		HLed_on(RED);			// RED On
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else if (1 == u8_gs_btn_press_counter)
+	{
+		SYSTICK_vidStart();	// start timer
+		HLed_off(RED);			// RED OFF
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_on(GREEN);		// GREEN On
+	}
+	else if (2 == u8_gs_btn_press_counter)
+	{
+		SYSTICK_vidStart();	// start timer
+		HLed_off(RED);			// RED OFF
+		HLed_on(BLUE);			// BLUE	On
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else if(3 == u8_gs_btn_press_counter)
+	{
+		SYSTICK_vidStart();	// start timer
+		HLed_on(RED);			// RED On
+		HLed_on(BLUE);		// BLUE	On
+		HLed_on(GREEN);		// GREEN On
+	}
+	else if(4 == u8_gs_btn_press_counter)
+	{
+		SYSTICK_vidStop();		// stop timer
+		HLed_off(RED);			// RED OFF
+		HLed_off(BLUE);			// BLUE	OFF
+		HLed_off(GREEN);		// GREEN OFF
+	}
+	else
+	{
+		// do nothing
+	}
+	
 	u8_gs_btn_prv_state = u8_gs_btn_state;
 }
 
