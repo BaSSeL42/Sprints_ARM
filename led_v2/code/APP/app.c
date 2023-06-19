@@ -28,9 +28,9 @@ void APP_vidInit(void)
 	HButton_Init(PUSH_BTN);			// Push button
 	
 	st_systk_cfg_t st_systk_cfg = {
-		.en_systck_clk_src = SYSTK_PIOSC,
+		.en_systck_clk_src = SYSTK_SYSTEM_CLK,
 		.en_systck_int = SYSTK_IRQ_ENABLE,
-		.u32_time_ms = 100000,
+		.u32_time_ms = 1000,
 		.ptr_func = v_systick_cbf
 	
 	};
@@ -69,7 +69,8 @@ void APP_vidStart(void)
 								HLed_on(RED);			// RED On
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_off(GREEN);		// GREEN OFF
-								break;
+								goto end_S;
+								//break;
 							}
 							case 1 :
 							{
@@ -77,7 +78,7 @@ void APP_vidStart(void)
 								HLed_off(RED);			// RED OFF
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_on(GREEN);		// GREEN On
-								break;
+								goto end_S;
 							}
 							case 2 :
 							{
@@ -85,7 +86,7 @@ void APP_vidStart(void)
 								HLed_off(RED);			// RED OFF
 								HLed_on(BLUE);			// BLUE	On
 								HLed_off(GREEN);		// GREEN OFF
-								break;
+								goto end_S;
 							}
 							case 3 :
 							{
@@ -93,7 +94,7 @@ void APP_vidStart(void)
 								HLed_on(RED);			// RED On
 								HLed_on(BLUE);		// BLUE	On
 								HLed_on(GREEN);		// GREEN On
-								break;
+								goto end_S;
 							}
 							case 4 :
 							{
@@ -101,12 +102,11 @@ void APP_vidStart(void)
 								HLed_off(RED);			// RED OFF
 								HLed_off(BLUE);			// BLUE	OFF
 								HLed_off(GREEN);		// GREEN OFF
-								break;
+								goto end_S;
 							}
-							default :
-							{
-								break;
-							}
+							default : goto end_S;
+							end_S: break;
+							
 	}	
 	u8_gs_btn_prv_state = u8_gs_btn_state;
 }

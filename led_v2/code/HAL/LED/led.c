@@ -43,7 +43,6 @@ enu_ledError_t HLed_Init(enu_pin_t en_pinNum)
 
 
 	return errorStatus;
-
 }
 
 enu_ledError_t HLed_on(enu_pin_t en_pinx)
@@ -83,7 +82,6 @@ enu_ledError_t HLed_off(enu_pin_t en_pinx)
 
 
 	return errorStatus;
-
 }
 
 
