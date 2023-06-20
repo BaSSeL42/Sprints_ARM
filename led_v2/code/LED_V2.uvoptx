@@ -79,8 +79,8 @@
       </OPTFL>
       <CpuCode>4</CpuCode>
       <DebugOpt>
-        <uSim>0</uSim>
-        <uTrg>1</uTrg>
+        <uSim>1</uSim>
+        <uTrg>0</uTrg>
         <sLdApp>1</sLdApp>
         <sGomain>1</sGomain>
         <sRbreak>1</sRbreak>
@@ -103,7 +103,7 @@
         <bEvRecOn>1</bEvRecOn>
         <bSchkAxf>0</bSchkAxf>
         <bTchkAxf>0</bTchkAxf>
-        <nTsel>19</nTsel>
+        <nTsel>12</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -126,10 +126,6 @@
           <Number>0</Number>
           <Key>lmidk-agdi</Key>
           <Name>-U -O4622 -S3 -FO29</Name>
-        </SetRegEntry>
-        <SetRegEntry>
-          <Number>0</Number>
-          <Key>DLGUARM</Key>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -249,7 +245,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\main.c</PathWithFileName>
+      <PathWithFileName>..\code\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -261,7 +257,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\systick\systick_source.c</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\systick\systick_source.c</PathWithFileName>
       <FilenameWithoutPath>systick_source.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -273,7 +269,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\systick\include\systick_Interface.h</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\systick\include\systick_Interface.h</PathWithFileName>
       <FilenameWithoutPath>systick_Interface.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -285,7 +281,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\systick\include\systick_Private.h</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\systick\include\systick_Private.h</PathWithFileName>
       <FilenameWithoutPath>systick_Private.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -297,7 +293,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\MGPIO\mgpio_Program.c</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\MGPIO\mgpio_Program.c</PathWithFileName>
       <FilenameWithoutPath>mgpio_Program.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -309,7 +305,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\MGPIO\includes\mgpio_Config.h</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\MGPIO\includes\mgpio_Config.h</PathWithFileName>
       <FilenameWithoutPath>mgpio_Config.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -321,7 +317,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\MGPIO\includes\mgpio_Interface.h</PathWithFileName>
+      <PathWithFileName>..\code\MCAL\MGPIO\includes\mgpio_Interface.h</PathWithFileName>
       <FilenameWithoutPath>mgpio_Interface.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -333,7 +329,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\MCAL\MGPIO\includes\mgpio_Private.h</PathWithFileName>
+      <PathWithFileName>.\MCAL\MGPIO\includes\mgpio_Private.h</PathWithFileName>
       <FilenameWithoutPath>mgpio_Private.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -345,7 +341,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\HAL\LED\led.c</PathWithFileName>
+      <PathWithFileName>.\HAL\LED\led.c</PathWithFileName>
       <FilenameWithoutPath>led.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -357,7 +353,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\HAL\LED\include\led.h</PathWithFileName>
+      <PathWithFileName>.\HAL\LED\include\led.h</PathWithFileName>
       <FilenameWithoutPath>led.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -369,7 +365,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\HAL\Button\button.c</PathWithFileName>
+      <PathWithFileName>.\HAL\Button\button.c</PathWithFileName>
       <FilenameWithoutPath>button.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -381,7 +377,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\HAL\Button\include\button.h</PathWithFileName>
+      <PathWithFileName>.\HAL\Button\include\button.h</PathWithFileName>
       <FilenameWithoutPath>button.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -393,7 +389,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\COM\LBIT_MATH.h</PathWithFileName>
+      <PathWithFileName>.\COM\LBIT_MATH.h</PathWithFileName>
       <FilenameWithoutPath>LBIT_MATH.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -405,7 +401,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\COM\LSTD_TYPES.h</PathWithFileName>
+      <PathWithFileName>.\COM\LSTD_TYPES.h</PathWithFileName>
       <FilenameWithoutPath>LSTD_TYPES.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -417,7 +413,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\APP\app.c</PathWithFileName>
+      <PathWithFileName>.\APP\app.c</PathWithFileName>
       <FilenameWithoutPath>app.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -429,8 +425,32 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\code\APP\includes\app.h</PathWithFileName>
+      <PathWithFileName>.\APP\includes\app.h</PathWithFileName>
       <FilenameWithoutPath>app.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>17</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\HAL\systick_manager\systick_manager.c</PathWithFileName>
+      <FilenameWithoutPath>systick_manager.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>18</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\HAL\systick_manager\include\systick_manager.h</PathWithFileName>
+      <FilenameWithoutPath>systick_manager.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

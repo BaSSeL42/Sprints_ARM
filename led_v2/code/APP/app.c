@@ -1,10 +1,11 @@
 
 #include "LSTD_TYPES.h"
-#include "mgpio_Interface.h"
+//#include "mgpio_Interface.h"
 #include "led.h"
 #include "button.h"
 #include "app.h"
-#include "systick_Interface.h"
+#include "systick_manager.h"
+//#include "systick_Interface.h"
 
 #define RED							MGPIO_PINF_1
 #define BLUE						MGPIO_PINF_2
@@ -34,7 +35,7 @@ void APP_vidInit(void)
 		.ptr_func = v_systick_cbf
 	
 	};
-	SYSTICK_u8Init(&st_systk_cfg);
+	SYSTICK_MANAGER_u8Init(&st_systk_cfg);
 	
 	
 	HLed_off(RED);			// RED OFF
@@ -63,35 +64,35 @@ void APP_vidStart(void)
 
 	if(0 == u8_gs_btn_press_counter)
 	{
-		SYSTICK_vidStart();	// start timer
+		SYSTICK_MANAGER_vidStart();	// start timer
 		HLed_on(RED);			// RED On
 		HLed_off(BLUE);			// BLUE	OFF
 		HLed_off(GREEN);		// GREEN OFF
 	}
 	else if (1 == u8_gs_btn_press_counter)
 	{
-		SYSTICK_vidStart();	// start timer
+		SYSTICK_MANAGER_vidStart();	// start timer
 		HLed_off(RED);			// RED OFF
 		HLed_off(BLUE);			// BLUE	OFF
 		HLed_on(GREEN);		// GREEN On
 	}
 	else if (2 == u8_gs_btn_press_counter)
 	{
-		SYSTICK_vidStart();	// start timer
+		SYSTICK_MANAGER_vidStart();	// start timer
 		HLed_off(RED);			// RED OFF
 		HLed_on(BLUE);			// BLUE	On
 		HLed_off(GREEN);		// GREEN OFF
 	}
 	else if(3 == u8_gs_btn_press_counter)
 	{
-		SYSTICK_vidStart();	// start timer
+		SYSTICK_MANAGER_vidStart();	// start timer
 		HLed_on(RED);			// RED On
 		HLed_on(BLUE);		// BLUE	On
 		HLed_on(GREEN);		// GREEN On
 	}
 	else if(4 == u8_gs_btn_press_counter)
 	{
-		SYSTICK_vidStop();		// stop timer
+		SYSTICK_MANAGER_vidStop();		// stop timer
 		HLed_off(RED);			// RED OFF
 		HLed_off(BLUE);			// BLUE	OFF
 		HLed_off(GREEN);		// GREEN OFF

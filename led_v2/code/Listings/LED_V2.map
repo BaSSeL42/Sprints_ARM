@@ -29,17 +29,23 @@ Section Cross References
     button.o(i.HButton_getPinVal) refers to mgpio_program.o(i.MGPIO_u8GetPinData) for MGPIO_u8GetPinData
     app.o(i.APP_vidInit) refers to led.o(i.HLed_Init) for HLed_Init
     app.o(i.APP_vidInit) refers to button.o(i.HButton_Init) for HButton_Init
-    app.o(i.APP_vidInit) refers to systick_source.o(i.SYSTICK_u8Init) for SYSTICK_u8Init
+    app.o(i.APP_vidInit) refers to systick_manager.o(i.SYSTICK_MANAGER_u8Init) for SYSTICK_MANAGER_u8Init
     app.o(i.APP_vidInit) refers to led.o(i.HLed_off) for HLed_off
     app.o(i.APP_vidInit) refers to app.o(.constdata) for .constdata
     app.o(i.APP_vidStart) refers to button.o(i.HButton_getPinVal) for HButton_getPinVal
-    app.o(i.APP_vidStart) refers to systick_source.o(i.SYSTICK_vidStart) for SYSTICK_vidStart
+    app.o(i.APP_vidStart) refers to systick_manager.o(i.SYSTICK_MANAGER_vidStart) for SYSTICK_MANAGER_vidStart
     app.o(i.APP_vidStart) refers to led.o(i.HLed_on) for HLed_on
     app.o(i.APP_vidStart) refers to led.o(i.HLed_off) for HLed_off
-    app.o(i.APP_vidStart) refers to systick_source.o(i.SYSTICK_vidStop) for SYSTICK_vidStop
+    app.o(i.APP_vidStart) refers to systick_manager.o(i.SYSTICK_MANAGER_vidStop) for SYSTICK_MANAGER_vidStop
     app.o(i.APP_vidStart) refers to app.o(.data) for u8_gs_btn_state
     app.o(i.v_systick_cbf) refers to app.o(.data) for u8_gs_btn_press_counter
     app.o(.constdata) refers to app.o(i.v_systick_cbf) for v_systick_cbf
+    systick_manager.o(i.SYSTICK_MANAGER_u8DeInit) refers to systick_source.o(i.SYSTICK_u8DeInit) for SYSTICK_u8DeInit
+    systick_manager.o(i.SYSTICK_MANAGER_u8GetIntStatus) refers to systick_source.o(i.SYSTICK_u8GetIntStatus) for SYSTICK_u8GetIntStatus
+    systick_manager.o(i.SYSTICK_MANAGER_u8Init) refers to systick_source.o(i.SYSTICK_u8Init) for SYSTICK_u8Init
+    systick_manager.o(i.SYSTICK_MANAGER_vidResetTimer) refers to systick_source.o(i.SYSTICK_vidResetTimer) for SYSTICK_vidResetTimer
+    systick_manager.o(i.SYSTICK_MANAGER_vidStart) refers to systick_source.o(i.SYSTICK_vidStart) for SYSTICK_vidStart
+    systick_manager.o(i.SYSTICK_MANAGER_vidStop) refers to systick_source.o(i.SYSTICK_vidStop) for SYSTICK_vidStop
     startup_tm4c123.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c123.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_tm4c123.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -186,13 +192,16 @@ Removing Unused input sections from the image.
     Removing app.o(.rev16_text), (4 bytes).
     Removing app.o(.revsh_text), (4 bytes).
     Removing app.o(.rrx_text), (6 bytes).
+    Removing systick_manager.o(i.SYSTICK_MANAGER_u8DeInit), (8 bytes).
+    Removing systick_manager.o(i.SYSTICK_MANAGER_u8GetIntStatus), (18 bytes).
+    Removing systick_manager.o(i.SYSTICK_MANAGER_vidResetTimer), (8 bytes).
     Removing system_tm4c123.o(.rev16_text), (4 bytes).
     Removing system_tm4c123.o(.revsh_text), (4 bytes).
     Removing system_tm4c123.o(.rrx_text), (6 bytes).
     Removing system_tm4c123.o(i.SystemCoreClockUpdate), (196 bytes).
     Removing system_tm4c123.o(i.getOscClk), (244 bytes).
 
-27 unused section(s) (total 1268 bytes) removed from the image.
+30 unused section(s) (total 1302 bytes) removed from the image.
 
 ==============================================================================
 
@@ -203,68 +212,69 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      620  startup_tm4c123.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    ..\\code\\MCAL\\MGPIO\\mgpio_Program.c   0x00000000   Number         0  mgpio_program.o ABSOLUTE
+    ..\\code\\MCAL\\systick\\systick_source.c 0x00000000   Number         0  systick_source.o ABSOLUTE
+    ..\code\MCAL\MGPIO\mgpio_Program.c       0x00000000   Number         0  mgpio_program.o ABSOLUTE
+    ..\code\MCAL\systick\systick_source.c    0x00000000   Number         0  systick_source.o ABSOLUTE
+    ..\code\main.c                           0x00000000   Number         0  main.o ABSOLUTE
+    APP\\app.c                               0x00000000   Number         0  app.o ABSOLUTE
+    APP\app.c                                0x00000000   Number         0  app.o ABSOLUTE
+    HAL\Button\button.c                      0x00000000   Number         0  button.o ABSOLUTE
+    HAL\LED\led.c                            0x00000000   Number         0  led.o ABSOLUTE
+    HAL\\Button\\button.c                    0x00000000   Number         0  button.o ABSOLUTE
+    HAL\\LED\\led.c                          0x00000000   Number         0  led.o ABSOLUTE
+    HAL\systick_manager\systick_manager.c    0x00000000   Number         0  systick_manager.o ABSOLUTE
     RTE\Device\TM4C123BH6PM\startup_TM4C123.s 0x00000000   Number         0  startup_tm4c123.o ABSOLUTE
     RTE\Device\TM4C123BH6PM\system_TM4C123.c 0x00000000   Number         0  system_tm4c123.o ABSOLUTE
     RTE\\Device\\TM4C123BH6PM\\system_TM4C123.c 0x00000000   Number         0  system_tm4c123.o ABSOLUTE
-    code\APP\app.c                           0x00000000   Number         0  app.o ABSOLUTE
-    code\HAL\Button\button.c                 0x00000000   Number         0  button.o ABSOLUTE
-    code\HAL\LED\led.c                       0x00000000   Number         0  led.o ABSOLUTE
-    code\MCAL\MGPIO\mgpio_Program.c          0x00000000   Number         0  mgpio_program.o ABSOLUTE
-    code\MCAL\systick\systick_source.c       0x00000000   Number         0  systick_source.o ABSOLUTE
-    code\\APP\\app.c                         0x00000000   Number         0  app.o ABSOLUTE
-    code\\HAL\\Button\\button.c              0x00000000   Number         0  button.o ABSOLUTE
-    code\\HAL\\LED\\led.c                    0x00000000   Number         0  led.o ABSOLUTE
-    code\\MCAL\\MGPIO\\mgpio_Program.c       0x00000000   Number         0  mgpio_program.o ABSOLUTE
-    code\\MCAL\\systick\\systick_source.c    0x00000000   Number         0  systick_source.o ABSOLUTE
-    code\main.c                              0x00000000   Number         0  main.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     !!!main                                  0x0000026c   Section        8  __main.o(!!!main)
     !!!scatter                               0x00000274   Section       52  __scatter.o(!!!scatter)
@@ -336,18 +346,21 @@ Image Symbol Table
     i.MGPIO_u8GetPinData                     0x00000708   Section        0  mgpio_program.o(i.MGPIO_u8GetPinData)
     i.MGPIO_u8Init                           0x00000760   Section        0  mgpio_program.o(i.MGPIO_u8Init)
     i.MGPIO_u8SetPinData                     0x00000b98   Section        0  mgpio_program.o(i.MGPIO_u8SetPinData)
-    i.SYSTICK_u8Init                         0x00000c94   Section        0  systick_source.o(i.SYSTICK_u8Init)
-    i.SYSTICK_vidStart                       0x00000d34   Section        0  systick_source.o(i.SYSTICK_vidStart)
-    i.SYSTICK_vidStop                        0x00000d58   Section        0  systick_source.o(i.SYSTICK_vidStop)
-    i.SysTick_Handler                        0x00000d6c   Section        0  systick_source.o(i.SysTick_Handler)
-    i.SystemInit                             0x00000d80   Section        0  system_tm4c123.o(i.SystemInit)
-    i.main                                   0x00000df8   Section        0  main.o(i.main)
-    i.set_tick_time                          0x00000e04   Section        0  systick_source.o(i.set_tick_time)
-    set_tick_time                            0x00000e05   Thumb Code    42  systick_source.o(i.set_tick_time)
-    i.v_systick_cbf                          0x00000e3c   Section        0  app.o(i.v_systick_cbf)
-    x$fpl$fpinit                             0x00000e48   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000e48   Number         0  fpinit.o(x$fpl$fpinit)
-    .constdata                               0x00000e54   Section       12  app.o(.constdata)
+    i.SYSTICK_MANAGER_u8Init                 0x00000c94   Section        0  systick_manager.o(i.SYSTICK_MANAGER_u8Init)
+    i.SYSTICK_MANAGER_vidStart               0x00000ca6   Section        0  systick_manager.o(i.SYSTICK_MANAGER_vidStart)
+    i.SYSTICK_MANAGER_vidStop                0x00000cb4   Section        0  systick_manager.o(i.SYSTICK_MANAGER_vidStop)
+    i.SYSTICK_u8Init                         0x00000cbc   Section        0  systick_source.o(i.SYSTICK_u8Init)
+    i.SYSTICK_vidStart                       0x00000d5c   Section        0  systick_source.o(i.SYSTICK_vidStart)
+    i.SYSTICK_vidStop                        0x00000d80   Section        0  systick_source.o(i.SYSTICK_vidStop)
+    i.SysTick_Handler                        0x00000d94   Section        0  systick_source.o(i.SysTick_Handler)
+    i.SystemInit                             0x00000da8   Section        0  system_tm4c123.o(i.SystemInit)
+    i.main                                   0x00000e20   Section        0  main.o(i.main)
+    i.set_tick_time                          0x00000e2c   Section        0  systick_source.o(i.set_tick_time)
+    set_tick_time                            0x00000e2d   Thumb Code    42  systick_source.o(i.set_tick_time)
+    i.v_systick_cbf                          0x00000e64   Section        0  app.o(i.v_systick_cbf)
+    x$fpl$fpinit                             0x00000e70   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x00000e70   Number         0  fpinit.o(x$fpl$fpinit)
+    .constdata                               0x00000e7c   Section       12  app.o(.constdata)
     .data                                    0x20000000   Section       20  systick_source.o(.data)
     gl_u32_time_out                          0x20000000   Data           4  systick_source.o(.data)
     gl_u8_is_initialized                     0x20000004   Data           1  systick_source.o(.data)
@@ -595,18 +608,21 @@ Image Symbol Table
     MGPIO_u8GetPinData                       0x00000709   Thumb Code    82  mgpio_program.o(i.MGPIO_u8GetPinData)
     MGPIO_u8Init                             0x00000761   Thumb Code  1078  mgpio_program.o(i.MGPIO_u8Init)
     MGPIO_u8SetPinData                       0x00000b99   Thumb Code   246  mgpio_program.o(i.MGPIO_u8SetPinData)
-    SYSTICK_u8Init                           0x00000c95   Thumb Code   152  systick_source.o(i.SYSTICK_u8Init)
-    SYSTICK_vidStart                         0x00000d35   Thumb Code    32  systick_source.o(i.SYSTICK_vidStart)
-    SYSTICK_vidStop                          0x00000d59   Thumb Code    18  systick_source.o(i.SYSTICK_vidStop)
-    SysTick_Handler                          0x00000d6d   Thumb Code    16  systick_source.o(i.SysTick_Handler)
-    SystemInit                               0x00000d81   Thumb Code    92  system_tm4c123.o(i.SystemInit)
-    main                                     0x00000df9   Thumb Code    12  main.o(i.main)
-    v_systick_cbf                            0x00000e3d   Thumb Code     8  app.o(i.v_systick_cbf)
-    _fp_init                                 0x00000e49   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x00000e51   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x00000e51   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000e60   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000e80   Number         0  anon$$obj.o(Region$$Table)
+    SYSTICK_MANAGER_u8Init                   0x00000c95   Thumb Code    18  systick_manager.o(i.SYSTICK_MANAGER_u8Init)
+    SYSTICK_MANAGER_vidStart                 0x00000ca7   Thumb Code    14  systick_manager.o(i.SYSTICK_MANAGER_vidStart)
+    SYSTICK_MANAGER_vidStop                  0x00000cb5   Thumb Code     8  systick_manager.o(i.SYSTICK_MANAGER_vidStop)
+    SYSTICK_u8Init                           0x00000cbd   Thumb Code   152  systick_source.o(i.SYSTICK_u8Init)
+    SYSTICK_vidStart                         0x00000d5d   Thumb Code    32  systick_source.o(i.SYSTICK_vidStart)
+    SYSTICK_vidStop                          0x00000d81   Thumb Code    18  systick_source.o(i.SYSTICK_vidStop)
+    SysTick_Handler                          0x00000d95   Thumb Code    16  systick_source.o(i.SysTick_Handler)
+    SystemInit                               0x00000da9   Thumb Code    92  system_tm4c123.o(i.SystemInit)
+    main                                     0x00000e21   Thumb Code    12  main.o(i.main)
+    v_systick_cbf                            0x00000e65   Thumb Code     8  app.o(i.v_systick_cbf)
+    _fp_init                                 0x00000e71   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x00000e79   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x00000e79   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x00000e88   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000ea8   Number         0  anon$$obj.o(Region$$Table)
     str_dio_led_init                         0x20000014   Data           4  led.o(.data)
     str_dio_button_init                      0x20000018   Data           4  button.o(.data)
     SystemCoreClock                          0x20000020   Data           4  system_tm4c123.o(.data)
@@ -621,69 +637,69 @@ Memory Map of the image
 
   Image Entry point : 0x0000030d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000ea4, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000ecc, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000e80, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000ea8, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x0000026c   Data   RO          357    RESET               startup_tm4c123.o
-    0x0000026c   0x0000026c   0x00000008   Code   RO          407  * !!!main             c_w.l(__main.o)
-    0x00000274   0x00000274   0x00000034   Code   RO          564    !!!scatter          c_w.l(__scatter.o)
-    0x000002a8   0x000002a8   0x0000001a   Code   RO          566    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000000   0x00000000   0x0000026c   Data   RO          402    RESET               startup_tm4c123.o
+    0x0000026c   0x0000026c   0x00000008   Code   RO          452  * !!!main             c_w.l(__main.o)
+    0x00000274   0x00000274   0x00000034   Code   RO          609    !!!scatter          c_w.l(__scatter.o)
+    0x000002a8   0x000002a8   0x0000001a   Code   RO          611    !!handler_copy      c_w.l(__scatter_copy.o)
     0x000002c2   0x000002c2   0x00000002   PAD
-    0x000002c4   0x000002c4   0x0000001c   Code   RO          568    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x000002e0   0x000002e0   0x00000002   Code   RO          434    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x000002e2   0x000002e2   0x00000004   Code   RO          440    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          443    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          446    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          448    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          450    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          453    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          455    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          457    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          459    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          461    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          463    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          465    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          467    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          469    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          471    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          473    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          477    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          479    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          481    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          483    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000002   Code   RO          484    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x000002e8   0x000002e8   0x00000002   Code   RO          504    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          517    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          519    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          522    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          525    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          527    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          530    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000002   Code   RO          531    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x000002ec   0x000002ec   0x00000000   Code   RO          409    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x000002ec   0x000002ec   0x00000000   Code   RO          411    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x000002ec   0x000002ec   0x00000006   Code   RO          423    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x000002f2   0x000002f2   0x00000000   Code   RO          413    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x000002f2   0x000002f2   0x00000004   Code   RO          414    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x000002f6   0x000002f6   0x00000000   Code   RO          416    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x000002f6   0x000002f6   0x00000008   Code   RO          417    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x000002fe   0x000002fe   0x00000002   Code   RO          438    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000300   0x00000300   0x00000000   Code   RO          486    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000300   0x00000300   0x00000004   Code   RO          487    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000304   0x00000304   0x00000006   Code   RO          488    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002c4   0x000002c4   0x0000001c   Code   RO          613    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x000002e0   0x000002e0   0x00000002   Code   RO          479    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x000002e2   0x000002e2   0x00000004   Code   RO          485    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          488    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          491    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          493    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          495    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          498    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          500    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          502    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          504    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          506    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          508    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          510    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          512    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          514    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          516    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          518    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          522    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          524    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          526    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          528    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000002   Code   RO          529    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x000002e8   0x000002e8   0x00000002   Code   RO          549    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          562    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          564    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          567    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          570    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          572    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          575    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000002   Code   RO          576    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x000002ec   0x000002ec   0x00000000   Code   RO          454    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x000002ec   0x000002ec   0x00000000   Code   RO          456    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x000002ec   0x000002ec   0x00000006   Code   RO          468    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x000002f2   0x000002f2   0x00000000   Code   RO          458    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x000002f2   0x000002f2   0x00000004   Code   RO          459    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x000002f6   0x000002f6   0x00000000   Code   RO          461    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x000002f6   0x000002f6   0x00000008   Code   RO          462    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x000002fe   0x000002fe   0x00000002   Code   RO          483    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000300   0x00000300   0x00000000   Code   RO          531    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000300   0x00000300   0x00000004   Code   RO          532    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000304   0x00000304   0x00000006   Code   RO          533    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000030a   0x0000030a   0x00000002   PAD
-    0x0000030c   0x0000030c   0x00000114   Code   RO          358  * .text               startup_tm4c123.o
-    0x00000420   0x00000420   0x00000006   Code   RO          405    .text               c_w.l(heapauxi.o)
-    0x00000426   0x00000426   0x0000004a   Code   RO          425    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000470   0x00000470   0x00000012   Code   RO          427    .text               c_w.l(exit.o)
+    0x0000030c   0x0000030c   0x00000114   Code   RO          403  * .text               startup_tm4c123.o
+    0x00000420   0x00000420   0x00000006   Code   RO          450    .text               c_w.l(heapauxi.o)
+    0x00000426   0x00000426   0x0000004a   Code   RO          470    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000470   0x00000470   0x00000012   Code   RO          472    .text               c_w.l(exit.o)
     0x00000482   0x00000482   0x00000002   PAD
-    0x00000484   0x00000484   0x00000008   Code   RO          435    .text               c_w.l(libspace.o)
-    0x0000048c   0x0000048c   0x0000000c   Code   RO          496    .text               c_w.l(sys_exit.o)
-    0x00000498   0x00000498   0x00000002   Code   RO          507    .text               c_w.l(use_no_semi.o)
-    0x0000049a   0x0000049a   0x00000000   Code   RO          509    .text               c_w.l(indicate_semi.o)
+    0x00000484   0x00000484   0x00000008   Code   RO          480    .text               c_w.l(libspace.o)
+    0x0000048c   0x0000048c   0x0000000c   Code   RO          541    .text               c_w.l(sys_exit.o)
+    0x00000498   0x00000498   0x00000002   Code   RO          552    .text               c_w.l(use_no_semi.o)
+    0x0000049a   0x0000049a   0x00000000   Code   RO          554    .text               c_w.l(indicate_semi.o)
     0x0000049a   0x0000049a   0x00000002   PAD
     0x0000049c   0x0000049c   0x00000040   Code   RO          319    i.APP_vidInit       app.o
     0x000004dc   0x000004dc   0x000000fc   Code   RO          320    i.APP_vidStart      app.o
@@ -702,41 +718,44 @@ Memory Map of the image
     0x00000760   0x00000760   0x00000436   Code   RO          139    i.MGPIO_u8Init      mgpio_program.o
     0x00000b96   0x00000b96   0x00000002   PAD
     0x00000b98   0x00000b98   0x000000fc   Code   RO          141    i.MGPIO_u8SetPinData  mgpio_program.o
-    0x00000c94   0x00000c94   0x000000a0   Code   RO           23    i.SYSTICK_u8Init    systick_source.o
-    0x00000d34   0x00000d34   0x00000024   Code   RO           25    i.SYSTICK_vidStart  systick_source.o
-    0x00000d58   0x00000d58   0x00000012   Code   RO           26    i.SYSTICK_vidStop   systick_source.o
-    0x00000d6a   0x00000d6a   0x00000002   PAD
-    0x00000d6c   0x00000d6c   0x00000014   Code   RO           27    i.SysTick_Handler   systick_source.o
-    0x00000d80   0x00000d80   0x00000078   Code   RO          366    i.SystemInit        system_tm4c123.o
-    0x00000df8   0x00000df8   0x0000000c   Code   RO            1    i.main              main.o
-    0x00000e04   0x00000e04   0x00000038   Code   RO           28    i.set_tick_time     systick_source.o
-    0x00000e3c   0x00000e3c   0x0000000c   Code   RO          321    i.v_systick_cbf     app.o
-    0x00000e48   0x00000e48   0x0000000a   Code   RO          494    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000e52   0x00000e52   0x00000002   PAD
-    0x00000e54   0x00000e54   0x0000000c   Data   RO          322    .constdata          app.o
-    0x00000e60   0x00000e60   0x00000020   Data   RO          562    Region$$Table       anon$$obj.o
+    0x00000c94   0x00000c94   0x00000012   Code   RO          360    i.SYSTICK_MANAGER_u8Init  systick_manager.o
+    0x00000ca6   0x00000ca6   0x0000000e   Code   RO          362    i.SYSTICK_MANAGER_vidStart  systick_manager.o
+    0x00000cb4   0x00000cb4   0x00000008   Code   RO          363    i.SYSTICK_MANAGER_vidStop  systick_manager.o
+    0x00000cbc   0x00000cbc   0x000000a0   Code   RO           23    i.SYSTICK_u8Init    systick_source.o
+    0x00000d5c   0x00000d5c   0x00000024   Code   RO           25    i.SYSTICK_vidStart  systick_source.o
+    0x00000d80   0x00000d80   0x00000012   Code   RO           26    i.SYSTICK_vidStop   systick_source.o
+    0x00000d92   0x00000d92   0x00000002   PAD
+    0x00000d94   0x00000d94   0x00000014   Code   RO           27    i.SysTick_Handler   systick_source.o
+    0x00000da8   0x00000da8   0x00000078   Code   RO          411    i.SystemInit        system_tm4c123.o
+    0x00000e20   0x00000e20   0x0000000c   Code   RO            1    i.main              main.o
+    0x00000e2c   0x00000e2c   0x00000038   Code   RO           28    i.set_tick_time     systick_source.o
+    0x00000e64   0x00000e64   0x0000000c   Code   RO          321    i.v_systick_cbf     app.o
+    0x00000e70   0x00000e70   0x0000000a   Code   RO          539    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00000e7a   0x00000e7a   0x00000002   PAD
+    0x00000e7c   0x00000e7c   0x0000000c   Data   RO          322    .constdata          app.o
+    0x00000e88   0x00000e88   0x00000020   Data   RO          607    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000e80, Size: 0x00000024, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000ea8, Size: 0x00000024, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000e80   0x00000014   Data   RW           29    .data               systick_source.o
-    0x20000014   0x00000e94   0x00000004   Data   RW          239    .data               led.o
-    0x20000018   0x00000e98   0x00000004   Data   RW          285    .data               button.o
-    0x2000001c   0x00000e9c   0x00000004   Data   RW          323    .data               app.o
-    0x20000020   0x00000ea0   0x00000004   Data   RW          368    .data               system_tm4c123.o
+    0x20000000   0x00000ea8   0x00000014   Data   RW           29    .data               systick_source.o
+    0x20000014   0x00000ebc   0x00000004   Data   RW          239    .data               led.o
+    0x20000018   0x00000ec0   0x00000004   Data   RW          285    .data               button.o
+    0x2000001c   0x00000ec4   0x00000004   Data   RW          323    .data               app.o
+    0x20000020   0x00000ec8   0x00000004   Data   RW          413    .data               system_tm4c123.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000024, Load base: 0x00000ea4, Size: 0x0000027c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000024, Load base: 0x00000ecc, Size: 0x0000027c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000024        -       0x00000018   Zero   RW          142    .bss                mgpio_program.o
-    0x2000003c        -       0x00000060   Zero   RW          436    .bss                c_w.l(libspace.o)
-    0x2000009c   0x00000ea4   0x00000004   PAD
-    0x200000a0        -       0x00000000   Zero   RW          356    HEAP                startup_tm4c123.o
-    0x200000a0        -       0x00000200   Zero   RW          355    STACK               startup_tm4c123.o
+    0x2000003c        -       0x00000060   Zero   RW          481    .bss                c_w.l(libspace.o)
+    0x2000009c   0x00000ecc   0x00000004   PAD
+    0x200000a0        -       0x00000000   Zero   RW          401    HEAP                startup_tm4c123.o
+    0x200000a0        -       0x00000200   Zero   RW          400    STACK               startup_tm4c123.o
 
 
 ==============================================================================
@@ -746,17 +765,18 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       328         24         12          4          0       1925   app.o
-        80          6          0          4          0       2417   button.o
-       104          4          0          4          0       2396   led.o
-        12          0          0          0          0       1911   main.o
-      1538         46          0          0         24       9041   mgpio_program.o
-       276         24        620          0        512       5464   startup_tm4c123.o
-       120         28          0          4          0        851   system_tm4c123.o
-       290         30          0         20          0       8152   systick_source.o
+       328         24         12          4          0       2021   app.o
+        80          6          0          4          0       2545   button.o
+       104          4          0          4          0       2524   led.o
+        12          0          0          0          0       1947   main.o
+      1538         46          0          0         24       9493   mgpio_program.o
+       276         24        620          0        512       5496   startup_tm4c123.o
+       120         28          0          4          0        915   system_tm4c123.o
+        40          0          0          0          0       2390   systick_manager.o
+       290         30          0         20          0       8516   systick_source.o
 
     ----------------------------------------------------------------------
-      2752        162        664         36        536      32157   Object Totals
+      2792        162        664         36        536      35847   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          0          0          0   (incl. Padding)
 
@@ -807,15 +827,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3048        178        664         36        636      30701   Grand Totals
-      3048        178        664         36        636      30701   ELF Image Totals
-      3048        178        664         36          0          0   ROM Totals
+      3088        178        664         36        636      34091   Grand Totals
+      3088        178        664         36        636      34091   ELF Image Totals
+      3088        178        664         36          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3712 (   3.63kB)
+    Total RO  Size (Code + RO Data)                 3752 (   3.66kB)
     Total RW  Size (RW Data + ZI Data)               672 (   0.66kB)
-    Total ROM Size (Code + RO Data + RW Data)       3748 (   3.66kB)
+    Total ROM Size (Code + RO Data + RW Data)       3788 (   3.70kB)
 
 ==============================================================================
 

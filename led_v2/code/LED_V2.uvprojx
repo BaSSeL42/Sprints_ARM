@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\code\MCAL\systick\include;.\code\MCAL\MGPIO\includes;.\code\COM;.\code\HAL\LED\include;.\code\HAL\Button\include;.\code\APP\includes</IncludePath>
+              <IncludePath>..\code\MCAL\systick\include;..\code\MCAL\MGPIO\includes;..\code\COM;..\code\HAL\LED\include;..\code\HAL\Button\include;..\code\APP\includes;.\HAL\systick_manager\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,82 +385,92 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\main.c</FilePath>
+              <FilePath>..\code\main.c</FilePath>
             </File>
             <File>
               <FileName>systick_source.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\MCAL\systick\systick_source.c</FilePath>
+              <FilePath>..\code\MCAL\systick\systick_source.c</FilePath>
             </File>
             <File>
               <FileName>systick_Interface.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\systick\include\systick_Interface.h</FilePath>
+              <FilePath>..\code\MCAL\systick\include\systick_Interface.h</FilePath>
             </File>
             <File>
               <FileName>systick_Private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\systick\include\systick_Private.h</FilePath>
+              <FilePath>..\code\MCAL\systick\include\systick_Private.h</FilePath>
             </File>
             <File>
               <FileName>mgpio_Program.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\MCAL\MGPIO\mgpio_Program.c</FilePath>
+              <FilePath>..\code\MCAL\MGPIO\mgpio_Program.c</FilePath>
             </File>
             <File>
               <FileName>mgpio_Config.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Config.h</FilePath>
+              <FilePath>..\code\MCAL\MGPIO\includes\mgpio_Config.h</FilePath>
             </File>
             <File>
               <FileName>mgpio_Interface.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Interface.h</FilePath>
+              <FilePath>..\code\MCAL\MGPIO\includes\mgpio_Interface.h</FilePath>
             </File>
             <File>
               <FileName>mgpio_Private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Private.h</FilePath>
+              <FilePath>.\MCAL\MGPIO\includes\mgpio_Private.h</FilePath>
             </File>
             <File>
               <FileName>led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\HAL\LED\led.c</FilePath>
+              <FilePath>.\HAL\LED\led.c</FilePath>
             </File>
             <File>
               <FileName>led.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\HAL\LED\include\led.h</FilePath>
+              <FilePath>.\HAL\LED\include\led.h</FilePath>
             </File>
             <File>
               <FileName>button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\HAL\Button\button.c</FilePath>
+              <FilePath>.\HAL\Button\button.c</FilePath>
             </File>
             <File>
               <FileName>button.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\HAL\Button\include\button.h</FilePath>
+              <FilePath>.\HAL\Button\include\button.h</FilePath>
             </File>
             <File>
               <FileName>LBIT_MATH.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\COM\LBIT_MATH.h</FilePath>
+              <FilePath>.\COM\LBIT_MATH.h</FilePath>
             </File>
             <File>
               <FileName>LSTD_TYPES.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\COM\LSTD_TYPES.h</FilePath>
+              <FilePath>.\COM\LSTD_TYPES.h</FilePath>
             </File>
             <File>
               <FileName>app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\APP\app.c</FilePath>
+              <FilePath>.\APP\app.c</FilePath>
             </File>
             <File>
               <FileName>app.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\APP\includes\app.h</FilePath>
+              <FilePath>.\APP\includes\app.h</FilePath>
+            </File>
+            <File>
+              <FileName>systick_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\systick_manager\systick_manager.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick_manager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\systick_manager\include\systick_manager.h</FilePath>
             </File>
           </Files>
         </Group>
