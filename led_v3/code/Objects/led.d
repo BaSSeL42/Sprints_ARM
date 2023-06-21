@@ -1,8 +1,8 @@
-.\objects\led.o: code\HAL\LED\led.c
-.\objects\led.o: .\code\COM\LSTD_TYPES.h
-.\objects\led.o: .\code\COM\LBIT_MATH.h
-.\objects\led.o: .\code\HAL\LED\include\led.h
-.\objects\led.o: .\code\MCAL\MGPIO\includes\mgpio_Interface.h
+.\objects\led.o: HAL\LED\led.c
+.\objects\led.o: .\COM\LSTD_TYPES.h
+.\objects\led.o: .\COM\LBIT_MATH.h
+.\objects\led.o: .\HAL\LED\include\led.h
+.\objects\led.o: .\MCAL\MGPIO\includes\mgpio_Interface.h
 .\objects\led.o: C:\Users\hp\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123\TM4C123.h
 .\objects\led.o: C:\Users\hp\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123\TM4C123GH6PM.h
 .\objects\led.o: C:\Users\hp\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm4.h

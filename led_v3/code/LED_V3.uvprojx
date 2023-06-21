@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\code\APP\includes;.\code\COM;.\code\HAL\Button\include;.\code\HAL\LED\include;.\code\HAL\gpt_manager\include;.\code\MCAL\MGPIO\includes;.\code\MCAL\gpt\include</IncludePath>
+              <IncludePath>.\MCAL\gpt\include;.\MCAL\MGPIO\includes;.\COM;.\APP\includes;.\HAL\Button\include;.\HAL\gpt_manager\include;.\HAL\LED\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,97 +385,97 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\main.c</FilePath>
+              <FilePath>.\main.c</FilePath>
             </File>
             <File>
               <FileName>mgpio_Program.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\MCAL\MGPIO\mgpio_Program.c</FilePath>
+              <FilePath>.\MCAL\MGPIO\mgpio_Program.c</FilePath>
             </File>
             <File>
               <FileName>mgpio_Config.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Config.h</FilePath>
+              <FilePath>.\MCAL\MGPIO\includes\mgpio_Config.h</FilePath>
             </File>
             <File>
               <FileName>mgpio_Interface.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Interface.h</FilePath>
+              <FilePath>.\MCAL\MGPIO\includes\mgpio_Interface.h</FilePath>
             </File>
             <File>
               <FileName>mgpio_Private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\MGPIO\includes\mgpio_Private.h</FilePath>
+              <FilePath>.\MCAL\MGPIO\includes\mgpio_Private.h</FilePath>
             </File>
             <File>
               <FileName>gpt_source.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\MCAL\gpt\gpt_source.c</FilePath>
+              <FilePath>.\MCAL\gpt\gpt_source.c</FilePath>
             </File>
             <File>
               <FileName>gpt_Config.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\gpt\include\gpt_Config.h</FilePath>
+              <FilePath>.\MCAL\gpt\include\gpt_Config.h</FilePath>
             </File>
             <File>
               <FileName>gpt_Interface.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\gpt\include\gpt_Interface.h</FilePath>
+              <FilePath>.\MCAL\gpt\include\gpt_Interface.h</FilePath>
             </File>
             <File>
               <FileName>gpt_Private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\MCAL\gpt\include\gpt_Private.h</FilePath>
+              <FilePath>.\MCAL\gpt\include\gpt_Private.h</FilePath>
             </File>
             <File>
               <FileName>led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\HAL\LED\led.c</FilePath>
+              <FilePath>.\HAL\LED\led.c</FilePath>
             </File>
             <File>
               <FileName>led.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\HAL\LED\include\led.h</FilePath>
-            </File>
-            <File>
-              <FileName>button.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\HAL\Button\button.c</FilePath>
-            </File>
-            <File>
-              <FileName>button.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\HAL\Button\include\button.h</FilePath>
-            </File>
-            <File>
-              <FileName>LBIT_MATH.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\COM\LBIT_MATH.h</FilePath>
-            </File>
-            <File>
-              <FileName>LSTD_TYPES.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\COM\LSTD_TYPES.h</FilePath>
-            </File>
-            <File>
-              <FileName>app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\APP\app.c</FilePath>
-            </File>
-            <File>
-              <FileName>app.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\APP\includes\app.h</FilePath>
+              <FilePath>.\HAL\LED\include\led.h</FilePath>
             </File>
             <File>
               <FileName>gpt_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\code\HAL\gpt_manager\gpt_manager.c</FilePath>
+              <FilePath>.\HAL\gpt_manager\gpt_manager.c</FilePath>
             </File>
             <File>
               <FileName>gpt_manager.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\code\HAL\gpt_manager\include\gpt_manager.h</FilePath>
+              <FilePath>.\HAL\gpt_manager\include\gpt_manager.h</FilePath>
+            </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\Button\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\Button\include\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>LBIT_MATH.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\COM\LBIT_MATH.h</FilePath>
+            </File>
+            <File>
+              <FileName>LSTD_TYPES.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\COM\LSTD_TYPES.h</FilePath>
+            </File>
+            <File>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\app.c</FilePath>
+            </File>
+            <File>
+              <FileName>app.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\includes\app.h</FilePath>
             </File>
           </Files>
         </Group>

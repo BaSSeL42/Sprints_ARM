@@ -1,19 +1,27 @@
 
+/********************************************************************************************************************
+*												Standard Types LIB
+********************************************************************************************************************/
 #include "LSTD_TYPES.h"
-//#include "mgpio_Interface.h"
+/********************************************************************************************************************
+*												Peripheral Files
+********************************************************************************************************************/
 #include "led.h"
 #include "button.h"
 #include "app.h"
 #include "gpt_manager.h"
-//#include "systick_Interface.h"
 
-//#define RED							MGPIO_PINF_1
-//#define BLUE						MGPIO_PINF_2
+
+/********************************************************************************************************************
+*												MACROs
+********************************************************************************************************************/
 #define GREEN						MGPIO_PINF_3
 #define PUSH_BTN				MGPIO_PINF_4
 
-//void v_systick_cbf(void);
-static void APP_vidCBK(void);
+
+/********************************************************************************************************************
+*												Global Variables
+********************************************************************************************************************/
 static uint8_ u8_gs_btn_state = MGPIO_PIN_HIGH;
 static uint8_ u8_gs_btn_prv_state = MGPIO_PIN_HIGH;
 const uint8_ u8_gc_arr_duty_cycles[5] = {0,30,60,90};
@@ -23,6 +31,17 @@ static uint8_ u8_gs_duty_counter = 0;
 uint64_ p_u64_int_cur_val;
 
 
+/********************************************************************************************************************
+*												Local APIs Prototype
+********************************************************************************************************************/
+static void APP_vidCBK(void);
+static void delay_ms(uint32_ number_of_seconds);
+void duty(uint8_ duty );
+
+
+/********************************************************************************************************************
+*												main APIs Implementation
+********************************************************************************************************************/
 void APP_vidInit(void)
 {
 	HLed_Init(GREEN);			// GREEN
@@ -51,41 +70,34 @@ void APP_vidInit(void)
 	HLed_off(GREEN);		// GREEN OFF
 }
 
-void duty(uint8_ duty )
-{
-	if(((duty/10) > u8_gs_duty_counter) && (0<= u8_gs_duty_counter))
-	{
-		HLed_on(GREEN);
-	}
-	else if (((duty/10) <= u8_gs_duty_counter) && (10> u8_gs_duty_counter))
-	{
-		HLed_off(GREEN);
-	}
-	else
-	{
-		u8_gs_duty_counter = 0;
-	}
-}
+
+
 
 void APP_vidStart(void)
 {
 	HButton_getPinVal(PUSH_BTN,&u8_gs_btn_state);
 	
-	if(MGPIO_PIN_LOW == u8_gs_btn_state && MGPIO_PIN_HIGH == u8_gs_btn_prv_state)
+	if(MGPIO_PIN_HIGH== u8_gs_btn_state && MGPIO_PIN_LOW == u8_gs_btn_prv_state)
 	{
-		if(3 == u8_gs_btn_press_counter)
+		delay_ms(25);
+		if(MGPIO_PIN_HIGH== u8_gs_btn_state && MGPIO_PIN_LOW == u8_gs_btn_prv_state)
 		{
-			u8_gs_btn_press_counter = 0;
-			u8_gs_current_duty_cycle = u8_gc_arr_duty_cycles[0];
+			u8_gs_duty_counter = 0;
+			if(3 == u8_gs_btn_press_counter)
+			{
+				u8_gs_btn_press_counter = 0;
+				u8_gs_current_duty_cycle = u8_gc_arr_duty_cycles[0];
+			}
+			else if(3 >  u8_gs_btn_press_counter)
+			{
+				u8_gs_btn_press_counter++;
+				u8_gs_current_duty_cycle = u8_gc_arr_duty_cycles[u8_gs_btn_press_counter];
+			}
+			else{
+				/* do nothing */
+			}
 		}
-		else if(3 >  u8_gs_btn_press_counter)
-		{
-			u8_gs_btn_press_counter++;
-			u8_gs_current_duty_cycle = u8_gc_arr_duty_cycles[u8_gs_btn_press_counter];
-		}
-		else{
-			/* do nothing */
-		}
+
 	}
 	duty(u8_gs_current_duty_cycle);
 
@@ -94,6 +106,25 @@ void APP_vidStart(void)
 }
 
 
+
+/********************************************************************************************************************
+*												Local APIs Implementation
+********************************************************************************************************************/
+
+static void delay_ms(uint32_ number_of_seconds)
+{
+    // Converting time into milli_seconds
+    uint32_ i,j;
+	
+	for (i = 0; i < number_of_seconds; i++)
+	{
+		for (j = 0; j < 1275; j++)
+		{
+			__asm__("NOP");
+			
+		}
+	}
+}
 
 
 static void APP_vidCBK(void)
@@ -116,7 +147,21 @@ static void APP_vidCBK(void)
 }
 
 
-
+void duty(uint8_ duty )
+{
+	if(((duty/10) > u8_gs_duty_counter) && (0<= u8_gs_duty_counter))
+	{
+		HLed_on(GREEN);
+	}
+	else if (((duty/10) <= u8_gs_duty_counter) && (10> u8_gs_duty_counter))
+	{
+		HLed_off(GREEN);
+	}
+	else
+	{
+		u8_gs_duty_counter = 0;
+	}
+}
 
 
 

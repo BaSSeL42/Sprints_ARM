@@ -1,2 +1,2 @@
-.\objects\main.o: code\main.c
-.\objects\main.o: .\code\APP\includes\app.h
+.\objects\main.o: main.c
+.\objects\main.o: .\APP\includes\app.h
