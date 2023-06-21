@@ -83,6 +83,9 @@ void APP_vidStart(void)
 			u8_gs_btn_press_counter++;
 			u8_gs_current_duty_cycle = u8_gc_arr_duty_cycles[u8_gs_btn_press_counter];
 		}
+		else{
+			/* do nothing */
+		}
 	}
 	duty(u8_gs_current_duty_cycle);
 
