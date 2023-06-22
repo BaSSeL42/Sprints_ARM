@@ -45,7 +45,7 @@ void duty(uint8_ duty );
 void APP_vidInit(void)
 {
 	HLed_Init(GREEN);			// GREEN
-	
+
 	
 	
 	HButton_Init(PUSH_BTN);			// Push button
