@@ -7,8 +7,8 @@
 /***********************************************************************************************
 *											Includes
 ***********************************************************************************************/
-#include "LSTD_TYPES.h"
-#include "LBIT_MATH.h"
+#include "std_types.h"
+#include "bit_math.h"
 //#include "mgpio_Interface.h"
 #include "button.h"
 

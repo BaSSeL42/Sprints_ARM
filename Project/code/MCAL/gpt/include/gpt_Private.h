@@ -53,6 +53,7 @@
 #define TAEN_IDX			(0U)
 #define TATOIM_IDX		(0U)
 #define TATOCINT_IDX	(0U)
+#define TATORIS_IDX		(0U)
 #define TASTALL_IDX		(1U)
 #define CAMIM_IDX			(1U)
 #define CAMCINT_IDX		(1U)

@@ -2,7 +2,7 @@
  *  AUTHOR 						: Bassel Yasser
  *  Version 					: V0.0.0
  *  Date							: 13 - 6 - 2023
- *  Description 			: gpt_source.c --> APIs Implementation
+ *  Description 			: gpt_Interface.h --> APIs Prototypes and Configurations
  *  Module Features		:
  *  											01- GPT_u8Init()
  *  											02- GPT_vidStart()
@@ -10,10 +10,14 @@
 													04-	GPT_vidIRQEnable()
 													05-	GPT_vidIRQDisable()
 													06-	GPT_u8GetCurrentVal()
-													07- GPT_u8PWMInit()
-													08- GPT_u8GeneratePWM()
-													09- GPT_u8PWMStart()
-													10- GPT_u8PWMStop()
+													07- GPT_u8DutyCycle()
+													08- GPT_u8Delay_ms()
+													09- GPT_u8Delay_us()
+													10= GPT_u8Delay_s()
+													11- GPT_u8PWMInit()
+													12- GPT_u8GeneratePWM()
+													13- GPT_u8PWMStart()
+													14- GPT_u8PWMStop()
  *****************************************************************************/
  /********************************************************************************************************************
 ********************************************************************************************************************/
@@ -46,6 +50,7 @@
 #define GPT_WIDE_CHANNEL_ID_OFFSET			6
 #define _16_BIT_MAX_LENGTH							0xFFFF
 #define _32_BIT_MAX_LENGTH							0xFFFFFFFF
+#define MAX_GPT_CHANNELS								12U
 /********************************************************************************************************************
 ********************************************************************************************************************/
 /********************************************************************************************************************
@@ -54,23 +59,23 @@
 /********************************************************************************************************************
 ********************************************************************************************************************/
 extern uint32_t 				SystemCoreClock;
-static en_gpt_time_x_t	gl_en_time_init 							= GPT_TIME_INVALID;
-static en_gpt_ch_id_t		gl_en_channel_id							= GPT_CHANNEL_INVALID; 
-static en_gpt_ch_id_t		gl_en_pwm_channel_id					= GPT_CHANNEL_INVALID; 
-static boolean					gl_bool_is_PR_used						= FALSE;
-static uint32_ 					gl_u32_is_initialized 				= FALSE;
-static boolean					gl_bool_is_pwm_initialized		= FALSE;
-static uint64_ 					gl_u64_gpt_ticks;
-static uint64_ 					gl_u64_pwm_total_ticks;
+static en_gpt_time_x_t	gs_en_time_init 							= GPT_TIME_INVALID;
+static en_gpt_ch_id_t		gs_en_channel_id							= GPT_CHANNEL_INVALID; 
+static en_gpt_ch_id_t		gs_en_pwm_channel_id					= GPT_CHANNEL_INVALID; 
+static boolean					gs_bool_is_PR_used						= FALSE;
+static uint32_ 					gs_u32_is_initialized 				= FALSE;
+static boolean					gs_bool_is_pwm_initialized		= FALSE;
+static uint64_ 					gs_u64_gpt_ticks;
+static uint64_ 					gs_u64_pwm_total_ticks;
 static uint32_					gs_u32_gpt_time;	
 static uint32_					gs_u32_duty_cycle;
 
-static ptr_func_t 			gl_pf_gpt_ch0_cbk 		= NULL;
-static ptr_func_t 			gl_pf_gpt_ch1_cbk 		= NULL;
-static ptr_func_t 			gl_pf_gpt_ch2_cbk 		= NULL;
-static ptr_func_t 			gl_pf_gpt_ch3_cbk 		= NULL;
-static ptr_func_t 			gl_pf_gpt_ch4_cbk 		= NULL;
-static ptr_func_t 			gl_pf_gpt_ch5_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch0_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch1_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch2_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch3_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch4_cbk 		= NULL;
+static ptr_func_t 			gs_pf_gpt_ch5_cbk 		= NULL;
 
 /********************************************************************************************************************
 ********************************************************************************************************************/
@@ -92,7 +97,7 @@ static void set_pwm_tick_time(uint32_ copy_u32_time_ms);
 /*****************************************************************************************************************
 *											01- GPT_u8Init()									
 * ----------------------------------------------------------------------------------------------------------------
- * @func  		: Systick Timer Intialization
+ * @func  		: GPT_u8InitTimer Intialization
  * @in[1] 		: Address of struct Instance
  * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
  ******************************************************************************************************************/
@@ -107,12 +112,11 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 					st_gpt_timer_cfg->en_gpt_mode				< 	GPT_CH_MODE_INVALID		&&
 					st_gpt_timer_cfg->en_gpt_irq				< 	GPT_IRQ_INVALID				&&
 					st_gpt_timer_cfg->en_gpt_time_x			< 	GPT_TIME_INVALID			&&
-					st_gpt_timer_cfg->ptr_func					!= 	NULL									&&
 					st_gpt_timer_cfg->en_gpt_stall			< 	GPT_STALL_INVALID			&&
 					st_gpt_timer_cfg->u32_set_time			!= 	ZERO)
 		{
 			loc_u8_channel_id = st_gpt_timer_cfg->en_gpt_ch_id;
-			gl_en_channel_id = st_gpt_timer_cfg->en_gpt_ch_id;
+			gs_en_channel_id = st_gpt_timer_cfg->en_gpt_ch_id;
 			
 			
 			/*						Enable Timer System Clock										*/
@@ -188,15 +192,15 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 			/*-------------------------------------------------------------*/				
 			if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_US)
 			{
-				gl_en_time_init = GPT_TIME_US;
+				gs_en_time_init = GPT_TIME_US;
 			}
 			else if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_MS)
 			{
-				gl_en_time_init = GPT_TIME_MS;
+				gs_en_time_init = GPT_TIME_MS;
 			}
 			else if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_S)
 			{
-				gl_en_time_init = GPT_TIME_S;
+				gs_en_time_init = GPT_TIME_S;
 			}
 			else 
 			{
@@ -295,17 +299,17 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 			/*-------------------------------------------------------------*/				
 			if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_US)
 			{
-				gl_en_time_init = GPT_TIME_US;
+				gs_en_time_init = GPT_TIME_US;
 				gs_u32_gpt_time = st_gpt_timer_cfg->u32_set_time;
 			}
 			else if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_MS)
 			{
-				gl_en_time_init = GPT_TIME_MS;
+				gs_en_time_init = GPT_TIME_MS;
 				gs_u32_gpt_time = st_gpt_timer_cfg->u32_set_time;
 			}
 			else if (st_gpt_timer_cfg->en_gpt_time_x == GPT_TIME_S)
 			{
-				gl_en_time_init = GPT_TIME_S;
+				gs_en_time_init = GPT_TIME_S;
 				gs_u32_gpt_time = st_gpt_timer_cfg->u32_set_time;
 			}
 			else 
@@ -324,17 +328,17 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 				
 			/*						Enable NVIC Timer Interrupt			 */
 			/*-------------------------------------------------------------*/				
-				if ((gl_en_channel_id == GPT_WIDE_CHANNEL_0) 		|| (gl_en_channel_id == GPT_CHANNEL_0) )
+				if ((gs_en_channel_id == GPT_WIDE_CHANNEL_0) 		|| (gs_en_channel_id == GPT_CHANNEL_0) )
 					NVIC_EnableIRQ(TIMER0A_IRQn);
-				else if(gl_en_channel_id == GPT_WIDE_CHANNEL_1 	|| (gl_en_channel_id == GPT_CHANNEL_1) )
+				else if(gs_en_channel_id == GPT_WIDE_CHANNEL_1 	|| (gs_en_channel_id == GPT_CHANNEL_1) )
 					NVIC_EnableIRQ(TIMER1A_IRQn);
-				else if(gl_en_channel_id == GPT_WIDE_CHANNEL_2 	|| (gl_en_channel_id == GPT_CHANNEL_2) )
+				else if(gs_en_channel_id == GPT_WIDE_CHANNEL_2 	|| (gs_en_channel_id == GPT_CHANNEL_2) )
 					NVIC_EnableIRQ(TIMER2A_IRQn);
-				else if(gl_en_channel_id == GPT_WIDE_CHANNEL_3 	|| (gl_en_channel_id == GPT_CHANNEL_3) )
+				else if(gs_en_channel_id == GPT_WIDE_CHANNEL_3 	|| (gs_en_channel_id == GPT_CHANNEL_3) )
 					NVIC_EnableIRQ(TIMER3A_IRQn);
-				else if(gl_en_channel_id == GPT_WIDE_CHANNEL_4 	|| (gl_en_channel_id == GPT_CHANNEL_4) )
+				else if(gs_en_channel_id == GPT_WIDE_CHANNEL_4 	|| (gs_en_channel_id == GPT_CHANNEL_4) )
 					NVIC_EnableIRQ(TIMER4A_IRQn);
-				else if(gl_en_channel_id == GPT_WIDE_CHANNEL_5 	|| (gl_en_channel_id == GPT_CHANNEL_5) )
+				else if(gs_en_channel_id == GPT_WIDE_CHANNEL_5 	|| (gs_en_channel_id == GPT_CHANNEL_5) )
 					NVIC_EnableIRQ(TIMER5A_IRQn);
 				else
 				{
@@ -356,23 +360,30 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 			
 			/*						Set Call Back Function			 */
 			/*-------------------------------------------------------------*/
-			
-				if (	(gl_en_channel_id == GPT_WIDE_CHANNEL_0) 		|| (gl_en_channel_id == GPT_CHANNEL_0) )
-					gl_pf_gpt_ch0_cbk = st_gpt_timer_cfg->ptr_func;
-				else if((gl_en_channel_id == GPT_WIDE_CHANNEL_1) 	|| (gl_en_channel_id == GPT_CHANNEL_1) )
-					gl_pf_gpt_ch1_cbk = st_gpt_timer_cfg->ptr_func;
-				else if((gl_en_channel_id == GPT_WIDE_CHANNEL_2) 	|| (gl_en_channel_id == GPT_CHANNEL_2) )
-					gl_pf_gpt_ch2_cbk = st_gpt_timer_cfg->ptr_func;
-				else if((gl_en_channel_id == GPT_WIDE_CHANNEL_3) 	|| (gl_en_channel_id == GPT_CHANNEL_3) )
-					gl_pf_gpt_ch3_cbk = st_gpt_timer_cfg->ptr_func;
-				else if((gl_en_channel_id == GPT_WIDE_CHANNEL_4) 	|| (gl_en_channel_id == GPT_CHANNEL_4) )
-					gl_pf_gpt_ch4_cbk = st_gpt_timer_cfg->ptr_func;
-				else if((gl_en_channel_id == GPT_WIDE_CHANNEL_5) 	|| (gl_en_channel_id == GPT_CHANNEL_5) )
-					gl_pf_gpt_ch5_cbk = st_gpt_timer_cfg->ptr_func;
-				else
-				{
-					/* do nothing */
-				}
+			if (st_gpt_timer_cfg->ptr_func != 	NULL	)
+			{
+					if (	(gs_en_channel_id == GPT_WIDE_CHANNEL_0) 		|| (gs_en_channel_id == GPT_CHANNEL_0) )
+						gs_pf_gpt_ch0_cbk = st_gpt_timer_cfg->ptr_func;
+					else if((gs_en_channel_id == GPT_WIDE_CHANNEL_1) 	|| (gs_en_channel_id == GPT_CHANNEL_1) )
+						gs_pf_gpt_ch1_cbk = st_gpt_timer_cfg->ptr_func;
+					else if((gs_en_channel_id == GPT_WIDE_CHANNEL_2) 	|| (gs_en_channel_id == GPT_CHANNEL_2) )
+						gs_pf_gpt_ch2_cbk = st_gpt_timer_cfg->ptr_func;
+					else if((gs_en_channel_id == GPT_WIDE_CHANNEL_3) 	|| (gs_en_channel_id == GPT_CHANNEL_3) )
+						gs_pf_gpt_ch3_cbk = st_gpt_timer_cfg->ptr_func;
+					else if((gs_en_channel_id == GPT_WIDE_CHANNEL_4) 	|| (gs_en_channel_id == GPT_CHANNEL_4) )
+						gs_pf_gpt_ch4_cbk = st_gpt_timer_cfg->ptr_func;
+					else if((gs_en_channel_id == GPT_WIDE_CHANNEL_5) 	|| (gs_en_channel_id == GPT_CHANNEL_5) )
+						gs_pf_gpt_ch5_cbk = st_gpt_timer_cfg->ptr_func;
+					else
+					{
+						/* do nothing */
+					}			
+			}
+			else 
+			{
+				/* do nothing */
+			}
+
 /*----*/
 #else
 /*----*/
@@ -381,7 +392,7 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 #endif			
 /*----*/
 
-					gl_u32_is_initialized = TRUE;
+					gs_u32_is_initialized = TRUE;
 		}
 		else 
 		{
@@ -406,7 +417,7 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
 uint8_ GPT_u8Start(void)
 {
 	uint8_ loc_u8_err_state = SUCCESS;
-	if (gl_u32_is_initialized == TRUE )
+	if (gs_u32_is_initialized == TRUE )
 	{
 
 /*----*/		
@@ -414,7 +425,7 @@ uint8_ GPT_u8Start(void)
 /*----*/	
 			/*						Start Timer Counter			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT(GPTMCTL_REG(gl_en_channel_id) , TAEN_IDX);
+				SET_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);
 	
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
@@ -428,7 +439,7 @@ uint8_ GPT_u8Start(void)
 
 			/*						Start Timer Counter			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT(GPTMCTL_REG(gl_en_channel_id) , TAEN_IDX);	
+				SET_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);	
 /*----*/
 #endif
 /*----*/
@@ -455,7 +466,7 @@ void GPT_vidStop(void)
 /*----*/	
 			/*						Stop Timer Counter			 */
 			/*-------------------------------------------------------------*/
-					CLR_BIT(GPTMCTL_REG(gl_en_channel_id) , TAEN_IDX);	
+					CLR_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);	
 	
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
@@ -468,7 +479,7 @@ void GPT_vidStop(void)
 
 			/*						Stop Timer Counter			 */
 			/*-------------------------------------------------------------*/
-					CLR_BIT(GPTMCTL_REG(gl_en_channel_id) , TAEN_IDX);	
+					CLR_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);	
 /*----*/
 #endif
 /*----*/
@@ -476,7 +487,7 @@ void GPT_vidStop(void)
 
 
 /*****************************************************************************************************************
-*											05- GPT_vidIRQEnable()									
+*											04- GPT_vidIRQEnable()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  			: GPT enable IRQ
  * @in[1] 			: void
@@ -491,7 +502,7 @@ void 	GPT_vidIRQEnable(void)
 	
 			/*						Enable Timer Peripheral Interrupt			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT( GPTMIMR_REG(gl_en_channel_id), TATOIM_IDX);
+				SET_BIT( GPTMIMR_REG(gs_en_channel_id), TATOIM_IDX);
 	
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
@@ -505,7 +516,7 @@ void 	GPT_vidIRQEnable(void)
 
 			/*						Enable Timer Peripheral Interrupt			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT( GPTMIMR_REG(gl_en_channel_id), TATOIM_IDX);	
+				SET_BIT( GPTMIMR_REG(gs_en_channel_id), TATOIM_IDX);	
 /*----*/
 #endif
 /*----*/
@@ -513,7 +524,7 @@ return;
 }
 
 /*****************************************************************************************************************
-*											06- GPT_vidIRQDisable()									
+*											05- GPT_vidIRQDisable()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  			: GPT disable IRQ
  * @in[1] 			: void
@@ -528,7 +539,7 @@ void 	GPT_vidIRQDisable(void)
 	
 			/*						Enable Timer Peripheral Interrupt			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT( GPTMICR_REG(gl_en_channel_id), TATOCINT_IDX);
+				SET_BIT( GPTMICR_REG(gs_en_channel_id), TATOCINT_IDX);
 	
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
@@ -542,7 +553,7 @@ void 	GPT_vidIRQDisable(void)
 
 			/*						Disable Timer Peripheral Interrupt			 */
 			/*-------------------------------------------------------------*/
-				CLR_BIT( GPTMIMR_REG(gl_en_channel_id), TATOIM_IDX);	
+				CLR_BIT( GPTMIMR_REG(gs_en_channel_id), TATOIM_IDX);	
 				
 /*----*/
 #endif
@@ -551,7 +562,7 @@ void 	GPT_vidIRQDisable(void)
 }
 
 /*****************************************************************************************************************
-*											07- GPT_u8GetCurrentVal()									
+*											06- GPT_u8GetCurrentVal()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  		: Get GPT current value
  * @in[1] 		: p_u8_int_status
@@ -561,13 +572,13 @@ void 	GPT_vidIRQDisable(void)
 uint8_ 	GPT_u8GetCurrentVal(uint64_* p_u64_int_cur_val )
 {
 	uint8_ loc_u8_err_state = SUCCESS;
-	if (gl_u32_is_initialized == TRUE && p_u64_int_cur_val != NULL)
+	if (gs_u32_is_initialized == TRUE && p_u64_int_cur_val != NULL)
 	{
 
 /*----*/		
 #if GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
 /*----*/
-			*p_u64_int_cur_val = GPTMTAV_REG(gl_en_channel_id);
+			*p_u64_int_cur_val = GPTMTAV_REG(gs_en_channel_id);
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
 /*----*/
@@ -577,8 +588,8 @@ uint8_ 	GPT_u8GetCurrentVal(uint64_* p_u64_int_cur_val )
 /*----*/	
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
 /*----*/
-		uint32_ loc_u32_GPTMTBV_REG_val = GPTMTBV_REG(gl_en_channel_id);
-					*p_u64_int_cur_val = ( ((uint64_)loc_u32_GPTMTBV_REG_val << 32U) | (GPTMTAV_REG(gl_en_channel_id)) );
+		uint32_ loc_u32_GPTMTBV_REG_val = GPTMTBV_REG(gs_en_channel_id);
+					*p_u64_int_cur_val = ( ((uint64_)loc_u32_GPTMTBV_REG_val << 32U) | (GPTMTAV_REG(gs_en_channel_id)) );
 /*----*/
 #endif
 /*----*/	
@@ -597,11 +608,11 @@ uint8_ 	GPT_u8GetCurrentVal(uint64_* p_u64_int_cur_val )
 
 
 /*****************************************************************************************************************
-*											08- GPT_u8DutyCycle()									
+*											07- GPT_u8DutyCycle()									
 * ----------------------------------------------------------------------------------------------------------------
- * @func  		: Get GPT current value
+ * @func  		: Set Duty Cycle
  * @in[1] 		: u32_a_duty_cycle
-								- Duty Cycle (0 ~ 100)
+								- Duty Cycle { 0 ~ 100 }
  * @return    : void
  ******************************************************************************************************************/
 void GPT_u8DutyCycle(uint32_ u32_a_duty_cycle)
@@ -615,10 +626,294 @@ void GPT_u8DutyCycle(uint32_ u32_a_duty_cycle)
 	return;
 }
 
+/*****************************************************************************************************************
+*											08- GPT_u8Delay_ms()									
+* ----------------------------------------------------------------------------------------------------------------
+ * @func  		: Set Delsy in milli second
+ * @in[1] 		: a_en_gpt_ch_id
+ *								- {GPT_CHANNEL_0 ~ GPT_CHANNEL_5} - {GPT_WIDE_CHANNEL_0 ~ GPT_WIDE_CHANNEL_5}
+ * @in[1] 		: a_u32_time_ms
+ *								- Set time in milli second								
+ * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
+ ******************************************************************************************************************/
+uint8_ GPT_u8Delay_ms( en_gpt_ch_id_t a_en_gpt_ch_id, uint32_ a_u32_time_ms)
+{
+	uint8_ loc_u8_err_state = SUCCESS;
+	static boolean Ls_bool_is_first_time = TRUE;
+	static en_gpt_ch_id_t Ls_en_prev_channel = GPT_CHANNEL_INVALID;
+	uint64_ loc_u64_gpt_ticks;
+	if (a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+	{	
+/*----*/		
+#if GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
+/*----*/	
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
+/*----*/
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
+/*----*/
+	
+		
+		if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+		{
+						/*						Enable Timer System Clock										*/
+			/*-------------------------------------------------------------*/			
+			if ( a_en_gpt_ch_id> GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				SET_BIT(RCGCWTIMER_REG, (a_en_gpt_ch_id - GPT_WIDE_CHANNEL_ID_OFFSET));
+			}
+			else 
+			{
+				SET_BIT(RCGCTIMER_REG, a_en_gpt_ch_id);
+			}
+			
+			/*						Ensure the timer is disabled										*/
+			/*-------------------------------------------------------------*/
+			CLR_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);
+			
+						/* STALL enable during debugging */
+			SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TASTALL_IDX);
+			
+						/* counter count down */
+			CLR_BIT(GPTMTAMR_REG(a_en_gpt_ch_id), TACDIR_IDX  );
+			SET_BIT(GPTMTAMR_REG(a_en_gpt_ch_id),TAILD_IDX);
+			
+			/* IRQ Disable */
+			CLR_BIT( GPTMIMR_REG(a_en_gpt_ch_id), TATOIM_IDX);			
+			
+			Ls_bool_is_first_time = FALSE;
+		}
+
+			
+			loc_u64_gpt_ticks = (uint64_) ( (a_u32_time_ms)* (SystemCoreClock/1000U ) );
+			GPTMTAILR_REG(a_en_gpt_ch_id) = (uint32_)loc_u64_gpt_ticks;
+			
+			if (a_en_gpt_ch_id > GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				GPTMTBILR_REG(a_en_gpt_ch_id) = (gs_u64_gpt_ticks >> 32U);
+			}
+			else
+			{
+				/* do nothing */
+			}	
+
+			/*						Timer is enabled									*/
+			/*-------------------------------------------------------------*/
+			if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+							SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);		
+			
+			
+			while ( GET_BIT(GPTMRIS_REG(a_en_gpt_ch_id), TATORIS_IDX)  == 0);
+			SET_BIT( GPTMICR_REG(a_en_gpt_ch_id) ,TATOCINT_IDX);
+/*----*/
+#endif
+/*----*/			
+	}
+	else 
+	{
+		loc_u8_err_state = FAILED;
+	}
+	return loc_u8_err_state;
+}
+
+
+
 
 
 /*****************************************************************************************************************
-*											09- GPT_u8PWMInit()									
+*											09- GPT_u8Delay_us()									
+* ----------------------------------------------------------------------------------------------------------------
+ * @func  		: Set Delsy in micro second
+ * @in[1] 		: a_en_gpt_ch_id
+ *								- {GPT_CHANNEL_0 ~ GPT_CHANNEL_5} - {GPT_WIDE_CHANNEL_0 ~ GPT_WIDE_CHANNEL_5}
+ * @in[1] 		: a_u32_time_us
+ *								- Set time in micro second								
+ * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
+ ******************************************************************************************************************/
+uint8_ GPT_u8Delay_us( en_gpt_ch_id_t a_en_gpt_ch_id, uint32_ a_u32_time_us)
+{
+	uint8_ loc_u8_err_state = SUCCESS;
+	static boolean Ls_bool_is_first_time = TRUE;
+	static en_gpt_ch_id_t Ls_en_prev_channel = GPT_CHANNEL_INVALID;
+	uint64_ loc_u64_gpt_ticks;
+	if (a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+	{	
+/*----*/		
+#if GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
+/*----*/	
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
+/*----*/
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
+/*----*/
+	
+		
+		if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+		{
+						/*						Enable Timer System Clock										*/
+			/*-------------------------------------------------------------*/			
+			if ( a_en_gpt_ch_id> GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				SET_BIT(RCGCWTIMER_REG, (a_en_gpt_ch_id - GPT_WIDE_CHANNEL_ID_OFFSET));
+			}
+			else 
+			{
+				SET_BIT(RCGCTIMER_REG, a_en_gpt_ch_id);
+			}
+			
+			/*						Ensure the timer is disabled										*/
+			/*-------------------------------------------------------------*/
+			CLR_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);
+			
+						/* STALL enable during debugging */
+			SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TASTALL_IDX);
+			
+						/* counter count down */
+			CLR_BIT(GPTMTAMR_REG(a_en_gpt_ch_id), TACDIR_IDX  );
+			SET_BIT(GPTMTAMR_REG(a_en_gpt_ch_id),TAILD_IDX);
+			
+			/* IRQ Disable */
+			CLR_BIT( GPTMIMR_REG(a_en_gpt_ch_id), TATOIM_IDX);			
+			
+			Ls_bool_is_first_time = FALSE;
+		}
+
+			
+			loc_u64_gpt_ticks = (uint64_) ( (a_u32_time_us)* (SystemCoreClock/1000000U ) );
+			GPTMTAILR_REG(a_en_gpt_ch_id) = (uint32_)loc_u64_gpt_ticks;
+			
+			if (a_en_gpt_ch_id > GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				GPTMTBILR_REG(a_en_gpt_ch_id) = (gs_u64_gpt_ticks >> 32U);
+			}
+			else
+			{
+				/* do nothing */
+			}	
+
+			/*						Timer is enabled									*/
+			/*-------------------------------------------------------------*/
+			if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+							SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);		
+			
+			
+			while ( GET_BIT(GPTMRIS_REG(a_en_gpt_ch_id), TATORIS_IDX)  == 0);
+			SET_BIT( GPTMICR_REG(a_en_gpt_ch_id) ,TATOCINT_IDX);
+/*----*/
+#endif
+/*----*/			
+	}
+	else 
+	{
+		loc_u8_err_state = FAILED;
+	}
+	return loc_u8_err_state;
+}
+
+
+/*****************************************************************************************************************
+*											10- GPT_u8Delay_s()									
+* ----------------------------------------------------------------------------------------------------------------
+ * @func  		: Set Delsy in second
+ * @in[1] 		: a_en_gpt_ch_id
+ *								- {GPT_CHANNEL_0 ~ GPT_CHANNEL_5} - {GPT_WIDE_CHANNEL_0 ~ GPT_WIDE_CHANNEL_5}
+ * @in[1] 		: a_u32_time_s
+ *								- Set time in second								
+ * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
+ ******************************************************************************************************************/
+uint8_ GPT_u8Delay_s( en_gpt_ch_id_t a_en_gpt_ch_id, uint32_ a_u32_time_s)
+{
+	uint8_ loc_u8_err_state = SUCCESS;
+	static boolean Ls_bool_is_first_time = TRUE;
+	static en_gpt_ch_id_t Ls_en_prev_channel = GPT_CHANNEL_INVALID;
+	uint64_ loc_u64_gpt_ticks;
+	if (a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+	{	
+/*----*/		
+#if GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
+/*----*/	
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
+/*----*/
+		
+/*----*/
+#elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
+/*----*/
+	
+		
+		if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+		{
+						/*						Enable Timer System Clock										*/
+			/*-------------------------------------------------------------*/			
+			if ( a_en_gpt_ch_id> GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				SET_BIT(RCGCWTIMER_REG, (a_en_gpt_ch_id - GPT_WIDE_CHANNEL_ID_OFFSET));
+			}
+			else 
+			{
+				SET_BIT(RCGCTIMER_REG, a_en_gpt_ch_id);
+			}
+			
+			/*						Ensure the timer is disabled										*/
+			/*-------------------------------------------------------------*/
+			CLR_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);
+			
+						/* STALL enable during debugging */
+			SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TASTALL_IDX);
+			
+						/* counter count down */
+			CLR_BIT(GPTMTAMR_REG(a_en_gpt_ch_id), TACDIR_IDX  );
+			SET_BIT(GPTMTAMR_REG(a_en_gpt_ch_id),TAILD_IDX);
+			
+			/* IRQ Disable */
+			CLR_BIT( GPTMIMR_REG(a_en_gpt_ch_id), TATOIM_IDX);			
+			
+			Ls_bool_is_first_time = FALSE;
+		}
+
+			
+			loc_u64_gpt_ticks = (uint64_) ( (a_u32_time_s)* (SystemCoreClock) );
+			GPTMTAILR_REG(a_en_gpt_ch_id) = (uint32_)loc_u64_gpt_ticks;
+			
+			if (a_en_gpt_ch_id > GPT_CHANNEL_5 && a_en_gpt_ch_id < GPT_CHANNEL_INVALID)
+			{
+				GPTMTBILR_REG(a_en_gpt_ch_id) = (gs_u64_gpt_ticks >> 32U);
+			}
+			else
+			{
+				/* do nothing */
+			}	
+
+			/*						Timer is enabled									*/
+			/*-------------------------------------------------------------*/
+			if(Ls_bool_is_first_time == TRUE || Ls_en_prev_channel != a_en_gpt_ch_id)
+							SET_BIT(GPTMCTL_REG(a_en_gpt_ch_id ) , TAEN_IDX);		
+			
+			
+			while ( GET_BIT(GPTMRIS_REG(a_en_gpt_ch_id), TATORIS_IDX)  == 0);
+			SET_BIT( GPTMICR_REG(a_en_gpt_ch_id) ,TATOCINT_IDX);
+/*----*/
+#endif
+/*----*/			
+	}
+	else 
+	{
+		loc_u8_err_state = FAILED;
+	}
+	return loc_u8_err_state;
+}
+
+
+
+/*****************************************************************************************************************
+*											11- GPT_u8PWMInit()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  		: Get GPT current value
  * @in[1] 		: copy_en_gpt_ch_id
@@ -642,7 +937,7 @@ uint8_ GPT_u8PWMInit(st_gpt_pwm_cfg_t* p_st_gpt_pwm_cfg)
 				p_st_gpt_pwm_cfg->en_gpt_stall			<	GPT_STALL_INVALID				&&
 				p_st_gpt_pwm_cfg->en_gpt_irq				< GPT_IRQ_INVALID )
 		{
-				gl_en_pwm_channel_id = p_st_gpt_pwm_cfg->en_gpt_ch_id;
+				gs_en_pwm_channel_id = p_st_gpt_pwm_cfg->en_gpt_ch_id;
 
 				/*						Enable Timer System Clock										*/
 				/*-------------------------------------------------------------*/				
@@ -755,17 +1050,17 @@ uint8_ GPT_u8PWMInit(st_gpt_pwm_cfg_t* p_st_gpt_pwm_cfg)
 			if (p_st_gpt_pwm_cfg->ptr_func != NULL)
 			{
 					if (	(p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_0) 		|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_0) )
-						gl_pf_gpt_ch0_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch0_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else if((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_1) 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_1) )
-						gl_pf_gpt_ch1_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch1_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else if((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_2) 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_2) )
-						gl_pf_gpt_ch2_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch2_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else if((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_3) 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_3) )
-						gl_pf_gpt_ch3_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch3_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else if((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_4) 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_4) )
-						gl_pf_gpt_ch4_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch4_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else if((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_5) 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_5) )
-						gl_pf_gpt_ch5_cbk = p_st_gpt_pwm_cfg->ptr_func;
+						gs_pf_gpt_ch5_cbk = p_st_gpt_pwm_cfg->ptr_func;
 					else
 					{
 						/* do nothing */
@@ -777,7 +1072,7 @@ uint8_ GPT_u8PWMInit(st_gpt_pwm_cfg_t* p_st_gpt_pwm_cfg)
 			}
 					
 				
-				gl_bool_is_pwm_initialized = TRUE;
+				gs_bool_is_pwm_initialized = TRUE;
 
 	/*----*/
 	#elif GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_B
@@ -798,7 +1093,7 @@ uint8_ GPT_u8PWMInit(st_gpt_pwm_cfg_t* p_st_gpt_pwm_cfg)
 
 
 /*****************************************************************************************************************
-*											10- GPT_u8GeneratePWM()									
+*											12- GPT_u8GeneratePWM()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  		: Generate PWM signal
  * @in[1] 		: copy_en_gpt_ch_id
@@ -812,37 +1107,37 @@ uint8_ GPT_u8GeneratePWM(uint8_ copy_u8_duty_cycle)
 	uint8_ loc_u8_err_state = SUCCESS;
 	uint64_ loc_u64_match;
 	uint8_ loc_u8_duty_cycle = 100U - copy_u8_duty_cycle;
-	if (gl_bool_is_pwm_initialized == TRUE && copy_u8_duty_cycle <= 100U && gl_en_pwm_channel_id < GPT_CHANNEL_INVALID)
+	if (gs_bool_is_pwm_initialized == TRUE && copy_u8_duty_cycle <= 100U && gs_en_pwm_channel_id < GPT_CHANNEL_INVALID)
 	{
 		
-		loc_u64_match = gl_u64_pwm_total_ticks - (gl_u64_pwm_total_ticks * (loc_u8_duty_cycle / 100.0));
+		loc_u64_match = gs_u64_pwm_total_ticks - (gs_u64_pwm_total_ticks * (loc_u8_duty_cycle / 100.0));
 /*----*/		
 #if  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_A
 /*----*/
 	
-		if (gl_bool_is_PR_used == FALSE )
+		if (gs_bool_is_PR_used == FALSE )
 		{
-			if(gl_en_pwm_channel_id > GPT_CHANNEL_5 && gl_en_pwm_channel_id < GPT_CHANNEL_INVALID )
+			if(gs_en_pwm_channel_id > GPT_CHANNEL_5 && gs_en_pwm_channel_id < GPT_CHANNEL_INVALID )
 			{
-				GPTMTAMATCHR_REG(gl_en_pwm_channel_id) = (uint32_) loc_u64_match;
+				GPTMTAMATCHR_REG(gs_en_pwm_channel_id) = (uint32_) loc_u64_match;
 			}
 			else 
 			{
-				GPTMTAMATCHR_REG(gl_en_pwm_channel_id) = (uint16_) loc_u64_match;
+				GPTMTAMATCHR_REG(gs_en_pwm_channel_id) = (uint16_) loc_u64_match;
 			}
 		}
-		else if (gl_bool_is_PR_used == TRUE)
+		else if (gs_bool_is_PR_used == TRUE)
 		{
-			if(gl_en_pwm_channel_id > GPT_CHANNEL_5 && gl_en_pwm_channel_id < GPT_CHANNEL_INVALID )
+			if(gs_en_pwm_channel_id > GPT_CHANNEL_5 && gs_en_pwm_channel_id < GPT_CHANNEL_INVALID )
 			{
-				GPTMTAPMR_REG(gl_en_pwm_channel_id)  = (uint16_)  loc_u64_match ;
-				GPTMTAMATCHR_REG(gl_en_pwm_channel_id) = (uint32_) (loc_u64_match >> 16U);
+				GPTMTAPMR_REG(gs_en_pwm_channel_id)  = (uint16_)  loc_u64_match ;
+				GPTMTAMATCHR_REG(gs_en_pwm_channel_id) = (uint32_) (loc_u64_match >> 16U);
 				
 			}
 			else 
 			{
-				GPTMTAPMR_REG(gl_en_pwm_channel_id)  		= (uint8_)  loc_u64_match ;
-				GPTMTAMATCHR_REG(gl_en_pwm_channel_id) 	= (uint32_)(loc_u64_match >> 8U);
+				GPTMTAPMR_REG(gs_en_pwm_channel_id)  		= (uint8_)  loc_u64_match ;
+				GPTMTAMATCHR_REG(gs_en_pwm_channel_id) 	= (uint32_)(loc_u64_match >> 8U);
 			}
 		}
 		else 
@@ -867,7 +1162,7 @@ uint8_ GPT_u8GeneratePWM(uint8_ copy_u8_duty_cycle)
 }
 
 /*****************************************************************************************************************
-*											11- GPT_u8PWMStart()									
+*											13- GPT_u8PWMStart()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  			: Start GPT PWM generation
  * @in[1] 			: void
@@ -876,7 +1171,7 @@ uint8_ GPT_u8GeneratePWM(uint8_ copy_u8_duty_cycle)
 uint8_ GPT_u8PWMStart(void)
 {
 	uint8_ loc_u8_err_state = SUCCESS;
-	if (gl_bool_is_pwm_initialized == TRUE )
+	if (gs_bool_is_pwm_initialized == TRUE )
 	{	
 /*----*/		
 #if  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_A
@@ -884,7 +1179,7 @@ uint8_ GPT_u8PWMStart(void)
 	
 			/*						Start Timer Counter			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT(GPTMCTL_REG(gl_en_pwm_channel_id) , TAEN_IDX);	
+				SET_BIT(GPTMCTL_REG(gs_en_pwm_channel_id) , TAEN_IDX);	
 		
 /*----*/		
 #elif  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_B
@@ -900,7 +1195,7 @@ uint8_ GPT_u8PWMStart(void)
 
 
 /*****************************************************************************************************************
-*											12- GPT_u8PWMStop()									
+*											14- GPT_u8PWMStop()									
 * ----------------------------------------------------------------------------------------------------------------
  * @func  			: Stop GPT PWM generation
  * @in[1] 			: void
@@ -914,7 +1209,7 @@ void GPT_u8PWMStop(void)
 	
 			/*						Stop Timer Counter			 */
 			/*-------------------------------------------------------------*/
-					CLR_BIT(GPTMCTL_REG(gl_en_pwm_channel_id) , TAEN_IDX);
+					CLR_BIT(GPTMCTL_REG(gs_en_pwm_channel_id) , TAEN_IDX);
 		
 /*----*/		
 #elif  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_B
@@ -932,26 +1227,26 @@ void GPT_u8PWMStop(void)
 static void set_tick_time(uint32_ copy_u32_time)
 {
 	
-	if (gl_en_time_init == GPT_TIME_US)
+	if (gs_en_time_init == GPT_TIME_US)
 	{
-		gl_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock/1000000U ) );
+		gs_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock/1000000U ) );
 
 /*----*/		
 #if GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
 /*----*/	
-		GPTMTAILR_REG(copy_en_gpt_ch_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(copy_en_gpt_ch_id) = (uint32_)gs_u64_gpt_ticks;
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
 /*----*/
-		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gs_u64_gpt_ticks;
 /*----*/
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
 /*----*/
-		GPTMTAILR_REG(gl_en_channel_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(gs_en_channel_id) = (uint32_)gs_u64_gpt_ticks;
 		
-		if (gl_en_channel_id > GPT_CHANNEL_5 && gl_en_channel_id < GPT_CHANNEL_INVALID)
+		if (gs_en_channel_id > GPT_CHANNEL_5 && gs_en_channel_id < GPT_CHANNEL_INVALID)
 		{
-			GPTMTBILR_REG(gl_en_channel_id) = (gl_u64_gpt_ticks >> 32U);
+			GPTMTBILR_REG(gs_en_channel_id) = (gs_u64_gpt_ticks >> 32U);
 		}
 		else
 		{
@@ -961,28 +1256,28 @@ static void set_tick_time(uint32_ copy_u32_time)
 #endif
 /*----*/		
 	}
-	else if (gl_en_time_init == GPT_TIME_MS)
+	else if (gs_en_time_init == GPT_TIME_MS)
 	{
-		gl_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock/1000U ) );
+		gs_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock/1000U ) );
 
 /*----*/		
 #if  GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
 /*----*/
-		GPTMTAILR_REG(copy_en_gpt_ch_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(copy_en_gpt_ch_id) = (uint32_)gs_u64_gpt_ticks;
 /*----*/		
 #elif  GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
 /*----*/
-		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gs_u64_gpt_ticks;
 		
 /*----*/	
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
 /*----*/
-		GPTMTAILR_REG(gl_en_channel_id) &= 0x0;
-		GPTMTAILR_REG(gl_en_channel_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(gs_en_channel_id) &= 0x0;
+		GPTMTAILR_REG(gs_en_channel_id) = (uint32_)gs_u64_gpt_ticks;
 		
-		if (gl_en_channel_id > GPT_CHANNEL_5 && gl_en_channel_id < GPT_CHANNEL_INVALID)
+		if (gs_en_channel_id > GPT_CHANNEL_5 && gs_en_channel_id < GPT_CHANNEL_INVALID)
 		{
-			GPTMTBILR_REG(gl_en_channel_id) = (gl_u64_gpt_ticks >> 32U);
+			GPTMTBILR_REG(gs_en_channel_id) = (gs_u64_gpt_ticks >> 32U);
 		}
 		else
 		{
@@ -993,26 +1288,26 @@ static void set_tick_time(uint32_ copy_u32_time)
 #endif	
 /*----*/
 	}
-	else if (gl_en_time_init == GPT_TIME_S)
+	else if (gs_en_time_init == GPT_TIME_S)
 	{
-		gl_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock ) );
+		gs_u64_gpt_ticks = (uint64_) ( (copy_u32_time)* (SystemCoreClock ) );
 /*----*/		
 #if  GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_A
 /*----*/
-		GPTMTAILR_REG(gl_en_channel_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(gs_en_channel_id) = (uint32_)gs_u64_gpt_ticks;
 /*----*/
 #elif  GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_INDVIDUAL_TIMER_B
 /*----*/
-		GPTMTBILR_REG(gl_en_channel_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTBILR_REG(gs_en_channel_id) = (uint32_)gs_u64_gpt_ticks;
 		
 /*----*/		
 #elif GPT_TIMER_INDV_CONC_SELECTION == GPT_TIMER_CONCATINATION
 /*----*/
-		GPTMTAILR_REG(gl_en_channel_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTAILR_REG(gs_en_channel_id) = (uint32_)gs_u64_gpt_ticks;
 		
-		if (gl_en_channel_id > GPT_CHANNEL_5 && gl_en_channel_id < GPT_CHANNEL_INVALID)
+		if (gs_en_channel_id > GPT_CHANNEL_5 && gs_en_channel_id < GPT_CHANNEL_INVALID)
 		{
-			GPTMTBILR_REG(gl_en_channel_id) = (gl_u64_gpt_ticks >> 32U);
+			GPTMTBILR_REG(gs_en_channel_id) = (gs_u64_gpt_ticks >> 32U);
 		}
 		else
 		{
@@ -1039,41 +1334,41 @@ static void set_pwm_tick_time(uint32_ copy_u32_time_ms)
 #if  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_A
 /*----*/
 	
-		gl_u64_pwm_total_ticks =  (uint64_)(copy_u32_time_ms)* (SystemCoreClock/1000U );
+		gs_u64_pwm_total_ticks =  (uint64_)(copy_u32_time_ms)* (SystemCoreClock/1000U );
 
-		if ( (gl_u64_pwm_total_ticks <= _16_BIT_MAX_LENGTH && gl_en_pwm_channel_id < GPT_WIDE_CHANNEL_0) || (gl_u64_pwm_total_ticks <= _32_BIT_MAX_LENGTH && gl_en_pwm_channel_id > GPT_CHANNEL_5) )
+		if ( (gs_u64_pwm_total_ticks <= _16_BIT_MAX_LENGTH && gs_en_pwm_channel_id < GPT_WIDE_CHANNEL_0) || (gs_u64_pwm_total_ticks <= _32_BIT_MAX_LENGTH && gs_en_pwm_channel_id > GPT_CHANNEL_5) )
 		{
-			if(gl_en_pwm_channel_id > GPT_CHANNEL_5 && gl_en_pwm_channel_id < GPT_CHANNEL_INVALID )
+			if(gs_en_pwm_channel_id > GPT_CHANNEL_5 && gs_en_pwm_channel_id < GPT_CHANNEL_INVALID )
 			{
-				GPTMTAILR_REG(gl_en_pwm_channel_id) = (uint32_)gl_u64_pwm_total_ticks;
+				GPTMTAILR_REG(gs_en_pwm_channel_id) = (uint32_)gs_u64_pwm_total_ticks;
 			}
 			else 
 			{
-				GPTMTAILR_REG(gl_en_pwm_channel_id) = (uint16_) gl_u64_gpt_ticks;
+				GPTMTAILR_REG(gs_en_pwm_channel_id) = (uint16_) gs_u64_gpt_ticks;
 			}
 		}
 		else 
 		{
-			if(gl_en_pwm_channel_id > GPT_CHANNEL_5 && gl_en_pwm_channel_id < GPT_CHANNEL_INVALID )
+			if(gs_en_pwm_channel_id > GPT_CHANNEL_5 && gs_en_pwm_channel_id < GPT_CHANNEL_INVALID )
 			{
-				GPTMTAPR_REG(gl_en_pwm_channel_id)  = (uint16_)  gl_u64_pwm_total_ticks ;
-				GPTMTAILR_REG(gl_en_pwm_channel_id) = (uint32_) (gl_u64_pwm_total_ticks >> 16U);
+				GPTMTAPR_REG(gs_en_pwm_channel_id)  = (uint16_)  gs_u64_pwm_total_ticks ;
+				GPTMTAILR_REG(gs_en_pwm_channel_id) = (uint32_) (gs_u64_pwm_total_ticks >> 16U);
 				
 			}
 			else 
 			{
-				GPTMTAPR_REG(gl_en_pwm_channel_id)  = (uint8_)  gl_u64_pwm_total_ticks ;
-				GPTMTAILR_REG(gl_en_pwm_channel_id) = (uint32_)(gl_u64_pwm_total_ticks >> 8U);
+				GPTMTAPR_REG(gs_en_pwm_channel_id)  = (uint8_)  gs_u64_pwm_total_ticks ;
+				GPTMTAILR_REG(gs_en_pwm_channel_id) = (uint32_)(gs_u64_pwm_total_ticks >> 8U);
 			}
 			
-			gl_bool_is_PR_used = TRUE;
+			gs_bool_is_PR_used = TRUE;
 		}
 	
 		
 /*----*/		
 #elif  GPT_PWM_TIMER_SELECTION == GPT_PWM_TIMER_B
 /*----*/
-		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gl_u64_gpt_ticks;
+		GPTMTBILR_REG(copy_en_gpt_ch_id) = (uint32_)gs_u64_gpt_ticks;
 		
 		
 #endif	
@@ -1088,11 +1383,11 @@ static void set_pwm_tick_time(uint32_ copy_u32_time_ms)
 void TIMER0A_Handler(void)
 {
 	static boolean loc_s_bool_duty_flag = FALSE;
-	if (gl_pf_gpt_ch0_cbk != NULL)
+	if (gs_pf_gpt_ch0_cbk != NULL)
 	{
-		SET_BIT( GPTMICR_REG(gl_en_channel_id), TATOCINT_IDX);
-		//SET_BIT( GPTMICR_REG(gl_en_channel_id), CAMCINT_IDX);
-			gl_pf_gpt_ch0_cbk();
+		SET_BIT( GPTMICR_REG(gs_en_channel_id), TATOCINT_IDX);
+		//SET_BIT( GPTMICR_REG(gs_en_channel_id), CAMCINT_IDX);
+			gs_pf_gpt_ch0_cbk();
 	}
 	else
 	{
@@ -1103,9 +1398,9 @@ void TIMER0A_Handler(void)
 
 void TIMER1A_Handler(void)
 {
-	if (gl_pf_gpt_ch1_cbk != NULL)
+	if (gs_pf_gpt_ch1_cbk != NULL)
 	{
-		gl_pf_gpt_ch1_cbk();
+		gs_pf_gpt_ch1_cbk();
 	}
 	else
 	{
@@ -1117,9 +1412,9 @@ void TIMER1A_Handler(void)
 
 void TIMER2A_Handler(void)
 {
-	if (gl_pf_gpt_ch2_cbk != NULL)
+	if (gs_pf_gpt_ch2_cbk != NULL)
 	{
-		gl_pf_gpt_ch2_cbk();
+		gs_pf_gpt_ch2_cbk();
 	}
 	else
 	{
@@ -1131,9 +1426,9 @@ void TIMER2A_Handler(void)
 
 void TIMER3A_Handler(void)
 {
-	if (gl_pf_gpt_ch3_cbk != NULL)
+	if (gs_pf_gpt_ch3_cbk != NULL)
 	{
-		gl_pf_gpt_ch3_cbk();
+		gs_pf_gpt_ch3_cbk();
 	}
 	else
 	{
@@ -1144,9 +1439,9 @@ void TIMER3A_Handler(void)
 
 void TIMER4A_Handler(void)
 {
-	if (gl_pf_gpt_ch4_cbk != NULL)
+	if (gs_pf_gpt_ch4_cbk != NULL)
 	{
-		gl_pf_gpt_ch4_cbk();
+		gs_pf_gpt_ch4_cbk();
 	}
 	else
 	{
@@ -1157,9 +1452,9 @@ void TIMER4A_Handler(void)
 
 void TIMER5A_Handler(void)
 {
-	if (gl_pf_gpt_ch5_cbk != NULL)
+	if (gs_pf_gpt_ch5_cbk != NULL)
 	{
-		gl_pf_gpt_ch5_cbk();
+		gs_pf_gpt_ch5_cbk();
 	}
 	else
 	{

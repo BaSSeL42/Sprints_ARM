@@ -28,11 +28,11 @@ typedef enum
 /***********************************************************************************************
 *										Functions Prototype
 ***********************************************************************************************/
-enu_ledError_t HLed_Init(enu_pin_t en_pinNum);
+enu_ledError_t HLED_Init(enu_pin_t en_pinNum);
 
-enu_ledError_t HLed_on(enu_pin_t en_pinx);
-enu_ledError_t HLed_off(enu_pin_t en_pinx);
-enu_ledError_t HLed_toggle(enu_pin_t en_pinx);
+enu_ledError_t HLED_on(enu_pin_t en_pinx);
+enu_ledError_t HLED_off(enu_pin_t en_pinx);
+enu_ledError_t HLED_toggle(enu_pin_t en_pinx);
 
 #endif /* HAL_LED_LED_H_ */
 /***********************************************************************************************

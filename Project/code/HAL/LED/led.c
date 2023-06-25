@@ -7,8 +7,8 @@
 /***********************************************************************************************
 *											Includes
 ***********************************************************************************************/
-#include "LSTD_TYPES.h"
-#include "LBIT_MATH.h"
+#include "std_types.h"
+#include "bit_math.h"
 //#include "mgpio_Interface.h"
 #include "led.h"
 
@@ -22,7 +22,7 @@ st_gpio_cfg_t str_dio_led_init;
 /***********************************************************************************************
 *										Function Implementation
 ***********************************************************************************************/
-enu_ledError_t HLed_Init(enu_pin_t en_pinNum)
+enu_ledError_t HLED_Init(enu_pin_t en_pinNum)
 {
 	enu_ledError_t errorStatus = LED_OK;
 
@@ -41,7 +41,7 @@ enu_ledError_t HLed_Init(enu_pin_t en_pinNum)
 
 }
 
-enu_ledError_t HLed_on(enu_pin_t en_pinx)
+enu_ledError_t HLED_on(enu_pin_t en_pinx)
 {
 	enu_ledError_t errorStatus = LED_OK;
 
@@ -62,7 +62,7 @@ enu_ledError_t HLed_on(enu_pin_t en_pinx)
 
 
 
-enu_ledError_t HLed_off(enu_pin_t en_pinx)
+enu_ledError_t HLED_off(enu_pin_t en_pinx)
 {
 	enu_ledError_t errorStatus = LED_OK;
 
@@ -82,7 +82,7 @@ enu_ledError_t HLed_off(enu_pin_t en_pinx)
 }
 
 
-enu_ledError_t HLed_toggle(enu_pin_t en_pinx)
+enu_ledError_t HLED_toggle(enu_pin_t en_pinx)
 {
 	enu_ledError_t errorStatus = LED_OK;
 
