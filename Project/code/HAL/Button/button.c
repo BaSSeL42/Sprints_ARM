@@ -7,10 +7,10 @@
 /***********************************************************************************************
 *											Includes
 ***********************************************************************************************/
-#include "std_types.h"
-#include "bit_math.h"
+#include "../../COM/std_types.h"
+#include "../../COM/bit_math.h"
 //#include "mgpio_Interface.h"
-#include "button.h"
+#include "./include/button.h"
 
 
 
