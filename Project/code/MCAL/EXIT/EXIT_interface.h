@@ -40,8 +40,66 @@ typedef enum{
     EXIT_EXCEED_PORT
 }exit_enu_return_state_t;
 
+
+
+/* 
+ * - Description -
+ * Initializes the exit pin with the provided configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pin_config: Pointer to the exit pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * EXIT_OK: Everything done successfully.
+ * EXIT_NULL_PTR: Null pointer provided as input.
+ */
+
 exit_enu_return_state_t  exit_init_pin(exit_str_pin_Config_t *ptr_str_pin_config);
+
+
+/* 
+ * - Description -
+ * Enables the interrupt for the exit pin specified in the configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pin_config: Pointer to the exit pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * EXIT_OK: Everything done successfully.
+ * EXIT_NULL_PTR: Null pointer provided as input.
+ *
 exit_enu_return_state_t  exit_enable_int(exit_str_pin_Config_t *ptr_str_pin_config);
+
+
+/* 
+ * - Description -
+ * Disables the interrupt for the exit pin specified in the configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pin_config: Pointer to the exit pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * EXIT_OK: Everything done successfully.
+ * EXIT_NULL_PTR: Null pointer provided as input.
+ */
 exit_enu_return_state_t  exit_disable_int(exit_str_pin_Config_t *ptr_str_pin_config);
-exit_enu_return_state_t  exit_set_callback(exit_str_pin_Config_t *ptr_str_pin_config, ptr_vfunc ptr_call_back);
+
+
+/* 
+ * - Description -
+ * Sets the callback function for the exit pin specified in the configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pin_config: Pointer to the exit pin configuration structure.
+ * ptr_call_back: Pointer to the callback function.
+ *
+ * - Return -
+ * - Return cases -
+ * EXIT_OK: Everything done successfully.
+ * EXIT_NULL_PTR: Null pointer provided as input.
+ */
+exit_enu_return_state_t  exit_set_callback(exit_str_pin_Config_t *ptr_str_pin_config, ptr_func_t ptr_call_back);
 #endif

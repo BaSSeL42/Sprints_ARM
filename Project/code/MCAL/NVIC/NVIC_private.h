@@ -1,8 +1,8 @@
 #ifndef DIO_PRIVATE_H
 #define DIO_PRIVATE_H
 
-#include "../../STD_LIBRARIES/STD_TYPES.h"
-#include "../../STD_LIBRARIES/bit_math.h"
+#include "../../COM/bit_math.h"
+#include "../../COM/std_types.h"
 
 
 

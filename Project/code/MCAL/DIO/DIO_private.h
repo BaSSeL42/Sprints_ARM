@@ -4,7 +4,7 @@
 #include "../../COM/bit_math.h"
 #include "../../COM/std_types.h"
 
-#define RCGCGPIO																(*((volatile uint32_t*)0x400FE608))
+#define RCGCGPIO																(*((volatile uint32_*)0x400FE608))
 
 
 #define DIO_PORTA_APB														0x40004000
