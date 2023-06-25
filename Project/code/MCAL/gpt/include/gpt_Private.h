@@ -2,7 +2,7 @@
 #define GPT_PRIVATE_H_
 
 
-#define MGPT_OFFSET(X)		( ((X) < 8)? ((0x40030000) + ( (X)*(0x1000) )) :((0x4004C000) + ( ((X)-8)*(0x1000)) ) ) 
+#define MGPT_OFFSET(X)				( ((X) < 8)? ((0x40030000) + ( (X)*(0x1000) )) :((0x4004C000) + ( ((X)-8)*(0x1000)) ) ) 
 
 #define GPTMCFG_REG(x)					(*((volatile uint32_*)(MGPT_OFFSET(x) + 0x000)))
 #define GPTMTAMR_REG(x)					(*((volatile uint32_*)(MGPT_OFFSET(x) + 0x004)))

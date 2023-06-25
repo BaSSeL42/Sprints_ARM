@@ -1,7 +1,7 @@
 #ifndef GPT_PRIVATE_H_
 #define GPT_PRIVATE_H_
 
-/*									Timer Type Selection	
+/*							Timer Type Selection	
 *******************************************************************
 							- GPT_TIMER_A
 							- GPT_TIMER_B
