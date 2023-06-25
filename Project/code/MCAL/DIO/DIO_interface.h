@@ -93,10 +93,94 @@ typedef enum{
     DIO_EXCEED_PORT
 }dio_enu_return_state_t;
 
+
+/* 
+ * - Description -
+ * Enables the clock for the specified port.
+ *
+ * - Input parameters -
+ * copy_enu_port_num: The port number to enable the clock for.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ */
 dio_enu_return_state_t  dio_enable_clock(dio_enu_portx_t copy_enu_port_num);
+
+
+/* 
+ * - Description -
+ * Initializes the specified pin using the provided pin configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pinconfig: Pointer to the pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ * DIO_NULL_PTR: Null pointer provided as input.
+ */
 dio_enu_return_state_t  dio_init_pin(dio_str_pin_Config_t *ptr_str_pinconfig);
+
+
+
+/* 
+ * - Description -
+ * Sets the state of the specified pin.
+ *
+ * - Input parameters -
+ * ptr_str_pinconfig: Pointer to the pin configuration structure.
+ * copy_enu_pin_state: The state to set for the pin.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ * DIO_NULL_PTR: Null pointer provided as input.
+ */
 dio_enu_return_state_t  dio_set_pin(dio_str_pin_Config_t *ptr_str_pinconfig, dio_enu_pin_state_t copy_enu_pin_state);
+
+
+/* 
+ * - Description -
+ * Toggles the state of the specified pin.
+ *
+ * - Input parameters -
+ * ptr_str_pinconfig: Pointer to the pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ * DIO_NULL_PTR: Null pointer provided as input.
+ */
 dio_enu_return_state_t  dio_toggle_pin(dio_str_pin_Config_t *ptr_str_pinconfig);
+
+
+/* 
+ * - Description -
+ * Reads the state of the specified pin.
+ *
+ * - Input parameters -
+ * ptr_str_pinconfig: Pointer to the pin configuration structure.
+ * ptr_enu_pin_state: Pointer to the variable that will store the pin state.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ * DIO_NULL_PTR: Null pointer provided as input.
+ */
 dio_enu_return_state_t  dio_read_pin(dio_str_pin_Config_t *ptr_str_pinconfig, dio_enu_pin_state_t *ptr_enu_pin_state);
+
+
+/* 
+ * - Description -
+ * Unlocks the special pin using the specified pin configuration.
+ *
+ * - Input parameters -
+ * ptr_str_pinconfig: Pointer to the pin configuration structure.
+ *
+ * - Return -
+ * - Return cases -
+ * DIO_OK: Everything done successfully.
+ */
 dio_enu_return_state_t  dio_unlock_special_pin(dio_str_pin_Config_t *ptr_str_pinconfig);
 #endif

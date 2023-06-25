@@ -43,8 +43,45 @@ typedef enum{
     NVIC_MAX_INVALID_LOAD_VALUE
 }nvic_enu_return_state_t;
 
+
+/*
+*   -Description-
+*   This function is used to enable a specific peripheral interrupt source in the NVIC.
+*
+*   -Input parameters-
+*   - copy_enu_interupt_index: The interrupt index to be enabled (nvic_enu_interupt_index_t).
+*
+*   -Return-
+*   -Return cases-
+*   - NVIC_NOT_OK: An error occurred.
+*   - NVIC_OK: The operation was successful.
+*
+*   -Implementation-
+*   The function checks the value of copy_enu_interupt_index and sets the corresponding bit in the NVIC_ENx register based on the range of the interrupt index.
+*   The return value is initialized as NVIC_NOT_OK by default.
+*   Note: The actual implementation inside the if-else statements is not shown in this code snippet.
+*/
 nvic_enu_return_state_t nvic_EnablePeripheral  ( nvic_enu_interupt_index_t copy_enu_interupt_index);
 
+
+
+/*
+*   -Description-
+*   This function is used to disable a specific peripheral interrupt source in the NVIC.
+*
+*   -Input parameters-
+*   - copy_enu_interupt_index: The interrupt index to be disabled (nvic_enu_interupt_index_t).
+*
+*   -Return-
+*   -Return cases-
+*   - NVIC_NOT_OK: An error occurred.
+*   - NVIC_OK: The operation was successful.
+*
+*   -Implementation-
+*   The function checks the value of copy_enu_interupt_index and sets the corresponding bit in the NVIC_DISx register based on the range of the interrupt index.
+*   The return value is initialized as NVIC_NOT_OK by default.
+*   Note: The actual implementation inside the if-else statements is not shown in this code snippet.
+*/
 nvic_enu_return_state_t nvic_DisablePeripheral ( nvic_enu_interupt_index_t copy_enu_interupt_index );
 
 
