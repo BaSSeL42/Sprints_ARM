@@ -28,4 +28,7 @@
 #define CLR_ALL_BITS(REG)		(REG) &= ~(0x000000FF)
 #define TOG_ALL_BITS(REG)		(REG) ^=  (0xFF)
 
+
+#define HWREG32(_X)      (*((volatile uint32_ *)(_X)))
+
 #endif /* LBIT_MATH_H_ */
