@@ -3,7 +3,7 @@
 #ifndef		MOTOR_HAL
 #define 	MOTOR_HAL
 
-#include "../../MCAL/DIO/DIO_interface.h"
+#include "DIO_interface.h"
 
 typedef enum {
 	MOTOR_FORWARD,

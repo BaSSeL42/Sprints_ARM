@@ -1,11 +1,11 @@
 
 
-#include "./motor_interface.h"
-#include "../../MCAL/DIO/DIO_interface.h"
+#include "motor_interface.h"
+#include "DIO_interface.h"
 
-EN_motor_error_t motor_init( str_motor_config_t *str_motor_config){
+enm_motor_error_t motor_init( str_motor_config_t *str_motor_config){
     // check if pointer is null 
-    if (str_motor_config == NULL) return DIO_NOT_OK;    
+    if (str_motor_config == NULL) return MOTOR_NOK;    
 
     // init the motor DIO pins
     dio_enu_return_state_t l_str_dio_error_status;
@@ -35,11 +35,11 @@ EN_motor_error_t motor_init( str_motor_config_t *str_motor_config){
     return MOTOR_OK;
 }
 
-EN_motor_error_t motor_move( str_motor_config_t *str_motor_config, enm_motor_dir_t enm_motor_dir)
+enm_motor_error_t motor_move( str_motor_config_t *str_motor_config, enm_motor_dir_t enm_motor_dir)
 {
     // check if pointer is null
     if (str_motor_config == NULL)
-        return DIO_NOT_OK;
+        return MOTOR_NOK;
 
     // init the motor DIO pins
     dio_enu_return_state_t l_str_dio_error_status;
@@ -76,10 +76,10 @@ EN_motor_error_t motor_move( str_motor_config_t *str_motor_config, enm_motor_dir
     return MOTOR_OK;
 }
 
-EN_motor_error_t motor_stop( str_motor_config_t* str_motor_config){
+enm_motor_error_t motor_stop( str_motor_config_t* str_motor_config){
     // check if pointer is null
     if (str_motor_config == NULL)
-        return DIO_NOT_OK;
+        return MOTOR_NOK;
 
     // init the motor DIO pins
     dio_enu_return_state_t l_str_dio_error_status;

@@ -69,7 +69,7 @@ exit_enu_return_state_t  exit_init_pin(exit_str_pin_Config_t *ptr_str_pin_config
  * - Return cases -
  * EXIT_OK: Everything done successfully.
  * EXIT_NULL_PTR: Null pointer provided as input.
- *
+ */
 exit_enu_return_state_t  exit_enable_int(exit_str_pin_Config_t *ptr_str_pin_config);
 
 

@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'MOVING_CAR_ARM' 
+ * Project: 'Moving Car' 
  * Target:  'Target 1' 
  */
 
