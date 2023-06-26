@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -125,47 +126,6 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
-          <Simulator>
-            <UseSimulator>0</UseSimulator>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Simulator>
-          <Target>
-            <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>0</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Target>
-          <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
-          <SimDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-          </SimDlls>
-          <TargetDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
-          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -173,7 +133,7 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
+            <Capability>1</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
@@ -298,17 +258,17 @@
                 <Size>0x0</Size>
               </XRAM>
               <OCR_RVCT1>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT2>
               <OCR_RVCT3>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT3>
@@ -318,7 +278,7 @@
                 <Size>0x40000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
-                <Type>0</Type>
+                <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT5>
@@ -378,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\APP\includes;.\COM;.\HAL\button\include;.\HAL\led\include;.\HAL\motor;.\MANAER\car_control;.\MCAL\DIO;.\MCAL\EXIT;.\MCAL\gpt\include;.\MCAL\NVIC;.\MCAL\SYS_CONTROL;.\SERVICE\timer_management\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,9 +381,172 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\app.c</FilePath>
+            </File>
+            <File>
+              <FileName>app.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\includes\app.h</FilePath>
+            </File>
+            <File>
+              <FileName>bit_math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\COM\bit_math.h</FilePath>
+            </File>
+            <File>
+              <FileName>std_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\COM\std_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\button\button.c</FilePath>
+            </File>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\button\include\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\led\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\led\include\led.h</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\motor\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\motor\motor_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>motor_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\motor\motor_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\motor\motor_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>car_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MANAER\car_control\car_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_control_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MANAER\car_control\car_control_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>DIO_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\DIO\DIO_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>DIO_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\DIO\DIO_private.h</FilePath>
+            </File>
+            <File>
+              <FileName>DIO_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\DIO\DIO_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>EXIT_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\EXIT\EXIT_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>EXIT_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\EXIT\EXIT_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpt_source.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\gpt\gpt_source.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpt_Config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\gpt\include\gpt_Config.h</FilePath>
+            </File>
+            <File>
+              <FileName>gpt_Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\gpt\include\gpt_Interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>gpt_Private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\gpt\include\gpt_Private.h</FilePath>
+            </File>
+            <File>
+              <FileName>NVIC_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\NVIC\NVIC_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>NVIC_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\NVIC\NVIC_private.h</FilePath>
+            </File>
+            <File>
+              <FileName>NVIC_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\NVIC\NVIC_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>SYS_CONTROL_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\SYS_CONTROL\SYS_CONTROL_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>SYS_CONTROL_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MCAL\SYS_CONTROL\SYS_CONTROL_private.h</FilePath>
+            </File>
+            <File>
+              <FileName>SYS_CONTROL_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MCAL\SYS_CONTROL\SYS_CONTROL_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>timerM_Program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SERVICE\timer_management\timerM_Program.c</FilePath>
+            </File>
+            <File>
+              <FileName>timerM_Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SERVICE\timer_management\include\timerM_Interface.h</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
   </Targets>
+
+  <RTE>
+    <apis/>
+    <components/>
+    <files/>
+  </RTE>
 
 </Project>

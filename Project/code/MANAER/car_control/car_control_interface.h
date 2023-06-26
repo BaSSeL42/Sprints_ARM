@@ -1,7 +1,7 @@
 #ifndef CAR_MANAGER_CTR_H
 #define CAR_MANAGER_CTR_H
 
-#include "../../HAL/motor/motor_interface.h"
+#include "motor_interface.h"
 
 typedef enum    {
     CAR_STOP = 0,

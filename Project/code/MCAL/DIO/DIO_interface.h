@@ -87,8 +87,8 @@ typedef struct
 
 
 typedef enum{
-    DIO_NOT_OK=0,
-    DIO_OK,
+    DIO_OK=0,
+    DIO_NOT_OK,
     DIO_NULL_PTR,
     DIO_EXCEED_PORT
 }dio_enu_return_state_t;

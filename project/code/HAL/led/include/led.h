@@ -13,26 +13,31 @@
 /***********************************************************************************************
 *											Includes
 ***********************************************************************************************/
-#include "mgpio_Interface.h"
+#include "DIO_interface.h"
 /***********************************************************************************************
 *										User defined data type
 ***********************************************************************************************/
 typedef enum
 {
-	LED_NOK = 0,
-	LED_OK
+	LED_OK = 0,
+	LED_NOK
 
 }enu_ledError_t;
 
-
+typedef struct
+{
+	uint8_ u8_led_id;
+    dio_enu_portx_t enu_port;
+    dio_enu_pinx_t enu_pin;
+}str_led_config_t;
 /***********************************************************************************************
 *										Functions Prototype
 ***********************************************************************************************/
-enu_ledError_t HLED_Init(enu_pin_t en_pinNum);
+enu_ledError_t HLED_Init(str_led_config_t *str_led_config);
 
-enu_ledError_t HLED_on(enu_pin_t en_pinx);
-enu_ledError_t HLED_off(enu_pin_t en_pinx);
-enu_ledError_t HLED_toggle(enu_pin_t en_pinx);
+enu_ledError_t HLED_on(uint8_ u8_led_id);
+enu_ledError_t HLED_off(uint8_ u8_led_id);
+enu_ledError_t HLED_toggle(uint8_ u8_led_id);
 
 #endif /* HAL_LED_LED_H_ */
 /***********************************************************************************************

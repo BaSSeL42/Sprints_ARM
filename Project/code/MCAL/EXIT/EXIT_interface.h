@@ -1,10 +1,10 @@
 #ifndef EXIT_INTERFACE_H
 #define EXIT_INTERFACE_H
 
-#include "../DIO/DIO_interface.h"
-#include "../NVIC/NVIC_interface.h"
-#include "../../COM/bit_math.h"
-#include "../../COM/std_types.h"
+#include "DIO_interface.h"
+#include "NVIC_interface.h"
+#include "bit_math.h"
+#include "std_types.h"
 
 
 typedef enum{
