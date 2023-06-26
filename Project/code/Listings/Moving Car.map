@@ -4,6 +4,62 @@ Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
 
 Section Cross References
 
+    app.o(i.APP_longSide) refers to led.o(i.HLED_off) for HLED_off
+    app.o(i.APP_longSide) refers to led.o(i.HLED_on) for HLED_on
+    app.o(i.APP_longSide) refers to timerm_program.o(i.TIMM_u8Start) for TIMM_u8Start
+    app.o(i.APP_longSide) refers to car_control.o(i.car_move) for car_move
+    app.o(i.APP_longSide) refers to car_control.o(i.car_stop) for car_stop
+    app.o(i.APP_longSide) refers to timerm_program.o(i.TIMM_vidStop) for TIMM_vidStop
+    app.o(i.APP_longSide) refers to app.o(.data) for u8_gv_pwm
+    app.o(i.APP_longSide) refers to app.o(.constdata) for str_gc_car_config
+    app.o(i.APP_shortSide) refers to led.o(i.HLED_on) for HLED_on
+    app.o(i.APP_shortSide) refers to led.o(i.HLED_off) for HLED_off
+    app.o(i.APP_shortSide) refers to timerm_program.o(i.TIMM_u8Start) for TIMM_u8Start
+    app.o(i.APP_shortSide) refers to car_control.o(i.car_move) for car_move
+    app.o(i.APP_shortSide) refers to car_control.o(i.car_stop) for car_stop
+    app.o(i.APP_shortSide) refers to timerm_program.o(i.TIMM_vidStop) for TIMM_vidStop
+    app.o(i.APP_shortSide) refers to app.o(.data) for u8_gv_pwm
+    app.o(i.APP_shortSide) refers to app.o(.constdata) for str_gc_car_config
+    app.o(i.APP_startState) refers to button.o(i.HButton_enable_INT) for HButton_enable_INT
+    app.o(i.APP_startState) refers to timerm_program.o(i.TIMM_u8Start) for TIMM_u8Start
+    app.o(i.APP_startState) refers to app.o(i.APP_longSide) for APP_longSide
+    app.o(i.APP_startState) refers to app.o(i.APP_stop) for APP_stop
+    app.o(i.APP_startState) refers to app.o(i.App_rotate) for App_rotate
+    app.o(i.APP_startState) refers to app.o(i.APP_shortSide) for APP_shortSide
+    app.o(i.APP_startState) refers to app.o(.data) for arr_str_g_btn_config
+    app.o(i.APP_stop) refers to led.o(i.HLED_off) for HLED_off
+    app.o(i.APP_stop) refers to car_control.o(i.car_stop) for car_stop
+    app.o(i.APP_stop) refers to app.o(.constdata) for str_gc_car_config
+    app.o(i.APP_stopState) refers to button.o(i.HButton_disable_INT) for HButton_disable_INT
+    app.o(i.APP_stopState) refers to timerm_program.o(i.TIMM_vidStop) for TIMM_vidStop
+    app.o(i.APP_stopState) refers to app.o(i.APP_stop) for APP_stop
+    app.o(i.APP_stopState) refers to button.o(i.HButton_getPinVal) for HButton_getPinVal
+    app.o(i.APP_stopState) refers to app.o(.data) for arr_str_g_btn_config
+    app.o(i.APP_vidInit) refers to led.o(i.HLED_Init) for HLED_Init
+    app.o(i.APP_vidInit) refers to button.o(i.HButton_Init) for HButton_Init
+    app.o(i.APP_vidInit) refers to button.o(i.HButton_initializa_with_int) for HButton_initializa_with_int
+    app.o(i.APP_vidInit) refers to car_control.o(i.car_init) for car_init
+    app.o(i.APP_vidInit) refers to timerm_program.o(i.TIMM_u8Init) for TIMM_u8Init
+    app.o(i.APP_vidInit) refers to app.o(.data) for arr_str_g_led_config
+    app.o(i.APP_vidInit) refers to app.o(i.btn_stop_cbf) for btn_stop_cbf
+    app.o(i.APP_vidInit) refers to app.o(.constdata) for str_gc_car_config
+    app.o(i.APP_vidStart) refers to app.o(i.APP_vidInit) for APP_vidInit
+    app.o(i.APP_vidStart) refers to app.o(i.APP_stopState) for APP_stopState
+    app.o(i.APP_vidStart) refers to app.o(i.APP_startState) for APP_startState
+    app.o(i.APP_vidStart) refers to app.o(.data) for u8_gs_v_progState
+    app.o(i.App_rotate) refers to led.o(i.HLED_off) for HLED_off
+    app.o(i.App_rotate) refers to led.o(i.HLED_on) for HLED_on
+    app.o(i.App_rotate) refers to timerm_program.o(i.TIMM_u8Start) for TIMM_u8Start
+    app.o(i.App_rotate) refers to car_control.o(i.car_move) for car_move
+    app.o(i.App_rotate) refers to car_control.o(i.car_stop) for car_stop
+    app.o(i.App_rotate) refers to timerm_program.o(i.TIMM_vidStop) for TIMM_vidStop
+    app.o(i.App_rotate) refers to app.o(.data) for u8_gv_pwm
+    app.o(i.App_rotate) refers to app.o(.constdata) for str_gc_car_config
+    app.o(i.btn_stop_cbf) refers to app.o(.data) for u8_gv_delay
+    app.o(i.timer_1_cbf) refers to app.o(.data) for u8_gv_pwm
+    app.o(i.timer_2_cbf) refers to app.o(.data) for u8_gv_delay
+    app.o(.data) refers to app.o(i.timer_1_cbf) for timer_1_cbf
+    app.o(.data) refers to app.o(i.timer_2_cbf) for timer_2_cbf
     button.o(i.HButton_Init) refers to dio_prog.o(i.dio_init_pin) for dio_init_pin
     button.o(i.HButton_Init) refers to button.o(.constdata) for .constdata
     button.o(i.HButton_disable_INT) refers to exit_prog.o(i.exit_disable_int) for exit_disable_int
@@ -257,44 +313,11 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing button.o(i.HButton_Init), (68 bytes).
-    Removing button.o(i.HButton_disable_INT), (34 bytes).
-    Removing button.o(i.HButton_enable_INT), (34 bytes).
-    Removing button.o(i.HButton_getPinVal), (108 bytes).
-    Removing button.o(i.HButton_initializa_with_int), (78 bytes).
-    Removing button.o(.constdata), (14 bytes).
-    Removing led.o(i.HLED_Init), (136 bytes).
-    Removing led.o(i.HLED_off), (44 bytes).
-    Removing led.o(i.HLED_on), (44 bytes).
     Removing led.o(i.HLED_toggle), (44 bytes).
-    Removing led.o(.bss), (30 bytes).
-    Removing led.o(.data), (3 bytes).
-    Removing motor.o(i.motor_init), (104 bytes).
-    Removing motor.o(i.motor_move), (136 bytes).
-    Removing motor.o(i.motor_stop), (88 bytes).
-    Removing motor.o(.constdata), (46 bytes).
-    Removing car_control.o(i.car_init), (36 bytes).
-    Removing car_control.o(i.car_move), (148 bytes).
-    Removing car_control.o(i.car_stop), (36 bytes).
-    Removing timerm_program.o(i.TIMM_u8Init), (18 bytes).
-    Removing timerm_program.o(i.TIMM_u8Start), (14 bytes).
-    Removing timerm_program.o(i.TIMM_vidStop), (8 bytes).
     Removing timerm_program.o(i.TIMM_vidSynchDelay_ms), (22 bytes).
     Removing timerm_program.o(i.TIMM_vidSynchDelay_s), (22 bytes).
     Removing timerm_program.o(i.TIMM_vidSynchDelay_us), (22 bytes).
-    Removing dio_prog.o(i.dio_enable_clock), (28 bytes).
-    Removing dio_prog.o(i.dio_get_base_address), (72 bytes).
-    Removing dio_prog.o(i.dio_init_pin), (234 bytes).
-    Removing dio_prog.o(i.dio_read_pin), (50 bytes).
-    Removing dio_prog.o(i.dio_set_pin), (100 bytes).
     Removing dio_prog.o(i.dio_toggle_pin), (110 bytes).
-    Removing dio_prog.o(i.dio_unlock_special_pin), (56 bytes).
-    Removing exit_prog.o(i.exit_disable_int), (42 bytes).
-    Removing exit_prog.o(i.exit_enable_int), (42 bytes).
-    Removing exit_prog.o(i.exit_get_base_address), (72 bytes).
-    Removing exit_prog.o(i.exit_init_pin), (316 bytes).
-    Removing exit_prog.o(i.exit_set_callback), (28 bytes).
-    Removing exit_prog.o(.data), (2 bytes).
     Removing gpt_source.o(.rev16_text), (4 bytes).
     Removing gpt_source.o(.revsh_text), (4 bytes).
     Removing gpt_source.o(.rrx_text), (6 bytes).
@@ -304,28 +327,21 @@ Removing Unused input sections from the image.
     Removing gpt_source.o(i.GPT_u8DutyCycle), (104 bytes).
     Removing gpt_source.o(i.GPT_u8GeneratePWM), (432 bytes).
     Removing gpt_source.o(i.GPT_u8GetCurrentVal), (120 bytes).
-    Removing gpt_source.o(i.GPT_u8Init), (1098 bytes).
     Removing gpt_source.o(i.GPT_u8PWMInit), (932 bytes).
     Removing gpt_source.o(i.GPT_u8PWMStart), (104 bytes).
     Removing gpt_source.o(i.GPT_u8PWMStop), (88 bytes).
-    Removing gpt_source.o(i.GPT_u8Start), (104 bytes).
     Removing gpt_source.o(i.GPT_vidIRQDisable), (88 bytes).
     Removing gpt_source.o(i.GPT_vidIRQEnable), (88 bytes).
-    Removing gpt_source.o(i.GPT_vidStop), (88 bytes).
-    Removing gpt_source.o(i.__NVIC_EnableIRQ), (34 bytes).
     Removing gpt_source.o(i.set_pwm_tick_time), (396 bytes).
-    Removing gpt_source.o(i.set_tick_time), (456 bytes).
     Removing nvic_prog.o(i.nvic_DisablePeripheral), (136 bytes).
-    Removing nvic_prog.o(i.nvic_EnablePeripheral), (136 bytes).
     Removing sys_control_prog.o(i.sys_control_set_clock_system), (108 bytes).
     Removing system_tm4c123.o(.rev16_text), (4 bytes).
     Removing system_tm4c123.o(.revsh_text), (4 bytes).
     Removing system_tm4c123.o(.rrx_text), (6 bytes).
     Removing system_tm4c123.o(i.SystemCoreClockUpdate), (196 bytes).
     Removing system_tm4c123.o(i.getOscClk), (244 bytes).
-    Removing system_tm4c123.o(.data), (4 bytes).
 
-67 unused section(s) (total 9281 bytes) removed from the image.
+27 unused section(s) (total 5092 bytes) removed from the image.
 
 ==============================================================================
 
@@ -342,45 +358,45 @@ Image Symbol Table
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/daddsub.s                       0x00000000   Number         0  daddsub_clz.o ABSOLUTE
@@ -466,51 +482,108 @@ Image Symbol Table
     .text                                    0x0000048c   Section        0  sys_exit.o(.text)
     .text                                    0x00000498   Section        2  use_no_semi.o(.text)
     .text                                    0x0000049a   Section        0  indicate_semi.o(.text)
-    i.APP_vidInit                            0x0000049a   Section        0  app.o(i.APP_vidInit)
-    i.APP_vidStart                           0x0000049c   Section        0  app.o(i.APP_vidStart)
-    i.GPIOF_Handler                          0x000004a0   Section        0  exit_prog.o(i.GPIOF_Handler)
-    i.SystemInit                             0x000004f8   Section        0  system_tm4c123.o(i.SystemInit)
-    i.TIMER0A_Handler                        0x00000590   Section        0  gpt_source.o(i.TIMER0A_Handler)
-    i.TIMER1A_Handler                        0x000005f8   Section        0  gpt_source.o(i.TIMER1A_Handler)
-    i.TIMER2A_Handler                        0x0000060c   Section        0  gpt_source.o(i.TIMER2A_Handler)
-    i.TIMER3A_Handler                        0x00000620   Section        0  gpt_source.o(i.TIMER3A_Handler)
-    i.TIMER4A_Handler                        0x00000634   Section        0  gpt_source.o(i.TIMER4A_Handler)
-    i.TIMER5A_Handler                        0x00000648   Section        0  gpt_source.o(i.TIMER5A_Handler)
-    i.main                                   0x0000065c   Section        0  main.o(i.main)
-    x$fpl$fpinit                             0x00000668   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000668   Number         0  fpinit.o(x$fpl$fpinit)
-    .data                                    0x20000000   Section       71  gpt_source.o(.data)
-    gs_en_time_init                          0x20000000   Data           1  gpt_source.o(.data)
-    gs_en_channel_id                         0x20000001   Data           1  gpt_source.o(.data)
-    gs_en_pwm_channel_id                     0x20000002   Data           1  gpt_source.o(.data)
-    gs_bool_is_PR_used                       0x20000003   Data           1  gpt_source.o(.data)
-    gs_u32_is_initialized                    0x20000004   Data           4  gpt_source.o(.data)
-    gs_bool_is_pwm_initialized               0x20000008   Data           1  gpt_source.o(.data)
-    gs_u64_gpt_ticks                         0x20000010   Data           8  gpt_source.o(.data)
-    gs_u64_pwm_total_ticks                   0x20000018   Data           8  gpt_source.o(.data)
-    gs_u32_gpt_time                          0x20000020   Data           4  gpt_source.o(.data)
-    gs_u32_duty_cycle                        0x20000024   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch0_cbk                        0x20000028   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch1_cbk                        0x2000002c   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch2_cbk                        0x20000030   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch3_cbk                        0x20000034   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch4_cbk                        0x20000038   Data           4  gpt_source.o(.data)
-    gs_pf_gpt_ch5_cbk                        0x2000003c   Data           4  gpt_source.o(.data)
-    Ls_bool_is_first_time                    0x20000040   Data           1  gpt_source.o(.data)
-    Ls_en_prev_channel                       0x20000041   Data           1  gpt_source.o(.data)
-    Ls_bool_is_first_time                    0x20000042   Data           1  gpt_source.o(.data)
-    Ls_en_prev_channel                       0x20000043   Data           1  gpt_source.o(.data)
-    Ls_bool_is_first_time                    0x20000044   Data           1  gpt_source.o(.data)
-    Ls_en_prev_channel                       0x20000045   Data           1  gpt_source.o(.data)
-    loc_s_bool_duty_flag                     0x20000046   Data           1  gpt_source.o(.data)
-    .bss                                     0x20000048   Section       28  exit_prog.o(.bss)
-    exit_callback                            0x20000048   Data          28  exit_prog.o(.bss)
-    .bss                                     0x20000064   Section       96  libspace.o(.bss)
-    HEAP                                     0x200000c8   Section        0  startup_tm4c123.o(HEAP)
-    STACK                                    0x200000c8   Section      512  startup_tm4c123.o(STACK)
-    Heap_Mem                                 0x200000c8   Data           0  startup_tm4c123.o(HEAP)
-    Stack_Mem                                0x200000c8   Data         512  startup_tm4c123.o(STACK)
-    __initial_sp                             0x200002c8   Data           0  startup_tm4c123.o(STACK)
+    i.APP_longSide                           0x0000049c   Section        0  app.o(i.APP_longSide)
+    i.APP_shortSide                          0x00000500   Section        0  app.o(i.APP_shortSide)
+    i.APP_startState                         0x00000564   Section        0  app.o(i.APP_startState)
+    i.APP_stop                               0x00000634   Section        0  app.o(i.APP_stop)
+    i.APP_stopState                          0x0000065c   Section        0  app.o(i.APP_stopState)
+    i.APP_vidInit                            0x0000069c   Section        0  app.o(i.APP_vidInit)
+    i.APP_vidStart                           0x000006f0   Section        0  app.o(i.APP_vidStart)
+    i.App_rotate                             0x00000718   Section        0  app.o(i.App_rotate)
+    i.GPIOF_Handler                          0x0000077c   Section        0  exit_prog.o(i.GPIOF_Handler)
+    i.GPT_u8Init                             0x000007d4   Section        0  gpt_source.o(i.GPT_u8Init)
+    i.GPT_u8Start                            0x00000c20   Section        0  gpt_source.o(i.GPT_u8Start)
+    i.GPT_vidStop                            0x00000c88   Section        0  gpt_source.o(i.GPT_vidStop)
+    i.HButton_Init                           0x00000ce0   Section        0  button.o(i.HButton_Init)
+    i.HButton_disable_INT                    0x00000d24   Section        0  button.o(i.HButton_disable_INT)
+    i.HButton_enable_INT                     0x00000d46   Section        0  button.o(i.HButton_enable_INT)
+    i.HButton_getPinVal                      0x00000d68   Section        0  button.o(i.HButton_getPinVal)
+    i.HButton_initializa_with_int            0x00000dd4   Section        0  button.o(i.HButton_initializa_with_int)
+    i.HLED_Init                              0x00000e24   Section        0  led.o(i.HLED_Init)
+    i.HLED_off                               0x00000eac   Section        0  led.o(i.HLED_off)
+    i.HLED_on                                0x00000ed8   Section        0  led.o(i.HLED_on)
+    i.SystemInit                             0x00000f04   Section        0  system_tm4c123.o(i.SystemInit)
+    i.TIMER0A_Handler                        0x00000f9c   Section        0  gpt_source.o(i.TIMER0A_Handler)
+    i.TIMER1A_Handler                        0x00001004   Section        0  gpt_source.o(i.TIMER1A_Handler)
+    i.TIMER2A_Handler                        0x00001018   Section        0  gpt_source.o(i.TIMER2A_Handler)
+    i.TIMER3A_Handler                        0x0000102c   Section        0  gpt_source.o(i.TIMER3A_Handler)
+    i.TIMER4A_Handler                        0x00001040   Section        0  gpt_source.o(i.TIMER4A_Handler)
+    i.TIMER5A_Handler                        0x00001054   Section        0  gpt_source.o(i.TIMER5A_Handler)
+    i.TIMM_u8Init                            0x00001068   Section        0  timerm_program.o(i.TIMM_u8Init)
+    i.TIMM_u8Start                           0x0000107a   Section        0  timerm_program.o(i.TIMM_u8Start)
+    i.TIMM_vidStop                           0x0000108a   Section        0  timerm_program.o(i.TIMM_vidStop)
+    i.__NVIC_EnableIRQ                       0x00001094   Section        0  gpt_source.o(i.__NVIC_EnableIRQ)
+    __NVIC_EnableIRQ                         0x00001095   Thumb Code    34  gpt_source.o(i.__NVIC_EnableIRQ)
+    i.btn_stop_cbf                           0x000010b8   Section        0  app.o(i.btn_stop_cbf)
+    i.car_init                               0x000010d8   Section        0  car_control.o(i.car_init)
+    i.car_move                               0x000010fc   Section        0  car_control.o(i.car_move)
+    i.car_stop                               0x00001190   Section        0  car_control.o(i.car_stop)
+    i.dio_enable_clock                       0x000011b4   Section        0  dio_prog.o(i.dio_enable_clock)
+    i.dio_get_base_address                   0x000011d0   Section        0  dio_prog.o(i.dio_get_base_address)
+    dio_get_base_address                     0x000011d1   Thumb Code    50  dio_prog.o(i.dio_get_base_address)
+    i.dio_init_pin                           0x00001218   Section        0  dio_prog.o(i.dio_init_pin)
+    i.dio_read_pin                           0x00001302   Section        0  dio_prog.o(i.dio_read_pin)
+    i.dio_set_pin                            0x00001334   Section        0  dio_prog.o(i.dio_set_pin)
+    i.dio_unlock_special_pin                 0x00001398   Section        0  dio_prog.o(i.dio_unlock_special_pin)
+    i.exit_disable_int                       0x000013d0   Section        0  exit_prog.o(i.exit_disable_int)
+    i.exit_enable_int                        0x000013fa   Section        0  exit_prog.o(i.exit_enable_int)
+    i.exit_get_base_address                  0x00001424   Section        0  exit_prog.o(i.exit_get_base_address)
+    exit_get_base_address                    0x00001425   Thumb Code    50  exit_prog.o(i.exit_get_base_address)
+    i.exit_init_pin                          0x0000146c   Section        0  exit_prog.o(i.exit_init_pin)
+    i.exit_set_callback                      0x000015a8   Section        0  exit_prog.o(i.exit_set_callback)
+    i.main                                   0x000015c4   Section        0  main.o(i.main)
+    i.motor_init                             0x000015d0   Section        0  motor.o(i.motor_init)
+    i.motor_move                             0x00001638   Section        0  motor.o(i.motor_move)
+    i.motor_stop                             0x000016c0   Section        0  motor.o(i.motor_stop)
+    i.nvic_EnablePeripheral                  0x00001718   Section        0  nvic_prog.o(i.nvic_EnablePeripheral)
+    i.set_tick_time                          0x000017a0   Section        0  gpt_source.o(i.set_tick_time)
+    set_tick_time                            0x000017a1   Thumb Code   426  gpt_source.o(i.set_tick_time)
+    i.timer_1_cbf                            0x00001968   Section        0  app.o(i.timer_1_cbf)
+    i.timer_2_cbf                            0x00001978   Section        0  app.o(i.timer_2_cbf)
+    x$fpl$fpinit                             0x00001988   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x00001988   Number         0  fpinit.o(x$fpl$fpinit)
+    .constdata                               0x00001992   Section        6  app.o(.constdata)
+    .constdata                               0x00001998   Section       14  button.o(.constdata)
+    .constdata                               0x000019a8   Section       46  motor.o(.constdata)
+    .data                                    0x20000000   Section       56  app.o(.data)
+    u8_gs_v_progState                        0x20000000   Data           1  app.o(.data)
+    .data                                    0x20000038   Section        3  led.o(.data)
+    .data                                    0x2000003b   Section        2  exit_prog.o(.data)
+    special_pins                             0x2000003b   Data           2  exit_prog.o(.data)
+    .data                                    0x20000040   Section       71  gpt_source.o(.data)
+    gs_en_time_init                          0x20000040   Data           1  gpt_source.o(.data)
+    gs_en_channel_id                         0x20000041   Data           1  gpt_source.o(.data)
+    gs_en_pwm_channel_id                     0x20000042   Data           1  gpt_source.o(.data)
+    gs_bool_is_PR_used                       0x20000043   Data           1  gpt_source.o(.data)
+    gs_u32_is_initialized                    0x20000044   Data           4  gpt_source.o(.data)
+    gs_bool_is_pwm_initialized               0x20000048   Data           1  gpt_source.o(.data)
+    gs_u64_gpt_ticks                         0x20000050   Data           8  gpt_source.o(.data)
+    gs_u64_pwm_total_ticks                   0x20000058   Data           8  gpt_source.o(.data)
+    gs_u32_gpt_time                          0x20000060   Data           4  gpt_source.o(.data)
+    gs_u32_duty_cycle                        0x20000064   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch0_cbk                        0x20000068   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch1_cbk                        0x2000006c   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch2_cbk                        0x20000070   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch3_cbk                        0x20000074   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch4_cbk                        0x20000078   Data           4  gpt_source.o(.data)
+    gs_pf_gpt_ch5_cbk                        0x2000007c   Data           4  gpt_source.o(.data)
+    Ls_bool_is_first_time                    0x20000080   Data           1  gpt_source.o(.data)
+    Ls_en_prev_channel                       0x20000081   Data           1  gpt_source.o(.data)
+    Ls_bool_is_first_time                    0x20000082   Data           1  gpt_source.o(.data)
+    Ls_en_prev_channel                       0x20000083   Data           1  gpt_source.o(.data)
+    Ls_bool_is_first_time                    0x20000084   Data           1  gpt_source.o(.data)
+    Ls_en_prev_channel                       0x20000085   Data           1  gpt_source.o(.data)
+    loc_s_bool_duty_flag                     0x20000086   Data           1  gpt_source.o(.data)
+    .data                                    0x20000088   Section        4  system_tm4c123.o(.data)
+    .bss                                     0x2000008c   Section       30  led.o(.bss)
+    .bss                                     0x200000ac   Section       28  exit_prog.o(.bss)
+    exit_callback                            0x200000ac   Data          28  exit_prog.o(.bss)
+    .bss                                     0x200000c8   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000128   Section        0  startup_tm4c123.o(HEAP)
+    STACK                                    0x20000128   Section      512  startup_tm4c123.o(STACK)
+    Heap_Mem                                 0x20000128   Data           0  startup_tm4c123.o(HEAP)
+    Stack_Mem                                0x20000128   Data         512  startup_tm4c123.o(STACK)
+    __initial_sp                             0x20000328   Data           0  startup_tm4c123.o(STACK)
 
     Global Symbols
 
@@ -720,25 +793,73 @@ Image Symbol Table
     _sys_exit                                0x0000048d   Thumb Code     8  sys_exit.o(.text)
     __I$use$semihosting                      0x00000499   Thumb Code     0  use_no_semi.o(.text)
     __use_no_semihosting_swi                 0x00000499   Thumb Code     2  use_no_semi.o(.text)
-    APP_vidInit                              0x0000049b   Thumb Code     2  app.o(i.APP_vidInit)
     __semihosting_library_function           0x0000049b   Thumb Code     0  indicate_semi.o(.text)
-    APP_vidStart                             0x0000049d   Thumb Code     2  app.o(i.APP_vidStart)
-    GPIOF_Handler                            0x000004a1   Thumb Code    80  exit_prog.o(i.GPIOF_Handler)
-    SystemInit                               0x000004f9   Thumb Code   112  system_tm4c123.o(i.SystemInit)
-    TIMER0A_Handler                          0x00000591   Thumb Code    88  gpt_source.o(i.TIMER0A_Handler)
-    TIMER1A_Handler                          0x000005f9   Thumb Code    16  gpt_source.o(i.TIMER1A_Handler)
-    TIMER2A_Handler                          0x0000060d   Thumb Code    16  gpt_source.o(i.TIMER2A_Handler)
-    TIMER3A_Handler                          0x00000621   Thumb Code    16  gpt_source.o(i.TIMER3A_Handler)
-    TIMER4A_Handler                          0x00000635   Thumb Code    16  gpt_source.o(i.TIMER4A_Handler)
-    TIMER5A_Handler                          0x00000649   Thumb Code    16  gpt_source.o(i.TIMER5A_Handler)
-    main                                     0x0000065d   Thumb Code    12  main.o(i.main)
-    _fp_init                                 0x00000669   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x00000671   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x00000671   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000674   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000694   Number         0  anon$$obj.o(Region$$Table)
-    __libspace_start                         0x20000064   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x200000c4   Data           0  libspace.o(.bss)
+    APP_longSide                             0x0000049d   Thumb Code    92  app.o(i.APP_longSide)
+    APP_shortSide                            0x00000501   Thumb Code    92  app.o(i.APP_shortSide)
+    APP_startState                           0x00000565   Thumb Code   198  app.o(i.APP_startState)
+    APP_stop                                 0x00000635   Thumb Code    34  app.o(i.APP_stop)
+    APP_stopState                            0x0000065d   Thumb Code    52  app.o(i.APP_stopState)
+    APP_vidInit                              0x0000069d   Thumb Code    62  app.o(i.APP_vidInit)
+    APP_vidStart                             0x000006f1   Thumb Code    36  app.o(i.APP_vidStart)
+    App_rotate                               0x00000719   Thumb Code    92  app.o(i.App_rotate)
+    GPIOF_Handler                            0x0000077d   Thumb Code    80  exit_prog.o(i.GPIOF_Handler)
+    GPT_u8Init                               0x000007d5   Thumb Code  1098  gpt_source.o(i.GPT_u8Init)
+    GPT_u8Start                              0x00000c21   Thumb Code    88  gpt_source.o(i.GPT_u8Start)
+    GPT_vidStop                              0x00000c89   Thumb Code    74  gpt_source.o(i.GPT_vidStop)
+    HButton_Init                             0x00000ce1   Thumb Code    62  button.o(i.HButton_Init)
+    HButton_disable_INT                      0x00000d25   Thumb Code    34  button.o(i.HButton_disable_INT)
+    HButton_enable_INT                       0x00000d47   Thumb Code    34  button.o(i.HButton_enable_INT)
+    HButton_getPinVal                        0x00000d69   Thumb Code   102  button.o(i.HButton_getPinVal)
+    HButton_initializa_with_int              0x00000dd5   Thumb Code    78  button.o(i.HButton_initializa_with_int)
+    HLED_Init                                0x00000e25   Thumb Code   128  led.o(i.HLED_Init)
+    HLED_off                                 0x00000ead   Thumb Code    40  led.o(i.HLED_off)
+    HLED_on                                  0x00000ed9   Thumb Code    40  led.o(i.HLED_on)
+    SystemInit                               0x00000f05   Thumb Code   112  system_tm4c123.o(i.SystemInit)
+    TIMER0A_Handler                          0x00000f9d   Thumb Code    88  gpt_source.o(i.TIMER0A_Handler)
+    TIMER1A_Handler                          0x00001005   Thumb Code    16  gpt_source.o(i.TIMER1A_Handler)
+    TIMER2A_Handler                          0x00001019   Thumb Code    16  gpt_source.o(i.TIMER2A_Handler)
+    TIMER3A_Handler                          0x0000102d   Thumb Code    16  gpt_source.o(i.TIMER3A_Handler)
+    TIMER4A_Handler                          0x00001041   Thumb Code    16  gpt_source.o(i.TIMER4A_Handler)
+    TIMER5A_Handler                          0x00001055   Thumb Code    16  gpt_source.o(i.TIMER5A_Handler)
+    TIMM_u8Init                              0x00001069   Thumb Code    18  timerm_program.o(i.TIMM_u8Init)
+    TIMM_u8Start                             0x0000107b   Thumb Code    16  timerm_program.o(i.TIMM_u8Start)
+    TIMM_vidStop                             0x0000108b   Thumb Code    10  timerm_program.o(i.TIMM_vidStop)
+    btn_stop_cbf                             0x000010b9   Thumb Code    18  app.o(i.btn_stop_cbf)
+    car_init                                 0x000010d9   Thumb Code    36  car_control.o(i.car_init)
+    car_move                                 0x000010fd   Thumb Code   148  car_control.o(i.car_move)
+    car_stop                                 0x00001191   Thumb Code    36  car_control.o(i.car_stop)
+    dio_enable_clock                         0x000011b5   Thumb Code    24  dio_prog.o(i.dio_enable_clock)
+    dio_init_pin                             0x00001219   Thumb Code   234  dio_prog.o(i.dio_init_pin)
+    dio_read_pin                             0x00001303   Thumb Code    50  dio_prog.o(i.dio_read_pin)
+    dio_set_pin                              0x00001335   Thumb Code   100  dio_prog.o(i.dio_set_pin)
+    dio_unlock_special_pin                   0x00001399   Thumb Code    50  dio_prog.o(i.dio_unlock_special_pin)
+    exit_disable_int                         0x000013d1   Thumb Code    42  exit_prog.o(i.exit_disable_int)
+    exit_enable_int                          0x000013fb   Thumb Code    42  exit_prog.o(i.exit_enable_int)
+    exit_init_pin                            0x0000146d   Thumb Code   312  exit_prog.o(i.exit_init_pin)
+    exit_set_callback                        0x000015a9   Thumb Code    22  exit_prog.o(i.exit_set_callback)
+    main                                     0x000015c5   Thumb Code    12  main.o(i.main)
+    motor_init                               0x000015d1   Thumb Code   100  motor.o(i.motor_init)
+    motor_move                               0x00001639   Thumb Code   132  motor.o(i.motor_move)
+    motor_stop                               0x000016c1   Thumb Code    84  motor.o(i.motor_stop)
+    nvic_EnablePeripheral                    0x00001719   Thumb Code   132  nvic_prog.o(i.nvic_EnablePeripheral)
+    timer_1_cbf                              0x00001969   Thumb Code    12  app.o(i.timer_1_cbf)
+    timer_2_cbf                              0x00001979   Thumb Code    12  app.o(i.timer_2_cbf)
+    _fp_init                                 0x00001989   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x00001991   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x00001991   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    str_gc_car_config                        0x00001992   Data           6  app.o(.constdata)
+    Region$$Table$$Base                      0x000019d8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000019f8   Number         0  anon$$obj.o(Region$$Table)
+    u8_gv_delay                              0x20000001   Data           1  app.o(.data)
+    u8_gv_pwm                                0x20000002   Data           1  app.o(.data)
+    arr_str_g_led_config                     0x20000003   Data          12  app.o(.data)
+    arr_str_g_btn_config                     0x2000000f   Data           8  app.o(.data)
+    arr_st_g_gpt_timer_cfg                   0x20000018   Data          32  app.o(.data)
+    str_led_output_type_and_speed_and_state  0x20000038   Data           3  led.o(.data)
+    SystemCoreClock                          0x20000088   Data           4  system_tm4c123.o(.data)
+    str_dio_led_init                         0x2000008c   Data          30  led.o(.bss)
+    __libspace_start                         0x200000c8   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000128   Data           0  libspace.o(.bss)
 
 
 
@@ -748,102 +869,159 @@ Memory Map of the image
 
   Image Entry point : 0x0000030d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x000006dc, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00001a84, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000694, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000019f8, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x0000026c   Data   RO          629    RESET               startup_tm4c123.o
-    0x0000026c   0x0000026c   0x00000008   Code   RO          683  * !!!main             c_w.l(__main.o)
-    0x00000274   0x00000274   0x00000034   Code   RO          875    !!!scatter          c_w.l(__scatter.o)
-    0x000002a8   0x000002a8   0x0000001a   Code   RO          877    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000000   0x00000000   0x0000026c   Data   RO          690    RESET               startup_tm4c123.o
+    0x0000026c   0x0000026c   0x00000008   Code   RO          744  * !!!main             c_w.l(__main.o)
+    0x00000274   0x00000274   0x00000034   Code   RO          936    !!!scatter          c_w.l(__scatter.o)
+    0x000002a8   0x000002a8   0x0000001a   Code   RO          938    !!handler_copy      c_w.l(__scatter_copy.o)
     0x000002c2   0x000002c2   0x00000002   PAD
-    0x000002c4   0x000002c4   0x0000001c   Code   RO          879    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x000002e0   0x000002e0   0x00000002   Code   RO          745    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x000002e2   0x000002e2   0x00000004   Code   RO          751    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          754    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          757    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          759    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          761    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          764    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          766    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          768    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          770    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          772    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          774    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          776    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          778    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          780    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          782    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          784    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          788    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          790    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          792    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000000   Code   RO          794    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x000002e6   0x000002e6   0x00000002   Code   RO          795    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x000002e8   0x000002e8   0x00000002   Code   RO          815    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          828    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          830    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          833    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          836    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          838    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000000   Code   RO          841    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x000002ea   0x000002ea   0x00000002   Code   RO          842    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x000002ec   0x000002ec   0x00000000   Code   RO          715    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x000002ec   0x000002ec   0x00000000   Code   RO          722    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x000002ec   0x000002ec   0x00000006   Code   RO          734    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x000002f2   0x000002f2   0x00000000   Code   RO          724    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x000002f2   0x000002f2   0x00000004   Code   RO          725    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x000002f6   0x000002f6   0x00000000   Code   RO          727    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x000002f6   0x000002f6   0x00000008   Code   RO          728    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x000002fe   0x000002fe   0x00000002   Code   RO          749    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000300   0x00000300   0x00000000   Code   RO          797    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000300   0x00000300   0x00000004   Code   RO          798    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000304   0x00000304   0x00000006   Code   RO          799    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002c4   0x000002c4   0x0000001c   Code   RO          940    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x000002e0   0x000002e0   0x00000002   Code   RO          806    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x000002e2   0x000002e2   0x00000004   Code   RO          812    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          815    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          818    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          820    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          822    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          825    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          827    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          829    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          831    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          833    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          835    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          837    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          839    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          841    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          843    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          845    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          849    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          851    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          853    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000000   Code   RO          855    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x000002e6   0x000002e6   0x00000002   Code   RO          856    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x000002e8   0x000002e8   0x00000002   Code   RO          876    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          889    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          891    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          894    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          897    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          899    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000000   Code   RO          902    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x000002ea   0x000002ea   0x00000002   Code   RO          903    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x000002ec   0x000002ec   0x00000000   Code   RO          776    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x000002ec   0x000002ec   0x00000000   Code   RO          783    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x000002ec   0x000002ec   0x00000006   Code   RO          795    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x000002f2   0x000002f2   0x00000000   Code   RO          785    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x000002f2   0x000002f2   0x00000004   Code   RO          786    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x000002f6   0x000002f6   0x00000000   Code   RO          788    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x000002f6   0x000002f6   0x00000008   Code   RO          789    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x000002fe   0x000002fe   0x00000002   Code   RO          810    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000300   0x00000300   0x00000000   Code   RO          858    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000300   0x00000300   0x00000004   Code   RO          859    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000304   0x00000304   0x00000006   Code   RO          860    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000030a   0x0000030a   0x00000002   PAD
-    0x0000030c   0x0000030c   0x00000114   Code   RO          630  * .text               startup_tm4c123.o
-    0x00000420   0x00000420   0x00000006   Code   RO          681    .text               c_w.l(heapauxi.o)
-    0x00000426   0x00000426   0x0000004a   Code   RO          736    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000470   0x00000470   0x00000012   Code   RO          738    .text               c_w.l(exit.o)
+    0x0000030c   0x0000030c   0x00000114   Code   RO          691  * .text               startup_tm4c123.o
+    0x00000420   0x00000420   0x00000006   Code   RO          742    .text               c_w.l(heapauxi.o)
+    0x00000426   0x00000426   0x0000004a   Code   RO          797    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000470   0x00000470   0x00000012   Code   RO          799    .text               c_w.l(exit.o)
     0x00000482   0x00000482   0x00000002   PAD
-    0x00000484   0x00000484   0x00000008   Code   RO          746    .text               c_w.l(libspace.o)
-    0x0000048c   0x0000048c   0x0000000c   Code   RO          807    .text               c_w.l(sys_exit.o)
-    0x00000498   0x00000498   0x00000002   Code   RO          818    .text               c_w.l(use_no_semi.o)
-    0x0000049a   0x0000049a   0x00000000   Code   RO          820    .text               c_w.l(indicate_semi.o)
-    0x0000049a   0x0000049a   0x00000002   Code   RO            1    i.APP_vidInit       app.o
-    0x0000049c   0x0000049c   0x00000002   Code   RO            2    i.APP_vidStart      app.o
-    0x0000049e   0x0000049e   0x00000002   PAD
-    0x000004a0   0x000004a0   0x00000058   Code   RO          314    i.GPIOF_Handler     exit_prog.o
-    0x000004f8   0x000004f8   0x00000098   Code   RO          638    i.SystemInit        system_tm4c123.o
-    0x00000590   0x00000590   0x00000068   Code   RO          390    i.TIMER0A_Handler   gpt_source.o
-    0x000005f8   0x000005f8   0x00000014   Code   RO          391    i.TIMER1A_Handler   gpt_source.o
-    0x0000060c   0x0000060c   0x00000014   Code   RO          392    i.TIMER2A_Handler   gpt_source.o
-    0x00000620   0x00000620   0x00000014   Code   RO          393    i.TIMER3A_Handler   gpt_source.o
-    0x00000634   0x00000634   0x00000014   Code   RO          394    i.TIMER4A_Handler   gpt_source.o
-    0x00000648   0x00000648   0x00000014   Code   RO          395    i.TIMER5A_Handler   gpt_source.o
-    0x0000065c   0x0000065c   0x0000000c   Code   RO          615    i.main              main.o
-    0x00000668   0x00000668   0x0000000a   Code   RO          805    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000672   0x00000672   0x00000002   PAD
-    0x00000674   0x00000674   0x00000020   Data   RO          873    Region$$Table       anon$$obj.o
+    0x00000484   0x00000484   0x00000008   Code   RO          807    .text               c_w.l(libspace.o)
+    0x0000048c   0x0000048c   0x0000000c   Code   RO          868    .text               c_w.l(sys_exit.o)
+    0x00000498   0x00000498   0x00000002   Code   RO          879    .text               c_w.l(use_no_semi.o)
+    0x0000049a   0x0000049a   0x00000000   Code   RO          881    .text               c_w.l(indicate_semi.o)
+    0x0000049a   0x0000049a   0x00000002   PAD
+    0x0000049c   0x0000049c   0x00000064   Code   RO            1    i.APP_longSide      app.o
+    0x00000500   0x00000500   0x00000064   Code   RO            2    i.APP_shortSide     app.o
+    0x00000564   0x00000564   0x000000d0   Code   RO            3    i.APP_startState    app.o
+    0x00000634   0x00000634   0x00000028   Code   RO            4    i.APP_stop          app.o
+    0x0000065c   0x0000065c   0x00000040   Code   RO            5    i.APP_stopState     app.o
+    0x0000069c   0x0000069c   0x00000054   Code   RO            6    i.APP_vidInit       app.o
+    0x000006f0   0x000006f0   0x00000028   Code   RO            7    i.APP_vidStart      app.o
+    0x00000718   0x00000718   0x00000064   Code   RO            8    i.App_rotate        app.o
+    0x0000077c   0x0000077c   0x00000058   Code   RO          375    i.GPIOF_Handler     exit_prog.o
+    0x000007d4   0x000007d4   0x0000044a   Code   RO          443    i.GPT_u8Init        gpt_source.o
+    0x00000c1e   0x00000c1e   0x00000002   PAD
+    0x00000c20   0x00000c20   0x00000068   Code   RO          447    i.GPT_u8Start       gpt_source.o
+    0x00000c88   0x00000c88   0x00000058   Code   RO          450    i.GPT_vidStop       gpt_source.o
+    0x00000ce0   0x00000ce0   0x00000044   Code   RO          115    i.HButton_Init      button.o
+    0x00000d24   0x00000d24   0x00000022   Code   RO          116    i.HButton_disable_INT  button.o
+    0x00000d46   0x00000d46   0x00000022   Code   RO          117    i.HButton_enable_INT  button.o
+    0x00000d68   0x00000d68   0x0000006c   Code   RO          118    i.HButton_getPinVal  button.o
+    0x00000dd4   0x00000dd4   0x0000004e   Code   RO          119    i.HButton_initializa_with_int  button.o
+    0x00000e22   0x00000e22   0x00000002   PAD
+    0x00000e24   0x00000e24   0x00000088   Code   RO          161    i.HLED_Init         led.o
+    0x00000eac   0x00000eac   0x0000002c   Code   RO          162    i.HLED_off          led.o
+    0x00000ed8   0x00000ed8   0x0000002c   Code   RO          163    i.HLED_on           led.o
+    0x00000f04   0x00000f04   0x00000098   Code   RO          699    i.SystemInit        system_tm4c123.o
+    0x00000f9c   0x00000f9c   0x00000068   Code   RO          451    i.TIMER0A_Handler   gpt_source.o
+    0x00001004   0x00001004   0x00000014   Code   RO          452    i.TIMER1A_Handler   gpt_source.o
+    0x00001018   0x00001018   0x00000014   Code   RO          453    i.TIMER2A_Handler   gpt_source.o
+    0x0000102c   0x0000102c   0x00000014   Code   RO          454    i.TIMER3A_Handler   gpt_source.o
+    0x00001040   0x00001040   0x00000014   Code   RO          455    i.TIMER4A_Handler   gpt_source.o
+    0x00001054   0x00001054   0x00000014   Code   RO          456    i.TIMER5A_Handler   gpt_source.o
+    0x00001068   0x00001068   0x00000012   Code   RO          271    i.TIMM_u8Init       timerm_program.o
+    0x0000107a   0x0000107a   0x00000010   Code   RO          272    i.TIMM_u8Start      timerm_program.o
+    0x0000108a   0x0000108a   0x0000000a   Code   RO          273    i.TIMM_vidStop      timerm_program.o
+    0x00001094   0x00001094   0x00000022   Code   RO          457    i.__NVIC_EnableIRQ  gpt_source.o
+    0x000010b6   0x000010b6   0x00000002   PAD
+    0x000010b8   0x000010b8   0x00000020   Code   RO            9    i.btn_stop_cbf      app.o
+    0x000010d8   0x000010d8   0x00000024   Code   RO          244    i.car_init          car_control.o
+    0x000010fc   0x000010fc   0x00000094   Code   RO          245    i.car_move          car_control.o
+    0x00001190   0x00001190   0x00000024   Code   RO          246    i.car_stop          car_control.o
+    0x000011b4   0x000011b4   0x0000001c   Code   RO          316    i.dio_enable_clock  dio_prog.o
+    0x000011d0   0x000011d0   0x00000048   Code   RO          317    i.dio_get_base_address  dio_prog.o
+    0x00001218   0x00001218   0x000000ea   Code   RO          318    i.dio_init_pin      dio_prog.o
+    0x00001302   0x00001302   0x00000032   Code   RO          319    i.dio_read_pin      dio_prog.o
+    0x00001334   0x00001334   0x00000064   Code   RO          320    i.dio_set_pin       dio_prog.o
+    0x00001398   0x00001398   0x00000038   Code   RO          322    i.dio_unlock_special_pin  dio_prog.o
+    0x000013d0   0x000013d0   0x0000002a   Code   RO          376    i.exit_disable_int  exit_prog.o
+    0x000013fa   0x000013fa   0x0000002a   Code   RO          377    i.exit_enable_int   exit_prog.o
+    0x00001424   0x00001424   0x00000048   Code   RO          378    i.exit_get_base_address  exit_prog.o
+    0x0000146c   0x0000146c   0x0000013c   Code   RO          379    i.exit_init_pin     exit_prog.o
+    0x000015a8   0x000015a8   0x0000001c   Code   RO          380    i.exit_set_callback  exit_prog.o
+    0x000015c4   0x000015c4   0x0000000c   Code   RO          676    i.main              main.o
+    0x000015d0   0x000015d0   0x00000068   Code   RO          204    i.motor_init        motor.o
+    0x00001638   0x00001638   0x00000088   Code   RO          205    i.motor_move        motor.o
+    0x000016c0   0x000016c0   0x00000058   Code   RO          206    i.motor_stop        motor.o
+    0x00001718   0x00001718   0x00000088   Code   RO          623    i.nvic_EnablePeripheral  nvic_prog.o
+    0x000017a0   0x000017a0   0x000001c8   Code   RO          459    i.set_tick_time     gpt_source.o
+    0x00001968   0x00001968   0x00000010   Code   RO           10    i.timer_1_cbf       app.o
+    0x00001978   0x00001978   0x00000010   Code   RO           11    i.timer_2_cbf       app.o
+    0x00001988   0x00001988   0x0000000a   Code   RO          866    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00001992   0x00001992   0x00000006   Data   RO           12    .constdata          app.o
+    0x00001998   0x00001998   0x0000000e   Data   RO          120    .constdata          button.o
+    0x000019a6   0x000019a6   0x00000002   PAD
+    0x000019a8   0x000019a8   0x0000002e   Data   RO          207    .constdata          motor.o
+    0x000019d6   0x000019d6   0x00000002   PAD
+    0x000019d8   0x000019d8   0x00000020   Data   RO          934    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000694, Size: 0x00000048, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x000019f8, Size: 0x0000008c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000694   0x00000047   Data   RW          399    .data               gpt_source.o
+    0x20000000   0x000019f8   0x00000038   Data   RW           13    .data               app.o
+    0x20000038   0x00001a30   0x00000003   Data   RW          166    .data               led.o
+    0x2000003b   0x00001a33   0x00000002   Data   RW          382    .data               exit_prog.o
+    0x2000003d   0x00001a35   0x00000003   PAD
+    0x20000040   0x00001a38   0x00000047   Data   RW          460    .data               gpt_source.o
+    0x20000087   0x00001a7f   0x00000001   PAD
+    0x20000088   0x00001a80   0x00000004   Data   RW          701    .data               system_tm4c123.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000048, Load base: 0x000006dc, Size: 0x00000280, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x2000008c, Load base: 0x00001a84, Size: 0x0000029c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000048        -       0x0000001c   Zero   RW          320    .bss                exit_prog.o
-    0x20000064        -       0x00000060   Zero   RW          747    .bss                c_w.l(libspace.o)
-    0x200000c4   0x000006dc   0x00000004   PAD
-    0x200000c8        -       0x00000000   Zero   RW          628    HEAP                startup_tm4c123.o
-    0x200000c8        -       0x00000200   Zero   RW          627    STACK               startup_tm4c123.o
+    0x2000008c        -       0x0000001e   Zero   RW          165    .bss                led.o
+    0x200000aa   0x00001a84   0x00000002   PAD
+    0x200000ac        -       0x0000001c   Zero   RW          381    .bss                exit_prog.o
+    0x200000c8        -       0x00000060   Zero   RW          808    .bss                c_w.l(libspace.o)
+    0x20000128        -       0x00000000   Zero   RW          689    HEAP                startup_tm4c123.o
+    0x20000128        -       0x00000200   Zero   RW          688    STACK               startup_tm4c123.o
 
 
 ==============================================================================
@@ -853,19 +1031,24 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-         4          0          0          0          0       3913   app.o
-        88          8          0          0         28       2916   exit_prog.o
-       204         36          0         71          0       9870   gpt_source.o
-         0          0          0          0          0        692   led.o
+       800        100          6         56          0      15991   app.o
+       322         12         14          0          0       7352   button.o
+       220          6          0          0          0       3373   car_control.o
+       540         38          0          0          0       7072   dio_prog.o
+       588         52          0          2         28       6521   exit_prog.o
+      1984        148          0         71          0      36563   gpt_source.o
+       224         16          0          3         30       3896   led.o
         12          0          0          0          0        491   main.o
+       328         12         46          0          0       5287   motor.o
+       136          4          0          0          0       1628   nvic_prog.o
        276         24        620          0        512       5496   startup_tm4c123.o
-       152         40          0          0          0        641   system_tm4c123.o
-         0          0          0          0          0       1628   timerm_program.o
+       152         40          0          4          0        931   system_tm4c123.o
+        44          0          0          0          0       4112   timerm_program.o
 
     ----------------------------------------------------------------------
-       738        108        652         72        540      25647   Object Totals
+      5632        452        722        140        572      98713   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         2          0          0          1          0          0   (incl. Padding)
+         6          0          4          4          2          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -894,8 +1077,8 @@ Image component sizes
         10          0          0          0          0        116   fpinit.o
 
     ----------------------------------------------------------------------
-       294         16          0          0        100        700   Library Totals
-         8          0          0          0          4          0   (incl. Padding)
+       294         16          0          0         96        700   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -905,7 +1088,7 @@ Image component sizes
         10          0          0          0          0        116   fz_wm.l
 
     ----------------------------------------------------------------------
-       294         16          0          0        100        700   Library Totals
+       294         16          0          0         96        700   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -914,15 +1097,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1032        124        652         72        640      25391   Grand Totals
-      1032        124        652         72        640      25391   ELF Image Totals
-      1032        124        652         72          0          0   ROM Totals
+      5926        468        722        140        668      94257   Grand Totals
+      5926        468        722        140        668      94257   ELF Image Totals
+      5926        468        722        140          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1684 (   1.64kB)
-    Total RW  Size (RW Data + ZI Data)               712 (   0.70kB)
-    Total ROM Size (Code + RO Data + RW Data)       1756 (   1.71kB)
+    Total RO  Size (Code + RO Data)                 6648 (   6.49kB)
+    Total RW  Size (RW Data + ZI Data)               808 (   0.79kB)
+    Total ROM Size (Code + RO Data + RW Data)       6788 (   6.63kB)
 
 ==============================================================================
 

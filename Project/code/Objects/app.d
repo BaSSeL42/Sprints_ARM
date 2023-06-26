@@ -8,4 +8,6 @@
 .\objects\app.o: .\HAL\button\include\button.h
 .\objects\app.o: .\MCAL\EXIT\EXIT_interface.h
 .\objects\app.o: .\MCAL\NVIC\NVIC_interface.h
+.\objects\app.o: .\MANAER\car_control\car_control_interface.h
+.\objects\app.o: .\HAL\motor\motor_interface.h
 .\objects\app.o: .\APP\includes\app.h

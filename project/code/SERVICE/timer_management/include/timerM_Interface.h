@@ -55,7 +55,7 @@ uint8_ TIMM_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg);
  * @in[1] 			: void
  * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
  ******************************************************************************************************************/
-uint8_ TIMM_u8Start(void);
+uint8_ TIMM_u8Start(uint8_ u8_channel_id);
 
 /*****************************************************************************************************************
 *											03- TIMM_vidStop()									
@@ -64,7 +64,7 @@ uint8_ TIMM_u8Start(void);
  * @in[1] 			: void
  * @return    	: void
  ******************************************************************************************************************/
-void TIMM_vidStop(void);
+void TIMM_vidStop(uint8_ u8_channel_id);
 
 /*****************************************************************************************************************
 *											04- TIMM_vidSynchDelay_ms()									
