@@ -32,7 +32,9 @@ enu_buttonError_t HButton_Init(button_str_btn_config_t *en_pinx)
 				}else{
 					temp.un_input_output_type.enu_input_type = DIO_PIN_INPUT_PULL_DOWN;
 				}
+				dio_unlock_special_pin(&temp);
         dio_init_pin(&temp);
+				
     }
 
     return return_value;

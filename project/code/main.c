@@ -4,9 +4,8 @@
 int main()
 {
 	APP_vidInit();
-	while(1)
-	{
-		APP_vidStart();
-	}
+
+	APP_vidStart();
+
 	return 0;
 }

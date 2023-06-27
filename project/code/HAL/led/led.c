@@ -41,6 +41,8 @@ enu_ledError_t HLED_Init(str_led_config_t *str_led_config)
 		str_dio_led_init[str_led_config->u8_led_id].un_input_output_type.str_output_type_and_speed_and_state.enu_output_current = str_led_output_type_and_speed_and_state.enu_output_current;
 		str_dio_led_init[str_led_config->u8_led_id].un_input_output_type.str_output_type_and_speed_and_state.enu_pin_state = str_led_output_type_and_speed_and_state.enu_pin_state;
 		
+		
+		dio_enable_clock(str_led_config->enu_port);
 		errorStatus = dio_init_pin(&str_dio_led_init[str_led_config->u8_led_id]);
 	}
 	else

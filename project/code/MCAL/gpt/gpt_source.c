@@ -77,6 +77,7 @@ static ptr_func_t 			gs_pf_gpt_ch3_cbk 		= NULL;
 static ptr_func_t 			gs_pf_gpt_ch4_cbk 		= NULL;
 static ptr_func_t 			gs_pf_gpt_ch5_cbk 		= NULL;
 
+
 /********************************************************************************************************************
 ********************************************************************************************************************/
 /********************************************************************************************************************
@@ -414,7 +415,7 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg)
  * @in[1] 			: void
  * @return    : uint8_  [error status if Sucessful Operation return {SUCCESS} if not return {FAILED}]
  ******************************************************************************************************************/
-uint8_ GPT_u8Start(void)
+uint8_ GPT_u8Start(en_gpt_ch_id_t en_channel_id)
 {
 	uint8_ loc_u8_err_state = SUCCESS;
 	if (gs_u32_is_initialized == TRUE )
@@ -439,7 +440,7 @@ uint8_ GPT_u8Start(void)
 
 			/*						Start Timer Counter			 */
 			/*-------------------------------------------------------------*/
-				SET_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);	
+				SET_BIT(GPTMCTL_REG(en_channel_id) , TAEN_IDX);	
 /*----*/
 #endif
 /*----*/
@@ -458,7 +459,7 @@ uint8_ GPT_u8Start(void)
  * @in[1] 			: void
  * @return    	: void
  ******************************************************************************************************************/
-void GPT_vidStop(void)
+void GPT_vidStop(en_gpt_ch_id_t en_channel_id)
 {
 
 /*----*/		
@@ -479,7 +480,7 @@ void GPT_vidStop(void)
 
 			/*						Stop Timer Counter			 */
 			/*-------------------------------------------------------------*/
-					CLR_BIT(GPTMCTL_REG(gs_en_channel_id) , TAEN_IDX);	
+					CLR_BIT(GPTMCTL_REG(en_channel_id) , TAEN_IDX);	
 /*----*/
 #endif
 /*----*/
@@ -1015,7 +1016,9 @@ uint8_ GPT_u8PWMInit(st_gpt_pwm_cfg_t* p_st_gpt_pwm_cfg)
 				/*						Enable NVIC Timer Interrupt			 */
 				/*-------------------------------------------------------------*/				
 					if ((p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_0) 		|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_0) )
+					{
 						NVIC_EnableIRQ(TIMER0A_IRQn);
+					}	
 					else if(p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_1 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_1) )
 						NVIC_EnableIRQ(TIMER1A_IRQn);
 					else if(p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_WIDE_CHANNEL_2 	|| (p_st_gpt_pwm_cfg->en_gpt_ch_id == GPT_CHANNEL_2) )
@@ -1382,10 +1385,9 @@ static void set_pwm_tick_time(uint32_ copy_u32_time_ms)
 
 void TIMER0A_Handler(void)
 {
-	static boolean loc_s_bool_duty_flag = FALSE;
 	if (gs_pf_gpt_ch0_cbk != NULL)
 	{
-		SET_BIT( GPTMICR_REG(gs_en_channel_id), TATOCINT_IDX);
+		SET_BIT( GPTMICR_REG(GPT_CHANNEL_0), TATOCINT_IDX);
 		//SET_BIT( GPTMICR_REG(gs_en_channel_id), CAMCINT_IDX);
 			gs_pf_gpt_ch0_cbk();
 	}
@@ -1400,6 +1402,7 @@ void TIMER1A_Handler(void)
 {
 	if (gs_pf_gpt_ch1_cbk != NULL)
 	{
+		SET_BIT( GPTMICR_REG(GPT_CHANNEL_1), TATOCINT_IDX);
 		gs_pf_gpt_ch1_cbk();
 	}
 	else

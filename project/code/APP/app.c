@@ -27,7 +27,7 @@ void APP_stop(void);
 void App_rotate(void);
 void APP_startState(void);
 void APP_stopState(void);
-
+void APP_longSideLed(uint8_ u8_led_state);
 
 /********************************************************************************************************************
 *												MACROs
@@ -35,10 +35,12 @@ void APP_stopState(void);
 
 /* todo: this section for MACROs */
 
-#define LED_NUMS			4
+#define LED_NUMS			3
 #define BTN_NUMS			2
 #define TIMERS_USED		2
 
+#define LED_ON				1
+#define LED_OFF				0
 
 #define BTN_START										0
 #define BTN_STOP										1
@@ -46,8 +48,8 @@ void APP_stopState(void);
 #define LED_MOVING_FWD_SHORT_SIDE		1
 #define LED_MOVING_FWD_ROTATE				2
 #define LED_MOVING_FWD_STOP					3
-#define Timer0											0
-#define Timer1											1
+#define Timer0											GPT_CHANNEL_0
+#define Timer1											GPT_CHANNEL_1
 
 /********************************************************************************************************************
 *												Global Variables
@@ -64,32 +66,29 @@ uint8_ volatile u8_gv_delay = 0;
 uint8_ volatile u8_gv_pwm = 0;
 
 str_led_config_t arr_str_g_led_config[LED_NUMS] = {
-	{.u8_led_id = LED_MOVING_FWD_LONG_SIDE,
+	{.u8_led_id = LED_MOVING_FWD_SHORT_SIDE,
 	 .enu_port = DIO_PORTF,
 		.enu_pin = DIO_PIN_1
 	},
-	{.u8_led_id = LED_MOVING_FWD_SHORT_SIDE,
-	 .enu_port = DIO_PORTF,
-		.enu_pin = DIO_PIN_2},
 	{.u8_led_id = LED_MOVING_FWD_ROTATE,
 	 .enu_port = DIO_PORTF,
-		.enu_pin = DIO_PIN_3},
+		.enu_pin = DIO_PIN_2},
 	{.u8_led_id = LED_MOVING_FWD_STOP,
 	 .enu_port = DIO_PORTF,
-		.enu_pin = DIO_PIN_5}
+		.enu_pin = DIO_PIN_3}
 };
 
 
 button_str_btn_config_t arr_str_g_btn_config[BTN_NUMS] = {
 	{.port_name = DIO_PORTF,
 		.pin = DIO_PIN_0,
-		.button_state = BUTTON_PRESSED,
-		.button_active = BUTTON_ACTIVE_HIGH
+		.button_state = BUTTON_RELEASED,
+		.button_active = BUTTON_ACTIVE_LOW
 	},
 	{.port_name = DIO_PORTF,
 		.pin = DIO_PIN_4,
-		.button_state = BUTTON_PRESSED,
-		.button_active = BUTTON_ACTIVE_HIGH
+		.button_state = BUTTON_RELEASED,
+		.button_active = BUTTON_ACTIVE_LOW
 	}
 };
 
@@ -138,29 +137,28 @@ void APP_vidInit(void)
 	
 	// Initialize all buttons
 	HButton_Init(&arr_str_g_btn_config[BTN_START]);
-	HButton_initializa_with_int(&arr_str_g_btn_config[BTN_START] ,btn_stop_cbf );
-	
+	HButton_initializa_with_int(&arr_str_g_btn_config[BTN_STOP] ,btn_stop_cbf );
+	__enable_irq();
 	
 	// Initialize car module
-	car_init(&str_gc_car_config);
+	//car_init(&str_gc_car_config);
 	
 	// Initialize Timer 1
-	TIMM_u8Init(&arr_st_g_gpt_timer_cfg[0]);
+	TIMM_u8Init(&arr_st_g_gpt_timer_cfg[Timer0]);
 	
 	
 	// Initialize Timer 2
-	TIMM_u8Init(&arr_st_g_gpt_timer_cfg[1]);
+	TIMM_u8Init(&arr_st_g_gpt_timer_cfg[Timer1]);
+	
+	
 	
 }
 
 
 void APP_vidStart(void)
 {
-	// Initialize all modules used in the app
-	APP_vidInit();
-	
 	while(1)
-	{
+	{	
 		while (u8_gs_v_progState == BTN_STOP)
 		{
 			// Perform stop state routine 
@@ -205,13 +203,20 @@ void timer_2_cbf(void)
 	u8_gv_delay++;
 }
 
+
+
+
+
+
+
 void APP_longSide(void)
 {
 	// Turn all LEDs off and turn long side LED on
-	HLED_off(LED_MOVING_FWD_SHORT_SIDE);
-	HLED_on(LED_MOVING_FWD_LONG_SIDE);
-	HLED_off(LED_MOVING_FWD_ROTATE);
-	HLED_off(LED_MOVING_FWD_STOP);
+//	HLED_off(LED_MOVING_FWD_SHORT_SIDE);
+//	HLED_off(LED_MOVING_FWD_ROTATE);
+//	HLED_off(LED_MOVING_FWD_STOP);
+//	APP_longSideLed(LED_ON);
+
 	
 	
 	// car move forward with 50% speed
@@ -220,11 +225,13 @@ void APP_longSide(void)
 	TIMM_u8Start(Timer0);							// start timer 0
 	while (u8_gv_pwm <= 5)						// 10 ms ON
 	{
-		car_move(&str_gc_car_config,CAR_FORWARD);
+//		car_move(&str_gc_car_config,CAR_FORWARD);
+		APP_longSideLed(LED_ON);
 	}
 	while (u8_gv_pwm > 5 && u8_gv_pwm <= 10)	// 10 ms OFF
 	{
-		car_stop(&str_gc_car_config);
+//		car_stop(&str_gc_car_config);
+		APP_longSideLed(LED_OFF);
 	}
 	TIMM_vidStop(Timer0);										// stop timer 0
 	u8_gv_pwm = 0;
@@ -233,8 +240,8 @@ void APP_longSide(void)
 void APP_shortSide(void)
 {
 	// Turn all LEDs off and turn short side LED on
-	HLED_on(LED_MOVING_FWD_SHORT_SIDE);
-	HLED_off(LED_MOVING_FWD_LONG_SIDE);
+//	HLED_on(LED_MOVING_FWD_SHORT_SIDE);
+	//HLED_off(LED_MOVING_FWD_LONG_SIDE);
 	HLED_off(LED_MOVING_FWD_ROTATE);
 	HLED_off(LED_MOVING_FWD_STOP);
 	
@@ -245,11 +252,13 @@ void APP_shortSide(void)
 	TIMM_u8Start(Timer0);									// start timer 0
 	while (u8_gv_pwm <= 3)							// 6 ms ON
 	{
-		car_move(&str_gc_car_config,CAR_FORWARD);
+//		car_move(&str_gc_car_config,CAR_FORWARD);
+		HLED_on(LED_MOVING_FWD_SHORT_SIDE);
 	}
 	while (u8_gv_pwm > 3 && u8_gv_pwm <= 10)		// 14 ms OFF
 	{
-		car_stop(&str_gc_car_config);
+//		car_stop(&str_gc_car_config);
+		HLED_off(LED_MOVING_FWD_SHORT_SIDE);
 	}
 	TIMM_vidStop(Timer0);										// stop timer 0
 	u8_gv_pwm = 0;
@@ -259,20 +268,20 @@ void APP_stop(void)
 {
 	// Turn all LEDs off and turn stop LED on
 	HLED_off(LED_MOVING_FWD_SHORT_SIDE);
-	HLED_off(LED_MOVING_FWD_LONG_SIDE);
+	//HLED_off(LED_MOVING_FWD_LONG_SIDE);
 	HLED_off(LED_MOVING_FWD_ROTATE);
-	HLED_off(LED_MOVING_FWD_STOP);
+	HLED_on(LED_MOVING_FWD_STOP);
 	
 	
 	// Here We Will STOP motors
-	car_stop(&str_gc_car_config);
+	//car_stop(&str_gc_car_config);
 }
 void App_rotate(void)
 {
 	// Turn all LEDs off and turn rotate LED on
 	HLED_off(LED_MOVING_FWD_SHORT_SIDE);
-	HLED_off(LED_MOVING_FWD_LONG_SIDE);
-	HLED_on(LED_MOVING_FWD_ROTATE);
+	//HLED_off(LED_MOVING_FWD_LONG_SIDE);
+//	HLED_on(LED_MOVING_FWD_ROTATE);
 	HLED_off(LED_MOVING_FWD_STOP);
 	
 	
@@ -282,11 +291,13 @@ void App_rotate(void)
 	TIMM_u8Start(Timer0);									// start timer 0
 	while (u8_gv_pwm <= 5)							// 10 ms ON
 	{
-		car_move(&str_gc_car_config,CAR_RIGHT);
+//		car_move(&str_gc_car_config,CAR_RIGHT);
+		HLED_on(LED_MOVING_FWD_ROTATE);
 	}
 	while (u8_gv_pwm > 5 && u8_gv_pwm <= 10)		// 10 ms OFF
 	{
-		car_stop(&str_gc_car_config);
+//		car_stop(&str_gc_car_config);
+		HLED_off(LED_MOVING_FWD_ROTATE);
 	}
 	TIMM_vidStop(Timer0);										// stop timer 0
 	u8_gv_pwm = 0;
@@ -295,6 +306,7 @@ void App_rotate(void)
 
 void APP_startState(void)
 {
+	
 	HButton_enable_INT(&arr_str_g_btn_config[BTN_STOP]);											// Enable External on stop btn
 	TIMM_u8Start(Timer1);						// start timer 1
 	if (u8_gv_delay>= 2)										// 1s delay
@@ -343,7 +355,7 @@ void APP_startState(void)
 }
 void APP_stopState(void)
 {
-	btn_enu_btn_state_t btnState = BUTTON_PRESSED;
+	btn_enu_btn_state_t btnState = BUTTON_RELEASED;
 	
 	
 	HButton_disable_INT(&arr_str_g_btn_config[BTN_STOP]);						// Disable External on stop btn
@@ -359,10 +371,38 @@ void APP_stopState(void)
 	// Read Start Button state
 	HButton_getPinVal(&arr_str_g_btn_config[BTN_START],&btnState);
 	
-	if (btnState == BUTTON_RELEASED)
+	if (btnState == BUTTON_PRESSED)
 	{
-		u8_gs_v_progState = BTN_START;
+		TIMM_vidSynchDelay_ms(GPT_CHANNEL_2, 25);
+		if (btnState == BUTTON_PRESSED)
+		{
+			u8_gs_v_progState = BTN_START;
+		}	
 	}
 	u8_gv_delay = 0;
+}
+
+
+
+
+void APP_longSideLed(uint8_ u8_led_state)
+{
+		if (u8_led_state == LED_ON)
+		{
+			HLED_on(LED_MOVING_FWD_SHORT_SIDE);
+			HLED_on(LED_MOVING_FWD_ROTATE);
+			HLED_on(LED_MOVING_FWD_STOP);
+		}
+		else if(u8_led_state == LED_OFF)
+		{
+			HLED_off(LED_MOVING_FWD_SHORT_SIDE);
+			HLED_off(LED_MOVING_FWD_ROTATE);
+			HLED_off(LED_MOVING_FWD_STOP);			
+		}
+		else 
+		{
+			/*do nothing */
+		}
+	
 }
 

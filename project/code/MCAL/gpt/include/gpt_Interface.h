@@ -173,7 +173,7 @@ uint8_ 	GPT_u8Init(st_gpt_timer_cfg_t* st_gpt_timer_cfg);
  * @in[1] 			: void
  * @return    : uint8_  [error status Sucessful Operation return {SUCCESS} if not return {FAILED}]
  ******************************************************************************************************************/
-uint8_ GPT_u8Start(void);
+uint8_ GPT_u8Start(en_gpt_ch_id_t en_channel_id);
 
 
 /*****************************************************************************************************************
@@ -183,7 +183,7 @@ uint8_ GPT_u8Start(void);
  * @in[1] 			: void
  * @return    	: void
  ******************************************************************************************************************/
-void GPT_vidStop(void);
+void GPT_vidStop(en_gpt_ch_id_t en_channel_id);
 
 
 /*****************************************************************************************************************
