@@ -1,0 +1,13 @@
+.\objects\app.o: APP\app.c
+.\objects\app.o: .\HAL\led\include\led.h
+.\objects\app.o: .\MCAL\DIO\DIO_interface.h
+.\objects\app.o: .\MCAL\DIO\../../COM/bit_math.h
+.\objects\app.o: .\MCAL\DIO\../../COM/std_types.h
+.\objects\app.o: .\SERVICE\timer_management\include\timerM_Interface.h
+.\objects\app.o: .\MCAL\gpt\include\gpt_Interface.h
+.\objects\app.o: .\HAL\button\include\button.h
+.\objects\app.o: .\MCAL\EXIT\EXIT_interface.h
+.\objects\app.o: .\MCAL\NVIC\NVIC_interface.h
+.\objects\app.o: .\MANAER\car_control\car_control_interface.h
+.\objects\app.o: .\HAL\motor\motor_interface.h
+.\objects\app.o: .\APP\includes\app.h
